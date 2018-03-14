@@ -1,0 +1,21 @@
+apply plugin: 'kotlin'
+
+dependencies {
+  def presentationDependencies = rootProject.ext.presentationDependencies
+  def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+  implementation project(":domain")
+
+  compileOnly presentationDependencies.javaxInject
+
+  implementation presentationDependencies.kotlin
+  implementation presentationDependencies.rxJava
+
+  testImplementation presentationTestDependencies.junit
+  testImplementation presentationTestDependencies.kotlinJUnit
+  testImplementation presentationTestDependencies.mockito
+  testImplementation presentationTestDependencies.mockitoKotlin
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
