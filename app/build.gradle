@@ -20,7 +20,7 @@ android {
     versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
     versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "com.ng.tvshowsdb.common.CustomAndroidJUnitTestRunner"
   }
   buildTypes {
     release {
