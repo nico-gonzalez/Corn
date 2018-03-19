@@ -12,7 +12,7 @@ interface TvShowsView : View<TvShowsPresenter> {
 
   fun hideLoading()
 
-  fun showError(message: String)
+  fun showError()
 
   fun showLoadingMoreShows()
 
@@ -41,7 +41,7 @@ class TvShowsPresenter(private val view: TvShowsView,
               view.hideLoading()
 
               it.error?.let {
-                view.showError(it.localizedMessage)
+                view.showError()
                 return@doOnNext
               }
 
@@ -68,7 +68,7 @@ class TvShowsPresenter(private val view: TvShowsView,
                 view.hideLoadingMoreShows()
 
                 it.error?.let {
-                  view.showError(it.localizedMessage)
+                  view.showError()
                   return@doOnNext
                 }
 
