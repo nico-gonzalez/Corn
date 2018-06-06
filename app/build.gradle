@@ -3,22 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-def versionMajor = 1
-def versionMinor = 0
-def versionPatch = 0
-def versionBuild = 0
-
 android {
 
-  compileSdkVersion rootProject.compileSdkVersion
-  buildToolsVersion rootProject.buildToolsVersion
+  compileSdkVersion Versions.compileSdk
+  buildToolsVersion Versions.buildTools
 
   defaultConfig {
     applicationId "com.ng.tvshowsdb"
-    minSdkVersion rootProject.minSdkVersion
-    targetSdkVersion rootProject.targetSdkVersion
-    versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-    versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+    minSdkVersion Versions.minSdk
+    targetSdkVersion Versions.targetSdk
+    versionCode Versions.versionCode
+    versionName Versions.versionName
 
     testInstrumentationRunner "com.ng.tvshowsdb.common.CustomAndroidJUnitTestRunner"
   }
@@ -31,46 +26,44 @@ android {
 }
 
 dependencies {
-  def appDependencies = rootProject.ext.appDependencies
-  def appTestDependencies = rootProject.ext.appTestDependencies
 
   implementation project(":presentation")
   implementation project(":data")
   implementation project(":domain")
 
-  implementation appDependencies.kotlin
-  implementation appDependencies.appcompatV7
-  implementation appDependencies.supportDesign
-  implementation appDependencies.recyclerView
-  implementation appDependencies.cardView
-  implementation appDependencies.supportConstraint
-  implementation appDependencies.glide
-  kapt appDependencies.glideCompiler
-  implementation appDependencies.dagger
-  implementation appDependencies.rxAndroid
-  implementation appDependencies.dagger
-  kapt appDependencies.daggerCompiler
-  implementation appDependencies.daggerAndroid
-  implementation appDependencies.daggerAndroidSupport
-  kapt appDependencies.daggerAndroidCompiler
+  implementation App.kotlin
+  implementation App.appcompatV7
+  implementation App.supportDesign
+  implementation App.recyclerView
+  implementation App.cardView
+  implementation App.supportConstraint
+  implementation App.glide
+  kapt App.glideCompiler
+  implementation App.dagger
+  implementation App.rxAndroid
+  implementation App.dagger
+  kapt App.daggerCompiler
+  implementation App.daggerAndroid
+  implementation App.daggerAndroidSupport
+  kapt App.daggerAndroidCompiler
 
-  testImplementation appTestDependencies.junit
-  androidTestImplementation appTestDependencies.junit
-  androidTestImplementation appTestDependencies.kotlinJUnit
-  androidTestImplementation appTestDependencies.androidRunner
-  androidTestImplementation appTestDependencies.androidRules
-  androidTestImplementation appTestDependencies.mockitoAndroid
-  androidTestImplementation appTestDependencies.mockitoKotlin
-  androidTestImplementation(appTestDependencies.espressoCore, {
+  testImplementation AppTest.junit
+  androidTestImplementation AppTest.junit
+  androidTestImplementation AppTest.kotlinJUnit
+  androidTestImplementation AppTest.androidRunner
+  androidTestImplementation AppTest.androidRules
+  androidTestImplementation AppTest.mockitoAndroid
+  androidTestImplementation AppTest.mockitoKotlin
+  androidTestImplementation(AppTest.espressoCore, {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
-  androidTestImplementation(appTestDependencies.espressoContrib, {
+  androidTestImplementation(AppTest.espressoContrib, {
     exclude group: 'com.android.support', module: 'appcompat'
     exclude group: 'com.android.support', module: 'support-v4'
     exclude group: 'com.android.support', module: 'support-annotations'
     exclude module: 'recyclerview-v7'
   })
-  androidTestImplementation appTestDependencies.espressoIntents
-  kaptAndroidTest appTestDependencies.daggerCompiler
-  kaptAndroidTest appTestDependencies.daggerAndroidCompiler
+  androidTestImplementation AppTest.espressoIntents
+  kaptAndroidTest AppTest.daggerCompiler
+  kaptAndroidTest AppTest.daggerAndroidCompiler
 }
