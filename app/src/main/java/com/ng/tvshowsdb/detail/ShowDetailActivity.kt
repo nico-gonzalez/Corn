@@ -39,9 +39,9 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
 
   private var showId: Long = -1
 
-  lateinit var similarShowsAdapter: ShowsAdapter
+  private lateinit var similarShowsAdapter: ShowsAdapter
 
-  lateinit var similarShowsLayoutManager: LinearLayoutManager
+  private lateinit var similarShowsLayoutManager: LinearLayoutManager
 
   companion object {
 
