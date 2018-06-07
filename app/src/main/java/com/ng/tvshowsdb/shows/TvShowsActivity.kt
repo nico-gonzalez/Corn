@@ -27,9 +27,9 @@ class TvShowsActivity : DaggerAppCompatActivity(), TvShowsView {
   @Inject
   lateinit var showsPresenter: TvShowsPresenter
 
-  lateinit var showsAdapter: ShowsAdapter
+  private lateinit var showsAdapter: ShowsAdapter
 
-  lateinit var showsLayoutManager: GridLayoutManager
+  private lateinit var showsLayoutManager: GridLayoutManager
 
   override fun setPresenter(presenter: TvShowsPresenter) {
     this.showsPresenter = presenter

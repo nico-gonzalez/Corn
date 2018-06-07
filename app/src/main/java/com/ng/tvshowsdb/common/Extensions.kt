@@ -3,6 +3,7 @@ package com.ng.tvshowsdb.common
 import android.graphics.drawable.Drawable
 import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -15,7 +16,7 @@ import com.ng.tvshowsdb.R
 import com.ng.tvshowsdb.data.BuildConfig
 
 fun ViewGroup.inflate(@LayoutRes layoutResId: Int,
-    attachToRoot: Boolean = false) = LayoutInflater.from(context).inflate(
+    attachToRoot: Boolean = false): View = LayoutInflater.from(context).inflate(
     layoutResId, this, attachToRoot)
 
 fun ImageView.loadShowImage(posterPath: String, onLoaded: (() -> Unit)? = null) = Glide.with(
