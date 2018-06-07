@@ -2,13 +2,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-  compileSdkVersion rootProject.compileSdkVersion
+  compileSdkVersion Versions.compileSdk
 
   defaultConfig {
-    minSdkVersion rootProject.minSdkVersion
-    targetSdkVersion rootProject.targetSdkVersion
-    versionCode 1
-    versionName "1.0"
+    minSdkVersion Versions.minSdk
+    targetSdkVersion Versions.targetSdk
+    versionCode Versions.versionCode
+    versionName Versions.versionName
   }
 
   buildTypes {
@@ -25,27 +25,25 @@ android {
 }
 
 dependencies {
-  def dataDependencies = rootProject.ext.dataDependencies
-  def dataTestDependencies = rootProject.ext.dataTestDependencies
 
   implementation project(":domain")
 
-  compileOnly dataDependencies.javaxInject
+  compileOnly Data.javaxInject
 
-  implementation dataDependencies.kotlin
-  implementation dataDependencies.moshi
-  implementation dataDependencies.moshiKotlin
-  api dataDependencies.retrofit
-  api dataDependencies.retrofitMoshi
-  api dataDependencies.retrofitRxJava
-  api dataDependencies.okhttpLoggingInterceptor
-  implementation dataDependencies.rxJava
+  implementation Data.kotlin
+  implementation Data.moshi
+  implementation Data.moshiKotlin
+  api Data.retrofit
+  api Data.retrofitMoshi
+  api Data.retrofitRxJava
+  api Data.okhttpLoggingInterceptor
+  implementation Data.rxJava
 
-  testImplementation dataTestDependencies.junit
-  testImplementation dataTestDependencies.kotlinJUnit
-  testImplementation dataTestDependencies.mockito
-  testImplementation dataTestDependencies.mockitoKotlin
-  androidTestImplementation dataTestDependencies.junit
+  testImplementation DataTest.junit
+  testImplementation DataTest.kotlinJUnit
+  testImplementation DataTest.mockito
+  testImplementation DataTest.mockitoKotlin
+  androidTestImplementation DataTest.junit
 }
 
 sourceCompatibility = "1.8"
