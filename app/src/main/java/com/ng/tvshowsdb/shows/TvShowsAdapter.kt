@@ -11,9 +11,7 @@ import com.ng.tvshowsdb.R
 import com.ng.tvshowsdb.common.inflate
 import com.ng.tvshowsdb.common.loadShowImage
 import com.ng.tvshowsdb.presentation.shows.TvShowViewModel
-import kotlinx.android.synthetic.main.show_card.view.posterIv
-import kotlinx.android.synthetic.main.show_card.view.ratingTv
-import kotlinx.android.synthetic.main.show_card.view.titleTv
+import kotlinx.android.synthetic.main.show_card.view.*
 
 sealed class ShowsViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -25,9 +23,9 @@ class ShowViewHolder(view: View,
       titleTv.text = show.title
       posterIv.loadShowImage(show.posterPath)
       ratingTv.text = show.rating
-    }
-    itemView.setOnClickListener {
-      onShowClickedListener(adapterPosition)
+      showCard.setOnClickListener {
+        onShowClickedListener(adapterPosition)
+      }
     }
   }
 }
@@ -87,9 +85,9 @@ class ShowsAdapter constructor(@LayoutRes private val showItemLayoutId: Int,
 
   override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
     super.onAttachedToRecyclerView(recyclerView)
-    this.recyclerView = recyclerView
-
-    recyclerView.addOnScrollListener(loadMoreScrollListener)
+    this.recyclerView = recyclerView.apply {
+      addOnScrollListener(loadMoreScrollListener)
+    }
   }
 
   fun setShows(shows: List<TvShowViewModel>) {
