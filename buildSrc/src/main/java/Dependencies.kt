@@ -1,6 +1,6 @@
 private object Versions {
   //region Android"
-  const val gradlePlugin = "3.1.2"
+  const val gradlePlugin = "3.1.3"
   const val buildTools = "27.0.3"
   const val minSdk = 19
   const val targetSdk = 27
@@ -8,7 +8,7 @@ private object Versions {
   //endregion"
 
   //region Libraries
-  const val kotlin = "1.2.41"
+  const val kotlin = "1.2.50"
   const val supportLibrary = "27.1.0"
   const val constraintLayout = "1.0.2"
   const val retrofit = "2.4.0"

@@ -10,7 +10,7 @@ import com.nhaarman.mockito_kotlin.inOrder
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verifyZeroInteractions
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Flowable
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 
@@ -40,7 +40,7 @@ class TvShowsPresenterTest {
   fun `On show most popular tv shows, gets popular tv shows and hand the view model to the view`() {
     val shows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-    whenever(getTvShows.execute(1)) doReturn Flowable.just(shows)
+    whenever(getTvShows.execute(1)) doReturn Single.just(shows)
     whenever(tvShowViewModelMapper.map(tvShow)) doReturn tvShowViewModel
 
     presenter.onShowMostPopularTvShows()
@@ -61,7 +61,7 @@ class TvShowsPresenterTest {
   fun `On show most popular tv shows, gets popular tv shows fails hands error message to view`() {
     val result = Result.error<TvShows>(Throwable("Error"))
 
-    whenever(getTvShows.execute(1)) doReturn Flowable.just(result)
+    whenever(getTvShows.execute(1)) doReturn Single.just(result)
 
     presenter.onShowMostPopularTvShows()
 
@@ -88,8 +88,8 @@ class TvShowsPresenterTest {
     val secondPageShows = Result.success(
         TvShows(listOf(similarTvShow), currentPage = 2, totalPages = 5))
 
-    whenever(getTvShows.execute(1)) doReturn Flowable.just(firstPageShows)
-    whenever(getTvShows.execute(2)) doReturn Flowable.just(secondPageShows)
+    whenever(getTvShows.execute(1)) doReturn Single.just(firstPageShows)
+    whenever(getTvShows.execute(2)) doReturn Single.just(secondPageShows)
     whenever(tvShowViewModelMapper.map(tvShow)) doReturn tvShowViewModel
     whenever(tvShowViewModelMapper.map(similarTvShow)) doReturn similarTvShowViewModel
 
@@ -121,8 +121,8 @@ class TvShowsPresenterTest {
     val firstPageShows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
     val secondPageResult = Result.error<TvShows>(Throwable("Error"))
 
-    whenever(getTvShows.execute(1)) doReturn Flowable.just(firstPageShows)
-    whenever(getTvShows.execute(2)) doReturn Flowable.just(secondPageResult)
+    whenever(getTvShows.execute(1)) doReturn Single.just(firstPageShows)
+    whenever(getTvShows.execute(2)) doReturn Single.just(secondPageResult)
     whenever(tvShowViewModelMapper.map(tvShow)) doReturn tvShowViewModel
 
     presenter.onShowMostPopularTvShows()

@@ -7,7 +7,6 @@ import dagger.android.DaggerApplication
 
 open class TvShowsDbApplication : DaggerApplication() {
 
-
   override fun applicationInjector(): AndroidInjector<out DaggerApplication>? {
     val daggerDataComponent = DaggerDataComponent.builder()
         .context(this)
