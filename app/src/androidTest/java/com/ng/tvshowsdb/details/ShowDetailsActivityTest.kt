@@ -10,7 +10,8 @@ import com.ng.tvshowsdb.presentation.detail.TvShowDetailsViewModelMapper
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,9 +36,9 @@ class ShowDetailsActivityTest : AndroidTest() {
   fun setup() {
     applicationComponent().inject(this)
 
-    whenever(showsRepository.getShow(eq(tvShow.id))) doReturn Flowable.just(tvShow)
+    whenever(showsRepository.getShow(eq(tvShow.id))) doReturn Maybe.just(tvShow)
     whenever(showsRepository.getSimilarTvShows(anyLong(), page = anyInt())) doReturn
-        Flowable.just(tvShows)
+        Single.just(tvShows)
   }
 
   @Test
@@ -50,7 +51,7 @@ class ShowDetailsActivityTest : AndroidTest() {
   @Test
   fun testWhenSimilarShowClickedOpenDetails() {
     val selectedShow = tvShows.shows[1]
-    whenever(showsRepository.getShow(eq(selectedShow.id))) doReturn Flowable.just(selectedShow)
+    whenever(showsRepository.getShow(eq(selectedShow.id))) doReturn Maybe.just(selectedShow)
 
     showDetail(tvShowViewModel) {
       clickOnSimilarTvShowAt(1)

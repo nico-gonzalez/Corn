@@ -43,11 +43,11 @@ class TvShowDetailPresenter(private val view: ShowDetailView,
     this.showId = showId
     subscriptions.add(
         getTvShow.execute(showId)
-            .doOnNext {
+            .doOnSuccess {
 
               it.error?.let {
                 view.showError(it.localizedMessage)
-                return@doOnNext
+                return@doOnSuccess
               }
 
               it.result?.let {
@@ -60,11 +60,11 @@ class TvShowDetailPresenter(private val view: ShowDetailView,
     )
     subscriptions.add(
         getSimilarTvShows.execute(Params(showId, currentSimilarShowsPage))
-            .doOnNext {
+            .doOnSuccess {
 
               it.error?.let {
                 view.showError(it.localizedMessage)
-                return@doOnNext
+                return@doOnSuccess
               }
 
               it.result?.let {
@@ -83,12 +83,12 @@ class TvShowDetailPresenter(private val view: ShowDetailView,
     if (currentSimilarShowsPage < totalSimilarShowsPages) {
       subscriptions.add(
           getSimilarTvShows.execute(Params(showId, ++currentSimilarShowsPage))
-              .doOnNext {
+              .doOnSuccess {
                 view.hideLoadingMoreSimilarShows()
 
                 it.error?.let {
                   view.showError(it.localizedMessage)
-                  return@doOnNext
+                  return@doOnSuccess
                 }
 
                 it.result?.let {

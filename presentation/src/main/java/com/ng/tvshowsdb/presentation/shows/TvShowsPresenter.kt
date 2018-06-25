@@ -37,12 +37,12 @@ class TvShowsPresenter(private val view: TvShowsView,
   fun onShowMostPopularTvShows() {
     subscriptions.add(
         getTvShows.execute(1)
-            .doOnNext {
+            .doOnSuccess {
               view.hideLoading()
 
               it.error?.let {
                 view.showError()
-                return@doOnNext
+                return@doOnSuccess
               }
 
               it.result?.let {
@@ -64,12 +64,12 @@ class TvShowsPresenter(private val view: TvShowsView,
     if (currentPage < totalShowsPages) {
       subscriptions.add(
           getTvShows.execute(++currentPage)
-              .doOnNext {
+              .doOnSuccess {
                 view.hideLoadingMoreShows()
 
                 it.error?.let {
                   view.showError()
-                  return@doOnNext
+                  return@doOnSuccess
                 }
 
                 it.result?.let {

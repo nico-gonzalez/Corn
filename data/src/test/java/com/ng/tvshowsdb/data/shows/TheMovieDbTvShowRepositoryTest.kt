@@ -9,8 +9,7 @@ import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Flowable
-import io.reactivex.subscribers.TestSubscriber
+import io.reactivex.Single
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
@@ -47,13 +46,14 @@ class TheMovieDbTvShowRepositoryTest {
   private val thirdTvShow: TvShow = mock {
     on { id }.doReturn(THIRD_SHOW_ID)
   }
-  private val tvShowItems = TvShowItems(listOf(firstTvShowItem, secondTvShowItem, thirdTvShowItem),
-      FIRST_PAGE, TOTAL_PAGES)
-  private val tvShows = TvShows(listOf(firstTvShow, secondTvShow, thirdTvShow), FIRST_PAGE,
-      TOTAL_PAGES)
-
-  private val showsSubscriber = TestSubscriber<TvShows>()
-  private val showSubscriber = TestSubscriber<TvShow>()
+  private val tvShowItems = TvShowItems(
+      listOf(firstTvShowItem, secondTvShowItem, thirdTvShowItem),
+      FIRST_PAGE, TOTAL_PAGES
+  )
+  private val tvShows = TvShows(
+      listOf(firstTvShow, secondTvShow, thirdTvShow), FIRST_PAGE,
+      TOTAL_PAGES
+  )
 
   @Before
   fun setup() {
@@ -65,9 +65,10 @@ class TheMovieDbTvShowRepositoryTest {
   @Test
   fun `Get shows gets most popular shows from remote and caches in memory cache`() {
 
-    whenever(service.getMostPopularTvShows(FIRST_PAGE)) doReturn Flowable.just(tvShowItems)
+    whenever(service.getMostPopularTvShows(FIRST_PAGE)) doReturn Single.just(tvShowItems)
 
-    repository.getMostPopularShows(FIRST_PAGE).subscribe(showsSubscriber)
+    repository.getMostPopularShows(FIRST_PAGE)
+        .test()
 
     verify(service).getMostPopularTvShows(FIRST_PAGE)
 
@@ -82,10 +83,11 @@ class TheMovieDbTvShowRepositoryTest {
 
     repository.showCache[THIRD_SHOW_ID] = thirdTvShow
 
-    repository.getShow(THIRD_SHOW_ID).subscribe(showSubscriber)
-
-    showSubscriber.assertValue(thirdTvShow)
-
+    repository.getShow(THIRD_SHOW_ID)
+        .test()
+        .apply {
+          assertValue(thirdTvShow)
+        }
   }
 
   @Test
@@ -95,12 +97,15 @@ class TheMovieDbTvShowRepositoryTest {
     repository.showCache[SECOND_SHOW_ID] = secondTvShow
 
     val similarShowItems = TvShowItems(listOf(thirdTvShowItem), FIRST_PAGE, TOTAL_PAGES)
-    whenever(mapper.map(similarShowItems)) doReturn TvShows(listOf(thirdTvShow), FIRST_PAGE,
-        TOTAL_PAGES)
+    whenever(mapper.map(similarShowItems)) doReturn TvShows(
+        listOf(thirdTvShow), FIRST_PAGE,
+        TOTAL_PAGES
+    )
     whenever(service.getSimilarTvShows(FIRST_SHOW_ID, FIRST_PAGE)) doReturn
-        Flowable.just(similarShowItems)
+        Single.just(similarShowItems)
 
-    repository.getSimilarTvShows(FIRST_SHOW_ID, FIRST_PAGE).subscribe(showsSubscriber)
+    repository.getSimilarTvShows(FIRST_SHOW_ID, FIRST_PAGE)
+        .test()
 
     verify(service).getSimilarTvShows(FIRST_SHOW_ID, FIRST_PAGE)
 

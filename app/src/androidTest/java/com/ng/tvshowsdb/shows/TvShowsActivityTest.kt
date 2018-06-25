@@ -9,7 +9,8 @@ import com.ng.tvshowsdb.domain.repository.TvShowRepository
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,10 +31,10 @@ class TvShowsActivityTest : AndroidTest() {
   fun setup() {
     applicationComponent().inject(this)
 
-    whenever(showsRepository.getMostPopularShows(anyInt())) doReturn Flowable.just(tvShows)
-    whenever(showsRepository.getShow(eq(tvShow.id))) doReturn Flowable.just(tvShow)
+    whenever(showsRepository.getMostPopularShows(anyInt())) doReturn Single.just(tvShows)
+    whenever(showsRepository.getShow(eq(tvShow.id))) doReturn Maybe.just(tvShow)
     whenever(showsRepository.getSimilarTvShows(eq(tvShow.id), page = anyInt())) doReturn
-        Flowable.just(similarTvShows)
+        Single.just(similarTvShows)
   }
 
   @Test

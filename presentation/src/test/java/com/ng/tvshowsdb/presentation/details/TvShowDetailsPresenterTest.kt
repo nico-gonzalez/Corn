@@ -20,7 +20,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.verifyZeroInteractions
 import com.nhaarman.mockito_kotlin.whenever
-import io.reactivex.Flowable
+import io.reactivex.Single
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
@@ -44,8 +44,10 @@ class TvShowDetailsPresenterTest {
 
   @Before
   fun setup() {
-    presenter = TvShowDetailPresenter(view, getTvShow, getSimilarTvShows, tvShowViewModelMapper,
-        tvShowDetailsViewModelMapper)
+    presenter = TvShowDetailPresenter(
+        view, getTvShow, getSimilarTvShows, tvShowViewModelMapper,
+        tvShowDetailsViewModelMapper
+    )
   }
 
   @Test
@@ -53,9 +55,9 @@ class TvShowDetailsPresenterTest {
     val showDetails = Result.success(tvShow)
     val similarTvShows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-    whenever(getTvShow.execute(SHOW_ID)) doReturn Flowable.just(showDetails)
+    whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
     whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
-        Flowable.just(similarTvShows)
+        Single.just(similarTvShows)
     whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsViewModel
 
     presenter.onShowDetails(SHOW_ID)
@@ -72,9 +74,9 @@ class TvShowDetailsPresenterTest {
     val showDetails = Result.error<TvShow>(Throwable("Error"))
     val similarTvShows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-    whenever(getTvShow.execute(SHOW_ID)) doReturn Flowable.just(showDetails)
+    whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
     whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
-        Flowable.just(similarTvShows)
+        Single.just(similarTvShows)
     whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsViewModel
 
     presenter.onShowDetails(SHOW_ID)
@@ -93,9 +95,9 @@ class TvShowDetailsPresenterTest {
     val showDetails = Result.success(tvShow)
     val similarTvShows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-    whenever(getTvShow.execute(SHOW_ID)) doReturn Flowable.just(showDetails)
+    whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
     whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
-        Flowable.just(similarTvShows)
+        Single.just(similarTvShows)
     whenever(tvShowViewModelMapper.map(tvShow)) doReturn tvShowViewModel
 
     presenter.onShowDetails(SHOW_ID)
