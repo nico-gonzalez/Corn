@@ -1,6 +1,6 @@
 private object Versions {
   //region Android"
-  const val gradlePlugin = "3.1.3"
+  const val gradlePlugin = "3.1.4"
   const val buildTools = "27.0.3"
   const val minSdk = 19
   const val targetSdk = 27
@@ -8,9 +8,9 @@ private object Versions {
   //endregion"
 
   //region Libraries
-  const val kotlin = "1.2.50"
-  const val supportLibrary = "27.1.0"
-  const val constraintLayout = "1.0.2"
+  const val kotlin = "1.2.60"
+  const val supportLibrary = "27.1.1"
+  const val constraintLayout = "1.1.2"
   const val retrofit = "2.4.0"
   const val okhttp = "3.10.0"
   const val moshi = "1.6.0"
@@ -19,6 +19,7 @@ private object Versions {
   const val javaxInject = "1"
   const val rxJava = "2.1.14"
   const val rxAndroid = "2.0.2"
+  const val androidArchComponents = "1.1.1"
   //endregion
 
   //region Test
@@ -71,6 +72,9 @@ private object Libs {
   const val daggerAndroidSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
   const val daggerAndroidCompiler = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
   const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
+  const val room = "android.arch.persistence.room:runtime:${Versions.androidArchComponents}"
+  const val roomCompiler = "android.arch.persistence.room:compiler:${Versions.androidArchComponents}"
+  const val roomRxJava = "android.arch.persistence.room:rxjava2:${Versions.androidArchComponents}"
   //endregion
 
   //region Testing
@@ -105,6 +109,9 @@ object Data {
   const val okhttpLoggingInterceptor = Libs.okhttpLoggingInterceptor
   const val javaxInject = Libs.javaxInject
   const val rxJava = Libs.rxJava
+  const val room = Libs.room
+  const val roomCompiler = Libs.roomCompiler
+  const val roomRxJava = Libs.roomRxJava
 }
 
 object DataTest {

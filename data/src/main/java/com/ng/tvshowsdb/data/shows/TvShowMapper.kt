@@ -9,15 +9,18 @@ class TvShowMapper @Inject constructor() {
 
   fun map(tvShows: TvShowItems): TvShows = with(tvShows) {
     TvShows(results
-        .map {
-          TvShow(it.id,
-              it.name ?: "",
-              it.overview ?: "",
-              it.poster_path ?: "",
-              it.backdrop_path ?: "",
-              it.first_air_date ?: "",
-              it.vote_average ?: 0.0)
-        }, page, total_pages)
+      .map {
+        TvShow(
+          it.id,
+          it.name ?: "",
+          it.overview ?: "",
+          it.poster_path ?: "",
+          it.backdrop_path ?: "",
+          it.first_air_date ?: "",
+          it.vote_average ?: 0.0
+        )
+      }, page, total_pages
+    )
 
   }
 }

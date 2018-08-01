@@ -15,26 +15,34 @@ import com.bumptech.glide.request.target.Target
 import com.ng.tvshowsdb.R
 import com.ng.tvshowsdb.data.BuildConfig
 
-fun ViewGroup.inflate(@LayoutRes layoutResId: Int,
-    attachToRoot: Boolean = false): View = LayoutInflater.from(context).inflate(
-    layoutResId, this, attachToRoot)
+fun ViewGroup.inflate(
+  @LayoutRes layoutResId: Int,
+  attachToRoot: Boolean = false
+): View = LayoutInflater.from(context).inflate(
+  layoutResId, this, attachToRoot
+)
 
 fun ImageView.loadShowImage(posterPath: String, onLoaded: (() -> Unit)? = null) = Glide.with(
-    context)
-    .applyDefaultRequestOptions(RequestOptions.placeholderOf(R.mipmap.ic_launcher_round))
-    .load("${BuildConfig.IMAGE_BASE_URL}/w500/$posterPath")
-    .listener(object : RequestListener<Drawable> {
-      override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?,
-          isFirstResource: Boolean): Boolean {
-        onLoaded?.invoke()
-        return false
-      }
+  context
+)
+  .applyDefaultRequestOptions(RequestOptions.placeholderOf(R.mipmap.ic_launcher_round))
+  .load("${BuildConfig.IMAGE_BASE_URL}/w500/$posterPath")
+  .listener(object : RequestListener<Drawable> {
+    override fun onLoadFailed(
+      e: GlideException?, model: Any?, target: Target<Drawable>?,
+      isFirstResource: Boolean
+    ): Boolean {
+      onLoaded?.invoke()
+      return false
+    }
 
-      override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?,
-          dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-        onLoaded?.invoke()
-        return false
-      }
+    override fun onResourceReady(
+      resource: Drawable?, model: Any?, target: Target<Drawable>?,
+      dataSource: DataSource?, isFirstResource: Boolean
+    ): Boolean {
+      onLoaded?.invoke()
+      return false
+    }
 
-    })
-    .into(this)
+  })
+  .into(this)

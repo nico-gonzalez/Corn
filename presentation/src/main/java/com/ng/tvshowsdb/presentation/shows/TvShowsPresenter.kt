@@ -1,5 +1,6 @@
 package com.ng.tvshowsdb.presentation.shows
 
+import com.ng.tvshowsdb.domain.common.extensions.addTo
 import com.ng.tvshowsdb.domain.shows.GetMostPopularTvShows
 import com.ng.tvshowsdb.presentation.common.Presenter
 import com.ng.tvshowsdb.presentation.common.View
@@ -23,9 +24,11 @@ interface TvShowsView : View<TvShowsPresenter> {
   fun navigateToShowDetails(position: Int, showId: Long)
 }
 
-class TvShowsPresenter(private val view: TvShowsView,
-    private val getTvShows: GetMostPopularTvShows,
-    private val tvShowViewModelMapper: TvShowViewModelMapper) : Presenter() {
+class TvShowsPresenter(
+  private val view: TvShowsView,
+  private val getTvShows: GetMostPopularTvShows,
+  private val tvShowViewModelMapper: TvShowViewModelMapper
+) : Presenter() {
 
   private var currentPage = 1
   private var totalShowsPages = 1
@@ -35,56 +38,52 @@ class TvShowsPresenter(private val view: TvShowsView,
   }
 
   fun onShowMostPopularTvShows() {
-    subscriptions.add(
-        getTvShows.execute(1)
-            .doOnSuccess {
-              view.hideLoading()
+    getTvShows.execute(1)
+      .doOnNext { result ->
+        view.hideLoading()
 
-              it.error?.let {
-                view.showError()
-                return@doOnSuccess
-              }
+        result.error?.let {
+          view.showError()
+          return@doOnNext
+        }
 
-              it.result?.let {
-                currentPage = it.currentPage
-                totalShowsPages = it.totalPages
-                val shows = it.shows.map(tvShowViewModelMapper::map)
-                view.showShows(shows)
-              }
+        result.result?.let {
+          currentPage = it.currentPage
+          totalShowsPages = it.totalPages
+          val shows = it.shows.map(tvShowViewModelMapper::map)
+          view.showShows(shows)
+        }
 
-            }
-            .doOnSubscribe {
-              view.showLoading()
-            }
-            .subscribe()
-    )
+      }
+      .doOnSubscribe {
+        view.showLoading()
+      }
+      .subscribe().addTo(disposables)
   }
 
   fun onShowMoreShows() {
     if (currentPage < totalShowsPages) {
-      subscriptions.add(
-          getTvShows.execute(++currentPage)
-              .doOnSuccess {
-                view.hideLoadingMoreShows()
+      getTvShows.execute(++currentPage)
+        .doOnNext { result ->
+          view.hideLoadingMoreShows()
 
-                it.error?.let {
-                  view.showError()
-                  return@doOnSuccess
-                }
+          result.error?.let {
+            view.showError()
+            return@doOnNext
+          }
 
-                it.result?.let {
-                  currentPage = it.currentPage
-                  totalShowsPages = it.totalPages
-                  val shows = it.shows.map(tvShowViewModelMapper::map)
-                  view.showMoreShows(shows)
-                }
+          result.result?.let {
+            currentPage = it.currentPage
+            totalShowsPages = it.totalPages
+            val shows = it.shows.map(tvShowViewModelMapper::map)
+            view.showMoreShows(shows)
+          }
 
-              }
-              .doOnSubscribe {
-                view.showLoadingMoreShows()
-              }
-              .subscribe()
-      )
+        }
+        .doOnSubscribe {
+          view.showLoadingMoreShows()
+        }
+        .subscribe().addTo(disposables)
     }
   }
 

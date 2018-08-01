@@ -1,8 +1,8 @@
 package com.ng.tvshowsdb.domain.common
 
-import io.reactivex.Single
+import io.reactivex.Flowable
 
 interface UseCase<in Params, T> {
 
-  fun execute(params: Params): Single<Result<T>>
+  fun execute(params: Params): Flowable<Result<T>>
 }

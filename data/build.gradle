@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion Versions.compileSdk
@@ -9,6 +10,12 @@ android {
     targetSdkVersion Versions.targetSdk
     versionCode Versions.versionCode
     versionName Versions.versionName
+
+    kapt {
+      arguments {
+        arg("room.schemaLocation", "$projectDir/schemas".toString())
+      }
+    }
   }
 
   buildTypes {
@@ -38,6 +45,9 @@ dependencies {
   api Data.retrofitRxJava
   api Data.okhttpLoggingInterceptor
   implementation Data.rxJava
+  api Data.room
+  implementation Data.roomRxJava
+  kapt Data.roomCompiler
 
   testImplementation DataTest.junit
   testImplementation DataTest.kotlinJUnit

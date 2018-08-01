@@ -87,10 +87,10 @@ class TvShowsActivity : DaggerAppCompatActivity(), TvShowsView {
 
   override fun showError() {
     Snackbar.make(showsRv, R.string.error_loading_popular_shows, Snackbar.LENGTH_LONG)
-        .setAction(R.string.retry, {
-          showsPresenter.onShowMostPopularTvShows()
-        })
-        .show()
+      .setAction(R.string.retry) {
+        showsPresenter.onShowMostPopularTvShows()
+      }
+      .show()
   }
 
   override fun showLoadingMoreShows() {
@@ -108,10 +108,13 @@ class TvShowsActivity : DaggerAppCompatActivity(), TvShowsView {
   override fun navigateToShowDetails(position: Int, showId: Long) {
     val view = showsLayoutManager.findViewByPosition(position)
     val intent = ShowDetailActivity.startIntent(this, showId)
-    startActivity(intent,
-        ActivityOptionsCompat.makeSceneTransitionAnimation(this, view,
-            getString(R.string.shared_show_poster_transition))
-            .toBundle()
+    startActivity(
+      intent,
+      ActivityOptionsCompat.makeSceneTransitionAnimation(
+        this, view,
+        getString(R.string.shared_show_poster_transition)
+      )
+        .toBundle()
     )
   }
 }
