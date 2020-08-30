@@ -14,14 +14,15 @@ private object Versions {
     const val recyclerview = "1.1.0"
     const val cardview = "1.0.0"
     const val constraintLayout = "2.0.0"
-    const val retrofit = "2.4.0"
-    const val okhttp = "3.10.0"
-    const val moshi = "1.6.0"
-    const val glide = "4.7.1"
+    const val retrofit = "2.9.0"
+    const val okhttp = "4.8.1"
+    const val moshi = "1.9.3"
+    const val glide = "4.11.0"
     const val dagger = "2.28.3"
     const val javaxInject = "1"
-    const val rxJava = "2.1.14"
-    const val rxAndroid = "2.0.2"
+    const val rxJava = "2.2.19"
+    const val rxAndroid = "2.1.1"
+    const val rxKotlin = "2.4.0"
     //endregion
 
     //region Test
@@ -76,6 +77,7 @@ private object Libs {
     const val daggerAndroidCompiler =
         "com.google.dagger:dagger-android-processor:${Versions.dagger}"
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
+    const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
     //endregion
 
     //region Testing
@@ -135,6 +137,7 @@ object DomainTest {
 object Presentation {
     const val kotlin = Libs.kotlin
     const val rxJava = Libs.rxJava
+    const val rxKotlin = Libs.rxKotlin
     const val javaxInject = Libs.javaxInject
 }
 

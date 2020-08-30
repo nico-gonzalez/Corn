@@ -1,8 +1,8 @@
 <resources>
-  <string name="app_name">TvShowsDB</string>
-  <string name="shared_show_poster_transition">shared_show_poster_transition_tag</string>
-  <string name="error_loading_popular_shows">Error loading shows</string>
-  <string name="retry">Retry</string>
+    <string name="app_name">Corn</string>
+    <string name="shared_show_poster_transition">shared_show_poster_transition_tag</string>
+    <string name="error_loading_popular_shows">Error loading shows</string>
+    <string name="retry">Retry</string>
     <string name="similar_shows">Similar Shows</string>
-  <string name="first_aired">First aired</string>
+    <string name="first_aired">First aired</string>
 </resources>

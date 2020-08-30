@@ -8,6 +8,7 @@ dependencies {
 
   implementation Presentation.kotlin
   implementation Presentation.rxJava
+  implementation Presentation.rxKotlin
 
   testImplementation PresentationTest.junit
   testImplementation PresentationTest.kotlinJUnit

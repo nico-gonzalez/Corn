@@ -48,11 +48,7 @@ class GetTvShowTest {
 
         getTvShow.execute(SHOW_ID)
             .test()
-            .apply {
-                assertValue {
-                    it.error == error
-                }
-            }
+            .assertError(error)
         verify(tvShowRepository).getShow(SHOW_ID)
     }
 }

@@ -8,6 +8,7 @@ import com.ng.tvshowsdb.presentation.common.View
 import com.ng.tvshowsdb.presentation.shows.LoadingTvShowUiModel
 import com.ng.tvshowsdb.presentation.shows.TvShowItem
 import com.ng.tvshowsdb.presentation.shows.TvShowViewModelMapper
+import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 interface ShowDetailView : View<TvShowDetailPresenter> {
@@ -40,70 +41,67 @@ class TvShowDetailPresenter @Inject constructor(
 
     fun onShowDetails(showId: Long) {
         this.showId = showId
-        subscriptions.add(
-            getTvShow.execute(showId)
-                .doOnSuccess { result ->
-                    result.error?.let {
-                        view.showError(it.localizedMessage)
-                        return@doOnSuccess
-                    }
+        getTvShow.execute(showId)
+            .doOnSuccess { result ->
+                result.error?.let {
+                    view.showError(it.localizedMessage)
+                    return@doOnSuccess
+                }
 
-                    result.value?.let { tvShow ->
-                        val show = tvShowDetailsViewModelMapper.map(tvShow)
-                        view.showDetails(show)
-                    }
+                result.value?.let { tvShow ->
+                    val show = tvShowDetailsViewModelMapper.map(tvShow)
+                    view.showDetails(show)
                 }
-                .subscribe()
-        )
-        subscriptions.add(
-            getSimilarTvShows.execute(Params(showId, currentSimilarShowsPage))
-                .doOnSuccess { result ->
-                    result.error?.let {
-                        view.showError(it.localizedMessage)
-                        return@doOnSuccess
-                    }
-                    result.value?.let {
-                        currentSimilarShowsPage = it.currentPage
-                        totalSimilarShowsPages = it.totalPages
-                        val shows = it.shows.map(tvShowViewModelMapper::map)
-                        similarTvShows.clear()
-                        similarTvShows += shows
-                        view.showSimilarShows(similarTvShows)
-                    }
+            }
+            .subscribe()
+            .addTo(subscriptions)
+        getSimilarTvShows.execute(Params(showId, currentSimilarShowsPage))
+            .doOnSuccess { result ->
+                result.error?.let {
+                    view.showError(it.localizedMessage)
+                    return@doOnSuccess
                 }
-                .subscribe()
-        )
+                result.value?.let {
+                    currentSimilarShowsPage = it.currentPage
+                    totalSimilarShowsPages = it.totalPages
+                    val shows = it.shows.map(tvShowViewModelMapper::map)
+                    similarTvShows.clear()
+                    similarTvShows += shows
+                    view.showSimilarShows(similarTvShows)
+                }
+            }
+            .subscribe()
+            .addTo(subscriptions)
     }
 
     fun onShowMoreSimilarShows() {
         val isLoadingMore = similarTvShows.last() == LoadingTvShowUiModel
         if (currentSimilarShowsPage < totalSimilarShowsPages && !isLoadingMore) {
-            subscriptions.add(
-                getSimilarTvShows.execute(Params(showId, ++currentSimilarShowsPage))
-                    .doOnSuccess { result ->
-                        similarTvShows.remove(LoadingTvShowUiModel)
-                        view.showSimilarShows(similarTvShows)
+            getSimilarTvShows.execute(Params(showId, ++currentSimilarShowsPage))
+                .doOnSuccess { result ->
+                    similarTvShows.remove(LoadingTvShowUiModel)
+                    view.showSimilarShows(similarTvShows)
 
-                        result.error?.let {
-                            view.showError(it.localizedMessage)
-                            return@doOnSuccess
-                        }
-
-                        result.value?.let {
-                            currentSimilarShowsPage = it.currentPage
-                            totalSimilarShowsPages = it.totalPages
-                            val shows = it.shows.map(tvShowViewModelMapper::map)
-                            similarTvShows += shows
-                            view.showSimilarShows(similarTvShows)
-                        }
-
+                    result.error?.let {
+                        view.showError(it.localizedMessage)
+                        return@doOnSuccess
                     }
-                    .doOnSubscribe {
-                        similarTvShows += LoadingTvShowUiModel
+
+                    result.value?.let {
+                        currentSimilarShowsPage = it.currentPage
+                        totalSimilarShowsPages = it.totalPages
+                        val shows = it.shows.map(tvShowViewModelMapper::map)
+                        similarTvShows += shows
                         view.showSimilarShows(similarTvShows)
                     }
-                    .subscribe()
-            )
+
+                }
+                .doOnSubscribe {
+                    similarTvShows += LoadingTvShowUiModel
+                    view.showSimilarShows(similarTvShows)
+                }
+                .subscribe()
+                .addTo(subscriptions)
         }
     }
 

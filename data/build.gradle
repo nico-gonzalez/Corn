@@ -32,7 +32,7 @@ dependencies {
 
   implementation Data.kotlin
   implementation Data.moshi
-  implementation Data.moshiKotlin
+  api Data.moshiKotlin
   api Data.retrofit
   api Data.retrofitMoshi
   api Data.retrofitRxJava

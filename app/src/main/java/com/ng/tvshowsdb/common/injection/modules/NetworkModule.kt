@@ -3,6 +3,8 @@ package com.ng.tvshowsdb.common.injection.modules
 import com.ng.tvshowsdb.data.BuildConfig
 import com.ng.tvshowsdb.data.common.remote.ApiKeyInterceptor
 import com.ng.tvshowsdb.data.common.remote.TheMovieDBService
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -35,13 +37,20 @@ class NetworkModule {
 
     @Singleton
     @Provides
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
+    @Singleton
+    @Provides
     fun provideRetrofit(
         @Named("baseUrl") baseUrl: String,
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
+        moshi: Moshi
     ): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(okHttpClient)
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
 

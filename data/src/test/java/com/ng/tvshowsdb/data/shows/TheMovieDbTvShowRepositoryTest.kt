@@ -47,14 +47,14 @@ class TheMovieDbTvShowRepositoryTest {
         on { id }.doReturn(THIRD_SHOW_ID)
     }
     private val tvShowItems = TvShowItems(
-      listOf(firstTvShowItem, secondTvShowItem, thirdTvShowItem),
-      FIRST_PAGE,
-      TOTAL_PAGES
+        listOf(firstTvShowItem, secondTvShowItem, thirdTvShowItem),
+        FIRST_PAGE,
+        TOTAL_PAGES
     )
     private val tvShows = TvShows(
-      listOf(firstTvShow, secondTvShow, thirdTvShow),
-      FIRST_PAGE,
-      TOTAL_PAGES
+        listOf(firstTvShow, secondTvShow, thirdTvShow),
+        FIRST_PAGE,
+        TOTAL_PAGES
     )
 
     @Before
@@ -100,8 +100,8 @@ class TheMovieDbTvShowRepositoryTest {
 
         val similarShowItems = TvShowItems(listOf(thirdTvShowItem), FIRST_PAGE, TOTAL_PAGES)
         whenever(mapper.map(similarShowItems)) doReturn TvShows(
-          listOf(thirdTvShow), FIRST_PAGE,
-          TOTAL_PAGES
+            listOf(thirdTvShow), FIRST_PAGE,
+            TOTAL_PAGES
         )
         whenever(service.getSimilarTvShows(FIRST_SHOW_ID, FIRST_PAGE)) doReturn
                 Single.just(similarShowItems)
