@@ -45,8 +45,8 @@ class TvShowDetailsPresenterTest {
     @Before
     fun setup() {
         presenter = TvShowDetailPresenter(
-          view, getTvShow, getSimilarTvShows, tvShowViewModelMapper,
-          tvShowDetailsViewModelMapper
+            view, getTvShow, getSimilarTvShows, tvShowViewModelMapper,
+            tvShowDetailsViewModelMapper
         )
     }
 
@@ -86,7 +86,7 @@ class TvShowDetailsPresenterTest {
         inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
             verify(getTvShow).execute(SHOW_ID)
             verify(view).showError(argThat {
-              this == "Error"
+                this == "Error"
             })
             verifyZeroInteractions(tvShowDetailsViewModelMapper)
         }
@@ -107,12 +107,12 @@ class TvShowDetailsPresenterTest {
 
         inOrder(view, getSimilarTvShows, tvShowViewModelMapper) {
             verify(getSimilarTvShows).execute(check {
-              assertThat(it.showId, `is`(equalTo(SHOW_ID)))
-              assertThat(it.page, `is`(equalTo(1)))
+                assertThat(it.showId, `is`(equalTo(SHOW_ID)))
+                assertThat(it.page, `is`(equalTo(1)))
             })
             verify(tvShowViewModelMapper).map(tvShow)
             verify(view).showSimilarShows(argThat {
-              this[0] == tvShowUiModel
+                this[0] == tvShowUiModel
             })
         }
     }

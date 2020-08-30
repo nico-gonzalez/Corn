@@ -3,6 +3,7 @@ package com.ng.tvshowsdb.presentation.shows
 import com.ng.tvshowsdb.domain.shows.GetMostPopularTvShows
 import com.ng.tvshowsdb.presentation.common.Presenter
 import com.ng.tvshowsdb.presentation.common.View
+import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 interface TvShowsView : View<TvShowsPresenter> {
@@ -33,10 +34,37 @@ class TvShowsPresenter @Inject constructor(
     }
 
     fun onShowMostPopularTvShows() {
-        subscriptions.add(
-            getTvShows.execute(1)
+        getTvShows.execute(1)
+            .doOnSuccess {
+                view.hideLoading()
+
+                it.error?.let {
+                    view.showError()
+                    return@doOnSuccess
+                }
+
+                it.value?.let {
+                    currentPage = it.currentPage
+                    totalShowsPages = it.totalPages
+                    val shows = it.shows.map(tvShowViewModelMapper::map)
+                    tvShows.clear()
+                    tvShows += shows
+                    view.showShows(tvShows)
+                }
+
+            }
+            .doOnSubscribe { view.showLoading() }
+            .subscribe()
+            .addTo(subscriptions)
+    }
+
+    fun onShowMoreShows() {
+        val isLoadingMore = tvShows.last() == LoadingTvShowUiModel
+        if (currentPage < totalShowsPages && !isLoadingMore) {
+            getTvShows.execute(++currentPage)
                 .doOnSuccess {
-                    view.hideLoading()
+                    tvShows.remove(LoadingTvShowUiModel)
+                    view.showShows(tvShows)
 
                     it.error?.let {
                         view.showError()
@@ -47,46 +75,17 @@ class TvShowsPresenter @Inject constructor(
                         currentPage = it.currentPage
                         totalShowsPages = it.totalPages
                         val shows = it.shows.map(tvShowViewModelMapper::map)
-                        tvShows.clear()
                         tvShows += shows
                         view.showShows(tvShows)
                     }
 
                 }
-                .doOnSubscribe { view.showLoading() }
+                .doOnSubscribe {
+                    tvShows += LoadingTvShowUiModel
+                    view.showShows(tvShows)
+                }
                 .subscribe()
-        )
-    }
-
-    fun onShowMoreShows() {
-        val isLoadingMore = tvShows.last() == LoadingTvShowUiModel
-        if (currentPage < totalShowsPages && !isLoadingMore) {
-            subscriptions.add(
-                getTvShows.execute(++currentPage)
-                    .doOnSuccess {
-                        tvShows.remove(LoadingTvShowUiModel)
-                        view.showShows(tvShows)
-
-                        it.error?.let {
-                            view.showError()
-                            return@doOnSuccess
-                        }
-
-                        it.value?.let {
-                            currentPage = it.currentPage
-                            totalShowsPages = it.totalPages
-                            val shows = it.shows.map(tvShowViewModelMapper::map)
-                            tvShows += shows
-                            view.showShows(tvShows)
-                        }
-
-                    }
-                    .doOnSubscribe {
-                        tvShows += LoadingTvShowUiModel
-                        view.showShows(tvShows)
-                    }
-                    .subscribe()
-            )
+                .addTo(subscriptions)
         }
     }
 

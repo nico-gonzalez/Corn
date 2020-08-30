@@ -14,13 +14,13 @@ class TvShowDetailViewModelMapperTest {
     private lateinit var mapper: TvShowDetailsViewModelMapper
 
     private val tvShow = TvShow(
-      1,
-      "La casa de papel",
-      "Money Heist",
-      "poster",
-      "backdrop",
-      "2017",
-      8.9
+        1,
+        "La casa de papel",
+        "Money Heist",
+        "poster",
+        "backdrop",
+        "2017",
+        8.9
     )
 
     @Before
@@ -32,13 +32,13 @@ class TvShowDetailViewModelMapperTest {
     fun `TvShow entity is formatted to a TvShow detail view model`() {
         val result = mapper.map(tvShow)
         val viewModel = TvShowDetailsUiModel(
-          1,
-          "La casa de papel",
-          "Money Heist",
-          "poster",
-          "backdrop",
-          "2017",
-          "8.9"
+            1,
+            "La casa de papel",
+            "Money Heist",
+            "poster",
+            "backdrop",
+            "2017",
+            "8.9"
         )
 
         assertThat(result.id, `is`(equalTo(viewModel.id)))

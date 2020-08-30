@@ -4,12 +4,7 @@ import com.ng.tvshowsdb.domain.common.Result
 import com.ng.tvshowsdb.domain.model.TvShow
 import com.ng.tvshowsdb.domain.model.TvShows
 import com.ng.tvshowsdb.domain.shows.GetMostPopularTvShows
-import com.nhaarman.mockito_kotlin.argThat
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.inOrder
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verifyZeroInteractions
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
@@ -51,7 +46,7 @@ class TvShowsPresenterTest {
             verify(view).hideLoading()
             verify(tvShowViewModelMapper).map(tvShow)
             verify(view).showShows(argThat {
-              this[0].id == SHOW_ID
+                this[0].id == SHOW_ID
             })
             verifyNoMoreInteractions()
         }
@@ -87,7 +82,7 @@ class TvShowsPresenterTest {
         val firstPageShows =
             Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
         val secondPageShows = Result.success(
-          TvShows(listOf(similarTvShow), currentPage = 2, totalPages = 5)
+            TvShows(listOf(similarTvShow), currentPage = 2, totalPages = 5)
         )
 
         whenever(getTvShows.execute(1)) doReturn Single.just(firstPageShows)
@@ -104,15 +99,13 @@ class TvShowsPresenterTest {
             verify(view).hideLoading()
             verify(tvShowViewModelMapper).map(tvShow)
             verify(view).showShows(argThat {
-              this[0].id == SHOW_ID
+                this[0].id == SHOW_ID
             })
 
             verify(getTvShows).execute(2)
-            verify(view).showLoadingMoreShows()
-            verify(view).hideLoadingMoreShows()
             verify(tvShowViewModelMapper).map(similarTvShow)
-            verify(view).showMoreShows(argThat {
-              this[0].id == SIMILAR_SHOW_ID
+            verify(view).showShows(argThat {
+                this[1].id == SIMILAR_SHOW_ID
             })
             verifyNoMoreInteractions()
         }
@@ -137,12 +130,11 @@ class TvShowsPresenterTest {
             verify(view).hideLoading()
             verify(tvShowViewModelMapper).map(tvShow)
             verify(view).showShows(argThat {
-              this[0].id == SHOW_ID
+                this[0].id == SHOW_ID
             })
 
+
             verify(getTvShows).execute(2)
-            verify(view).showLoadingMoreShows()
-            verify(view).hideLoadingMoreShows()
             verify(view).showError()
             verifyNoMoreInteractions()
         }
