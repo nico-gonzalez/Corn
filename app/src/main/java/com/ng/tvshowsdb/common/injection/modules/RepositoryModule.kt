@@ -8,14 +8,20 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = [
-  NetworkModule::class
-])
+@Module(
+    includes = [
+        NetworkModule::class
+    ]
+)
 class RepositoryModule {
 
-  @Singleton
-  @Provides
-  fun provideTvShowRepository(movieDBService: TheMovieDBService,
-      tvShowMapper: TvShowMapper): TvShowRepository = TheMovieDbTvShowRepository(movieDBService,
-      tvShowMapper)
+    @Singleton
+    @Provides
+    fun provideTvShowRepository(
+        movieDBService: TheMovieDBService,
+        tvShowMapper: TvShowMapper
+    ): TvShowRepository = TheMovieDbTvShowRepository(
+        movieDBService,
+        tvShowMapper
+    )
 }

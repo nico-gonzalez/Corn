@@ -8,21 +8,17 @@ import javax.inject.Inject
 
 class ApiKeyInterceptor @Inject constructor() : Interceptor {
 
-  override fun intercept(chain: Chain?): Response {
+    override fun intercept(chain: Chain): Response {
+        val original = chain.request()
+        val originalHttpUrl = original.url()
 
-    chain?.let {
-      val original = chain.request()
-      val originalHttpUrl = original.url()
+        val url = originalHttpUrl.newBuilder()
+            .addQueryParameter("api_key", BuildConfig.THE_MOVIE_DB_API_KEY)
+            .build()
 
-      val url = originalHttpUrl.newBuilder()
-          .addQueryParameter("api_key", BuildConfig.THE_MOVIE_DB_API_KEY)
-          .build()
+        val requestBuilder = original.newBuilder()
+            .url(url)
 
-      val requestBuilder = original.newBuilder()
-          .url(url)
-
-      return chain.proceed(requestBuilder.build())
+        return chain.proceed(requestBuilder.build())
     }
-    return chain!!.proceed(chain.request())
-  }
 }

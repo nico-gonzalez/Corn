@@ -8,10 +8,12 @@ import retrofit2.http.Query
 
 interface TheMovieDBService {
 
-  @GET("tv/popular")
-  fun getMostPopularTvShows(@Query("page") page: Int): Single<TvShowItems>
+    @GET("tv/popular")
+    fun getMostPopularTvShows(@Query("page") page: Int): Single<TvShowItems>
 
-  @GET("tv/{tv_id}/similar")
-  fun getSimilarTvShows(@Path("tv_id") id: Long,
-      @Query("page") page: Int = 1): Single<TvShowItems>
+    @GET("tv/{tv_id}/similar")
+    fun getSimilarTvShows(
+        @Path("tv_id") id: Long,
+        @Query("page") page: Int = 1
+    ): Single<TvShowItems>
 }

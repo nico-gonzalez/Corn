@@ -11,12 +11,12 @@ import dagger.Provides
 @Module
 class ApplicationModule {
 
-  @PerApplication
-  @Provides
-  fun provideContext(application: Application): Context = application
+    @PerApplication
+    @Provides
+    fun provideContext(application: Application): Context = application
 
-  @PerApplication
-  @Provides
-  fun provideSchedulers(): SchedulerProvider = SchedulerProviderImpl()
+    @PerApplication
+    @Provides
+    fun provideSchedulers(): SchedulerProvider = SchedulerProviderImpl()
 
 }

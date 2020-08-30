@@ -16,43 +16,43 @@ private const val SHOW_ID = 1L
 
 class GetTvShowTest {
 
-  private lateinit var getTvShow: GetTvShow
+    private lateinit var getTvShow: GetTvShow
 
-  private val tvShowRepository: TvShowRepository = mock()
-  private val schedulerProvider: SchedulerProvider = ImmediateSchedulers()
-  private val tvShow: TvShow = mock()
+    private val tvShowRepository: TvShowRepository = mock()
+    private val schedulerProvider: SchedulerProvider = ImmediateSchedulers()
+    private val tvShow: TvShow = mock()
 
-  @Before
-  fun setup() {
-    getTvShow = GetTvShow(schedulerProvider, tvShowRepository)
-  }
+    @Before
+    fun setup() {
+        getTvShow = GetTvShow(schedulerProvider, tvShowRepository)
+    }
 
-  @Test
-  fun `Gets Show from Repository by it's Id`() {
-    whenever(tvShowRepository.getShow(SHOW_ID)) doReturn Maybe.just(tvShow)
+    @Test
+    fun `Gets Show from Repository by it's Id`() {
+        whenever(tvShowRepository.getShow(SHOW_ID)) doReturn Maybe.just(tvShow)
 
-    getTvShow.execute(SHOW_ID)
-        .test()
-        .apply {
-          assertValue {
-            it.result == tvShow
-          }
-        }
-    verify(tvShowRepository).getShow(SHOW_ID)
-  }
+        getTvShow.execute(SHOW_ID)
+            .test()
+            .apply {
+                assertValue {
+                    it.value == tvShow
+                }
+            }
+        verify(tvShowRepository).getShow(SHOW_ID)
+    }
 
-  @Test
-  fun `Gets Show and fails returning an error`() {
-    val error: Throwable = mock()
-    whenever(tvShowRepository.getShow(SHOW_ID)) doReturn Maybe.error(error)
+    @Test
+    fun `Gets Show and fails returning an error`() {
+        val error: Throwable = mock()
+        whenever(tvShowRepository.getShow(SHOW_ID)) doReturn Maybe.error(error)
 
-    getTvShow.execute(SHOW_ID)
-        .test()
-        .apply {
-          assertValue {
-            it.error == error
-          }
-        }
-    verify(tvShowRepository).getShow(SHOW_ID)
-  }
+        getTvShow.execute(SHOW_ID)
+            .test()
+            .apply {
+                assertValue {
+                    it.error == error
+                }
+            }
+        verify(tvShowRepository).getShow(SHOW_ID)
+    }
 }

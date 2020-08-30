@@ -9,18 +9,21 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-  RepositoryModule::class, NetworkModule::class
-])
+@Component(
+    modules = [
+        RepositoryModule::class,
+        NetworkModule::class
+    ]
+)
 interface DataComponent {
 
-  fun tvShowRepository(): TvShowRepository
+    fun tvShowRepository(): TvShowRepository
 
-  @Component.Builder
-  interface Builder {
-    @BindsInstance
-    fun context(context: Context): Builder
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun context(context: Context): Builder
 
-    fun build(): DataComponent
-  }
+        fun build(): DataComponent
+    }
 }

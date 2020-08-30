@@ -17,8 +17,8 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
     debug {
-      buildConfigField "String", "BASE_URL", "\"http://api.themoviedb.org/3/\""
-      buildConfigField "String", "IMAGE_BASE_URL", "\"http://image.tmdb.org/t/p/\""
+      buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+      buildConfigField "String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/\""
       buildConfigField 'String', 'THE_MOVIE_DB_API_KEY', "\"$movie_db_api_key\""
     }
   }

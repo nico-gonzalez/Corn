@@ -10,12 +10,13 @@ import javax.inject.Inject
 
 class GetTvShow @Inject constructor(
     private val schedulers: SchedulerProvider,
-    private val tvShowRepository: TvShowRepository) : UseCase<Long, TvShow> {
+    private val tvShowRepository: TvShowRepository
+) : UseCase<Long, TvShow> {
 
-  override fun execute(id: Long): Single<Result<TvShow>> =
-      tvShowRepository.getShow(id)
-          .map { Result.success(it) }
-          .switchIfEmpty(Single.error(Throwable("Unable to find TvShow with Id $id")))
-          .subscribeOn(schedulers.io())
-          .observeOn(schedulers.ui())
+    override fun execute(id: Long): Single<Result<TvShow>> =
+        tvShowRepository.getShow(id)
+            .map { Result.success(it) }
+            .switchIfEmpty(Single.error(Throwable("Unable to find TvShow with Id $id")))
+            .subscribeOn(schedulers.io())
+            .observeOn(schedulers.ui())
 }

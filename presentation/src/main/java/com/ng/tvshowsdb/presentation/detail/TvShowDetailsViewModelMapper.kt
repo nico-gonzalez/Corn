@@ -5,8 +5,15 @@ import javax.inject.Inject
 
 class TvShowDetailsViewModelMapper @Inject constructor() {
 
-  fun map(tvShow: TvShow): TvShowDetailsViewModel = with(tvShow) {
-    TvShowDetailsViewModel(tvShow.id, tvShow.title, tvShow.description, tvShow.posterPath,
-        tvShow.backdropPath, tvShow.firstAirDate, tvShow.rating.toString())
-  }
+    fun map(tvShow: TvShow): TvShowDetailsUiModel = with(tvShow) {
+        TvShowDetailsUiModel(
+            id,
+            title,
+            description,
+            posterPath,
+            backdropPath,
+            firstAirDate,
+            rating.toString()
+        )
+    }
 }

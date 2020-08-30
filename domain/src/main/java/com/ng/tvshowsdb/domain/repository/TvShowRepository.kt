@@ -7,9 +7,9 @@ import io.reactivex.Single
 
 interface TvShowRepository {
 
-  fun getMostPopularShows(page: Int): Single<TvShows>
+    fun getMostPopularShows(page: Int): Single<TvShows>
 
-  fun getShow(id: Long): Maybe<TvShow>
+    fun getShow(id: Long): Maybe<TvShow>
 
-  fun getSimilarTvShows(id: Long, page: Int): Single<TvShows>
+    fun getSimilarTvShows(id: Long, page: Int): Single<TvShows>
 }

@@ -17,44 +17,44 @@ private const val PAGE = 1
 
 class GetMostPopularTvShowsTest {
 
-  private lateinit var getTvShows: GetMostPopularTvShows
+    private lateinit var getTvShows: GetMostPopularTvShows
 
-  private val tvShowRepository: TvShowRepository = mock()
-  private val schedulerProvider: SchedulerProvider = ImmediateSchedulers()
-  private val tvShow: TvShow = mock()
+    private val tvShowRepository: TvShowRepository = mock()
+    private val schedulerProvider: SchedulerProvider = ImmediateSchedulers()
+    private val tvShow: TvShow = mock()
 
-  @Before
-  fun setup() {
-    getTvShows = GetMostPopularTvShows(schedulerProvider, tvShowRepository)
-  }
+    @Before
+    fun setup() {
+        getTvShows = GetMostPopularTvShows(schedulerProvider, tvShowRepository)
+    }
 
-  @Test
-  fun `Gets Shows from Repository for given page`() {
-    val shows = TvShows(listOf(tvShow, tvShow, tvShow), 1, 5)
-    whenever(tvShowRepository.getMostPopularShows(PAGE)) doReturn Single.just(shows)
+    @Test
+    fun `Gets Shows from Repository for given page`() {
+        val shows = TvShows(listOf(tvShow, tvShow, tvShow), 1, 5)
+        whenever(tvShowRepository.getMostPopularShows(PAGE)) doReturn Single.just(shows)
 
-    getTvShows.execute(PAGE)
-        .test()
-        .apply {
-          assertValue {
-            it.result == shows
-          }
-        }
-    verify(tvShowRepository).getMostPopularShows(PAGE)
-  }
+        getTvShows.execute(PAGE)
+            .test()
+            .apply {
+                assertValue {
+                    it.value == shows
+                }
+            }
+        verify(tvShowRepository).getMostPopularShows(PAGE)
+    }
 
-  @Test
-  fun `Gets Shows and fails returning an error`() {
-    val error: Throwable = mock()
-    whenever(tvShowRepository.getMostPopularShows(PAGE)) doReturn Single.error(error)
+    @Test
+    fun `Gets Shows and fails returning an error`() {
+        val error: Throwable = mock()
+        whenever(tvShowRepository.getMostPopularShows(PAGE)) doReturn Single.error(error)
 
-    getTvShows.execute(PAGE)
-        .test()
-        .apply {
-          assertValue {
-            it.error == error
-          }
-        }
-    verify(tvShowRepository).getMostPopularShows(PAGE)
-  }
+        getTvShows.execute(PAGE)
+            .test()
+            .apply {
+                assertValue {
+                    it.error == error
+                }
+            }
+        verify(tvShowRepository).getMostPopularShows(PAGE)
+    }
 }

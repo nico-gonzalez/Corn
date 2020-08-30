@@ -13,15 +13,15 @@ import javax.inject.Singleton
 @Module
 class MockApplicationModule {
 
-  @Singleton
-  @Provides
-  fun provideSchedulerProvider(): SchedulerProvider = object : SchedulerProvider {
-    override fun io(): Scheduler = Schedulers.trampoline()
+    @Singleton
+    @Provides
+    fun provideSchedulerProvider(): SchedulerProvider = object : SchedulerProvider {
+        override fun io(): Scheduler = Schedulers.trampoline()
 
-    override fun ui(): Scheduler = AndroidSchedulers.mainThread()
-  }
+        override fun ui(): Scheduler = AndroidSchedulers.mainThread()
+    }
 
-  @Singleton
-  @Provides
-  fun providesTvShowsRepository(): TvShowRepository = mock()
+    @Singleton
+    @Provides
+    fun providesTvShowsRepository(): TvShowRepository = mock()
 }
