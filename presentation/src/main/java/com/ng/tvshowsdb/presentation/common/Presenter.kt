@@ -4,9 +4,9 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class Presenter {
 
-  protected val subscriptions: CompositeDisposable = CompositeDisposable()
+    protected val subscriptions: CompositeDisposable = CompositeDisposable()
 
-  fun detach() {
-    subscriptions.dispose()
-  }
+    fun detach() {
+        subscriptions.dispose()
+    }
 }

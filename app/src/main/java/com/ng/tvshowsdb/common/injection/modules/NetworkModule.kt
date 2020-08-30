@@ -17,34 +17,36 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-  @Provides
-  @Named("baseUrl")
-  fun provideBaseUrl(): String = BuildConfig.BASE_URL
+    @Provides
+    @Named("baseUrl")
+    fun provideBaseUrl(): String = BuildConfig.BASE_URL
 
-  @Singleton
-  @Provides
-  fun provideHttpClient(apiKeyInterceptor: ApiKeyInterceptor): OkHttpClient {
-    val builder = OkHttpClient.Builder()
-        .addInterceptor(apiKeyInterceptor)
+    @Singleton
+    @Provides
+    fun provideHttpClient(apiKeyInterceptor: ApiKeyInterceptor): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+            .addInterceptor(apiKeyInterceptor)
 
-    if (BuildConfig.DEBUG) {
-      builder.addInterceptor(HttpLoggingInterceptor().setLevel(BASIC))
+        if (BuildConfig.DEBUG) {
+            builder.addInterceptor(HttpLoggingInterceptor().setLevel(BASIC))
+        }
+        return builder.build()
     }
-    return builder.build()
-  }
 
-  @Singleton
-  @Provides
-  fun provideRetrofit(@Named("baseUrl") baseUrl: String,
-      okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-      .baseUrl(baseUrl)
-      .client(okHttpClient)
-      .addConverterFactory(MoshiConverterFactory.create())
-      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-      .build()
+    @Singleton
+    @Provides
+    fun provideRetrofit(
+        @Named("baseUrl") baseUrl: String,
+        okHttpClient: OkHttpClient
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(baseUrl)
+        .client(okHttpClient)
+        .addConverterFactory(MoshiConverterFactory.create())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
 
-  @Singleton
-  @Provides
-  fun provideFoursquareService(retrofit: Retrofit): TheMovieDBService = retrofit
-      .create(TheMovieDBService::class.java)
+    @Singleton
+    @Provides
+    fun provideFoursquareService(retrofit: Retrofit): TheMovieDBService = retrofit
+        .create(TheMovieDBService::class.java)
 }

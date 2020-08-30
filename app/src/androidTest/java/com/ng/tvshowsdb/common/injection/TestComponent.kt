@@ -9,15 +9,17 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-  AndroidSupportInjectionModule::class,
-  ActivityBindingModule::class,
-  MockApplicationModule::class
-])
+@Component(
+  modules = [
+    AndroidSupportInjectionModule::class,
+    ActivityBindingModule::class,
+    MockApplicationModule::class
+  ]
+)
 interface TestComponent : ApplicationComponent {
 
-  fun inject(tvShowsActivityTest: TvShowsActivityTest)
+    fun inject(tvShowsActivityTest: TvShowsActivityTest)
 
-  fun inject(showDetailsActivityTest: ShowDetailsActivityTest)
+    fun inject(showDetailsActivityTest: ShowDetailsActivityTest)
 
 }

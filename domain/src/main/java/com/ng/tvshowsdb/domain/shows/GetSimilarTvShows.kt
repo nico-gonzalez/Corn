@@ -9,15 +9,17 @@ import com.ng.tvshowsdb.domain.shows.GetSimilarTvShows.Params
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GetSimilarTvShows @Inject constructor(private val schedulers: SchedulerProvider,
-    private val tvShowRepository: TvShowRepository) : UseCase<Params, TvShows> {
+class GetSimilarTvShows @Inject constructor(
+    private val schedulers: SchedulerProvider,
+    private val tvShowRepository: TvShowRepository
+) : UseCase<Params, TvShows> {
 
-  override fun execute(params: Params): Single<Result<TvShows>> =
-      tvShowRepository.getSimilarTvShows(params.showId, params.page)
-          .map { Result.success(it) }
-          .onErrorReturn { Result.error(it) }
-          .subscribeOn(schedulers.io())
-          .observeOn(schedulers.ui())
+    override fun execute(params: Params): Single<Result<TvShows>> =
+        tvShowRepository.getSimilarTvShows(params.showId, params.page)
+            .map { Result.success(it) }
+            .onErrorReturn { Result.error(it) }
+            .subscribeOn(schedulers.io())
+            .observeOn(schedulers.ui())
 
-  data class Params(val showId: Long, val page: Int)
+    data class Params(val showId: Long, val page: Int)
 }

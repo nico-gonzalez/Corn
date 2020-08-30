@@ -8,14 +8,14 @@ import dagger.android.DaggerApplication
 
 class TestApplication : TvShowsDbApplication() {
 
-  private val testComponent by lazy {
-    DaggerTestComponent.builder()
-        .mockApplicationModule(MockApplicationModule())
-        .build()
-  }
+    private val testComponent by lazy {
+        DaggerTestComponent.builder()
+            .mockApplicationModule(MockApplicationModule())
+            .build()
+    }
 
-  fun applicationComponent(): TestComponent = testComponent
+    fun applicationComponent(): TestComponent = testComponent
 
-  override fun applicationInjector(): AndroidInjector<out DaggerApplication>? = testComponent
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication>? = testComponent
 
 }

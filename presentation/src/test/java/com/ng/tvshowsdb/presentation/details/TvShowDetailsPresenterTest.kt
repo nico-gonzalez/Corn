@@ -8,9 +8,9 @@ import com.ng.tvshowsdb.domain.shows.GetSimilarTvShows.Params
 import com.ng.tvshowsdb.domain.shows.GetTvShow
 import com.ng.tvshowsdb.presentation.detail.ShowDetailView
 import com.ng.tvshowsdb.presentation.detail.TvShowDetailPresenter
-import com.ng.tvshowsdb.presentation.detail.TvShowDetailsViewModel
+import com.ng.tvshowsdb.presentation.detail.TvShowDetailsUiModel
 import com.ng.tvshowsdb.presentation.detail.TvShowDetailsViewModelMapper
-import com.ng.tvshowsdb.presentation.shows.TvShowViewModel
+import com.ng.tvshowsdb.presentation.shows.TvShowUiModel
 import com.ng.tvshowsdb.presentation.shows.TvShowViewModelMapper
 import com.nhaarman.mockito_kotlin.argThat
 import com.nhaarman.mockito_kotlin.check
@@ -31,93 +31,96 @@ private const val SHOW_ID = 1L
 
 class TvShowDetailsPresenterTest {
 
-  private lateinit var presenter: TvShowDetailPresenter
+    private lateinit var presenter: TvShowDetailPresenter
 
-  private val view: ShowDetailView = mock()
-  private val getTvShow: GetTvShow = mock()
-  private val getSimilarTvShows: GetSimilarTvShows = mock()
-  private val tvShowViewModelMapper: TvShowViewModelMapper = mock()
-  private val tvShowDetailsViewModelMapper: TvShowDetailsViewModelMapper = mock()
-  private val tvShow: TvShow = mock()
-  private val tvShowDetailsViewModel: TvShowDetailsViewModel = mock()
-  private val tvShowViewModel: TvShowViewModel = mock()
+    private val view: ShowDetailView = mock()
+    private val getTvShow: GetTvShow = mock()
+    private val getSimilarTvShows: GetSimilarTvShows = mock()
+    private val tvShowViewModelMapper: TvShowViewModelMapper = mock()
+    private val tvShowDetailsViewModelMapper: TvShowDetailsViewModelMapper = mock()
+    private val tvShow: TvShow = mock()
+    private val tvShowDetailsUiModel: TvShowDetailsUiModel = mock()
+    private val tvShowUiModel: TvShowUiModel = mock()
 
-  @Before
-  fun setup() {
-    presenter = TvShowDetailPresenter(
-        view, getTvShow, getSimilarTvShows, tvShowViewModelMapper,
-        tvShowDetailsViewModelMapper
-    )
-  }
-
-  @Test
-  fun `On show details loads show and hands view model to view`() {
-    val showDetails = Result.success(tvShow)
-    val similarTvShows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
-
-    whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
-    whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
-        Single.just(similarTvShows)
-    whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsViewModel
-
-    presenter.onShowDetails(SHOW_ID)
-
-    inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
-      verify(getTvShow).execute(SHOW_ID)
-      verify(tvShowDetailsViewModelMapper).map(tvShow)
-      verify(view).showDetails(tvShowDetailsViewModel)
+    @Before
+    fun setup() {
+        presenter = TvShowDetailPresenter(
+          view, getTvShow, getSimilarTvShows, tvShowViewModelMapper,
+          tvShowDetailsViewModelMapper
+        )
     }
-  }
 
-  @Test
-  fun `On show details loads show fails and hands error message to view`() {
-    val showDetails = Result.error<TvShow>(Throwable("Error"))
-    val similarTvShows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
+    @Test
+    fun `On show details loads show and hands view model to view`() {
+        val showDetails = Result.success(tvShow)
+        val similarTvShows =
+            Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-    whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
-    whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
-        Single.just(similarTvShows)
-    whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsViewModel
+        whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
+        whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
+                Single.just(similarTvShows)
+        whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsUiModel
 
-    presenter.onShowDetails(SHOW_ID)
+        presenter.onShowDetails(SHOW_ID)
 
-    inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
-      verify(getTvShow).execute(SHOW_ID)
-      verify(view).showError(argThat {
-        this == "Error"
-      })
-      verifyZeroInteractions(tvShowDetailsViewModelMapper)
+        inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
+            verify(getTvShow).execute(SHOW_ID)
+            verify(tvShowDetailsViewModelMapper).map(tvShow)
+            verify(view).showDetails(tvShowDetailsUiModel)
+        }
     }
-  }
 
-  @Test
-  fun `On show details loads similar shows and hands view model to view`() {
-    val showDetails = Result.success(tvShow)
-    val similarTvShows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
+    @Test
+    fun `On show details loads show fails and hands error message to view`() {
+        val showDetails = Result.error<TvShow>(Throwable("Error"))
+        val similarTvShows =
+            Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-    whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
-    whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
-        Single.just(similarTvShows)
-    whenever(tvShowViewModelMapper.map(tvShow)) doReturn tvShowViewModel
+        whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
+        whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
+                Single.just(similarTvShows)
+        whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsUiModel
 
-    presenter.onShowDetails(SHOW_ID)
+        presenter.onShowDetails(SHOW_ID)
 
-    inOrder(view, getSimilarTvShows, tvShowViewModelMapper) {
-      verify(getSimilarTvShows).execute(check {
-        assertThat(it.showId, `is`(equalTo(SHOW_ID)))
-        assertThat(it.page, `is`(equalTo(1)))
-      })
-      verify(tvShowViewModelMapper).map(tvShow)
-      verify(view).showSimilarShows(argThat {
-        this[0] == tvShowViewModel
-      })
+        inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
+            verify(getTvShow).execute(SHOW_ID)
+            verify(view).showError(argThat {
+              this == "Error"
+            })
+            verifyZeroInteractions(tvShowDetailsViewModelMapper)
+        }
     }
-  }
 
-  @Test
-  fun `On similar show selected navigates to show details`() {
-    presenter.onSimilarShowSelected(1, SHOW_ID)
+    @Test
+    fun `On show details loads similar shows and hands view model to view`() {
+        val showDetails = Result.success(tvShow)
+        val similarTvShows =
+            Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-    verify(view).navigateToShowDetails(1, SHOW_ID)
-  }
+        whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
+        whenever(getSimilarTvShows.execute(Params(SHOW_ID, page = 1))) doReturn
+                Single.just(similarTvShows)
+        whenever(tvShowViewModelMapper.map(tvShow)) doReturn tvShowUiModel
+
+        presenter.onShowDetails(SHOW_ID)
+
+        inOrder(view, getSimilarTvShows, tvShowViewModelMapper) {
+            verify(getSimilarTvShows).execute(check {
+              assertThat(it.showId, `is`(equalTo(SHOW_ID)))
+              assertThat(it.page, `is`(equalTo(1)))
+            })
+            verify(tvShowViewModelMapper).map(tvShow)
+            verify(view).showSimilarShows(argThat {
+              this[0] == tvShowUiModel
+            })
+        }
+    }
+
+    @Test
+    fun `On similar show selected navigates to show details`() {
+        presenter.onSimilarShowSelected(1, SHOW_ID)
+
+        verify(view).navigateToShowDetails(1, SHOW_ID)
+    }
 }

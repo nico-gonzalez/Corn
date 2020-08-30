@@ -1,12 +1,12 @@
 package com.ng.tvshowsdb.common
 
-import android.support.test.InstrumentationRegistry
+import androidx.test.InstrumentationRegistry
 
 open class AndroidTest {
 
-  private fun application(): TestApplication = InstrumentationRegistry.getTargetContext()
-      .applicationContext as TestApplication
+    private fun application(): TestApplication = InstrumentationRegistry.getTargetContext()
+        .applicationContext as TestApplication
 
-  fun applicationComponent() = application().applicationComponent()
+    fun applicationComponent() = application().applicationComponent()
 
 }

@@ -1,9 +1,9 @@
 package com.ng.tvshowsdb.common
 
-import android.support.test.InstrumentationRegistry
+import androidx.test.InstrumentationRegistry
 
 open class TestRobot {
 
-  fun application(): TestApplication = InstrumentationRegistry.getTargetContext()
-      .applicationContext as TestApplication
+    fun application(): TestApplication = InstrumentationRegistry.getTargetContext()
+        .applicationContext as TestApplication
 }
