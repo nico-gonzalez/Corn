@@ -2,9 +2,10 @@ package com.ng.tvshowsdb.common.injection.components
 
 import android.app.Application
 import com.ng.tvshowsdb.common.TvShowsDbApplication
-import com.ng.tvshowsdb.common.injection.modules.ActivityBindingModule
 import com.ng.tvshowsdb.common.injection.modules.ApplicationModule
-import com.ng.tvshowsdb.common.injection.scopes.PerApplication
+import com.ng.tvshowsdb.core.ui.common.di.scopes.PerApplication
+import com.ng.tvshowsdb.shows.di.ShowsActivityBindingModule
+import com.ng.tvshowsdb.shows.di.ShowsComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -13,10 +14,12 @@ import dagger.android.support.AndroidSupportInjectionModule
 @PerApplication
 @Component(
     modules = [
-        ActivityBindingModule::class, AndroidSupportInjectionModule::class, ApplicationModule::class
+        AndroidSupportInjectionModule::class,
+        ApplicationModule::class,
+        ShowsActivityBindingModule::class
     ],
     dependencies = [
-        DataComponent::class
+        ShowsComponent::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<TvShowsDbApplication> {
@@ -26,7 +29,7 @@ interface ApplicationComponent : AndroidInjector<TvShowsDbApplication> {
         @BindsInstance
         fun application(application: Application): Builder
 
-        fun dataComponent(dataComponent: DataComponent): Builder
+        fun showsComponent(showsComponent: ShowsComponent): Builder
 
         fun build(): ApplicationComponent
     }

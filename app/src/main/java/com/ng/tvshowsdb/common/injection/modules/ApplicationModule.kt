@@ -3,20 +3,19 @@ package com.ng.tvshowsdb.common.injection.modules
 import android.app.Application
 import android.content.Context
 import com.ng.tvshowsdb.common.SchedulerProviderImpl
-import com.ng.tvshowsdb.common.injection.scopes.PerApplication
-import com.ng.tvshowsdb.domain.common.SchedulerProvider
+import com.ng.tvshowsdb.core.domain.common.SchedulerProvider
+import com.ng.tvshowsdb.core.ui.common.di.scopes.PerApplication
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 
 @Module
-class ApplicationModule {
+abstract class ApplicationModule {
 
     @PerApplication
-    @Provides
-    fun provideContext(application: Application): Context = application
+    @Binds
+    abstract fun provideContext(application: Application): Context
 
     @PerApplication
-    @Provides
-    fun provideSchedulers(): SchedulerProvider = SchedulerProviderImpl()
-
+    @Binds
+    abstract fun provideSchedulers(schedulerProvider: SchedulerProviderImpl): SchedulerProvider
 }
