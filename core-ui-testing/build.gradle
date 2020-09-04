@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion Versions.compileSdk
+    buildToolsVersion Versions.buildTools
+
+    defaultConfig {
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation project(":core-ui")
+    implementation project(":core-domain")
+
+    implementation Libs.kotlin
+    implementation Libs.rxJava
+    implementation Libs.rxAndroid
+    implementation Libs.junit
+    implementation Libs.kotlinJUnit
+    implementation Libs.androidRunner
+    implementation Libs.androidRules
+    implementation Libs.mockitoAndroid
+    implementation Libs.mockitoKotlin
+    implementation(Libs.espressoCore, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation(Libs.espressoContrib, {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    })
+    implementation Libs.espressoIntents
+    implementation Libs.dagger
+    implementation Libs.daggerAndroid
+    implementation Libs.daggerAndroidSupport
+    kapt Libs.daggerCompiler
+    kapt Libs.daggerAndroidCompiler
+}

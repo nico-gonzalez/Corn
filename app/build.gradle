@@ -5,68 +5,50 @@ apply plugin: 'kotlin-kapt'
 
 android {
 
-  compileSdkVersion Versions.compileSdk
-  buildToolsVersion Versions.buildTools
+    compileSdkVersion Versions.compileSdk
+    buildToolsVersion Versions.buildTools
 
-  defaultConfig {
-    applicationId "com.ng.tvshowsdb"
-    minSdkVersion Versions.minSdk
-    targetSdkVersion Versions.targetSdk
-    versionCode Versions.versionCode
-    versionName Versions.versionName
-
-    testInstrumentationRunner "com.ng.tvshowsdb.common.CustomAndroidJUnitTestRunner"
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    defaultConfig {
+        applicationId "com.ng.tvshowsdb"
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Versions.versionCode
+        versionName Versions.versionName
     }
-  }
-  packagingOptions {
-    exclude 'META-INF/main.kotlin_module'
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/main.kotlin_module'
+    }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
 
-  implementation project(":presentation")
-  implementation project(":data")
-  implementation project(":domain")
+    implementation project(":core-ui")
+    implementation project(":shows-ui")
+    implementation project(":core-domain")
 
-  implementation App.kotlin
-  implementation App.appcompatV7
-  implementation App.supportDesign
-  implementation App.recyclerView
-  implementation App.cardView
-  implementation App.supportConstraint
-  implementation App.glide
-  kapt App.glideCompiler
-  implementation App.dagger
-  implementation App.rxAndroid
-  implementation App.dagger
-  kapt App.daggerCompiler
-  implementation App.daggerAndroid
-  implementation App.daggerAndroidSupport
-  kapt App.daggerAndroidCompiler
-
-  testImplementation AppTest.junit
-  androidTestImplementation AppTest.junit
-  androidTestImplementation AppTest.kotlinJUnit
-  androidTestImplementation AppTest.androidRunner
-  androidTestImplementation AppTest.androidRules
-  androidTestImplementation AppTest.mockitoAndroid
-  androidTestImplementation AppTest.mockitoKotlin
-  androidTestImplementation(AppTest.espressoCore, {
-    exclude group: 'com.android.support', module: 'support-annotations'
-  })
-  androidTestImplementation(AppTest.espressoContrib, {
-    exclude group: 'com.android.support', module: 'appcompat'
-    exclude group: 'com.android.support', module: 'support-v4'
-    exclude group: 'com.android.support', module: 'support-annotations'
-    exclude module: 'recyclerview-v7'
-  })
-  androidTestImplementation AppTest.espressoIntents
-  kaptAndroidTest AppTest.daggerCompiler
-  kaptAndroidTest AppTest.daggerAndroidCompiler
+    implementation Libs.kotlin
+    implementation Libs.appcompat
+    implementation Libs.material
+    implementation Libs.recyclerview
+    implementation Libs.cardview
+    implementation Libs.constraintlayout
+    implementation Libs.glide
+    kapt Libs.glideCompiler
+    implementation Libs.dagger
+    implementation Libs.rxAndroid
+    implementation Libs.dagger
+    kapt Libs.daggerCompiler
+    implementation Libs.daggerAndroid
+    implementation Libs.daggerAndroidSupport
+    kapt Libs.daggerAndroidCompiler
 }

@@ -2,26 +2,25 @@ package com.ng.tvshowsdb.common
 
 import androidx.appcompat.app.AppCompatDelegate
 import com.ng.tvshowsdb.common.injection.components.DaggerApplicationComponent
-import com.ng.tvshowsdb.common.injection.components.DaggerDataComponent
+import com.ng.tvshowsdb.core.ui.common.BaseApplication
+import com.ng.tvshowsdb.shows.di.DaggerShowsComponent
 import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
 
-open class TvShowsDbApplication : DaggerApplication() {
+open class TvShowsDbApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication>? {
-        val daggerDataComponent = DaggerDataComponent.builder()
+    override fun applicationInjector(): AndroidInjector<out BaseApplication>? {
+        val showsComponent = DaggerShowsComponent.builder()
             .context(this)
             .build()
-        val applicationComponent = DaggerApplicationComponent.builder()
+        return DaggerApplicationComponent.builder()
             .application(this)
-            .dataComponent(daggerDataComponent)
+            .showsComponent(showsComponent)
             .build()
-        applicationComponent.inject(this)
-        return applicationComponent
+            .also { it.inject(this) }
     }
 }
