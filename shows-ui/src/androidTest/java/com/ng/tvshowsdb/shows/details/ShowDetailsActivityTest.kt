@@ -2,8 +2,8 @@ package com.ng.tvshowsdb.shows.details
 
 import androidx.test.runner.AndroidJUnit4
 import com.ng.tvshowsdb.core.ui.testing.AndroidTest
-import com.ng.tvshowsdb.core.ui.testing.injection.BaseApplicationComponent
 import com.ng.tvshowsdb.core.ui.testing.injection.MockApplicationModule
+import com.ng.tvshowsdb.core.ui.testing.injection.TestApplicationComponent
 import com.ng.tvshowsdb.shows.detail.ShowDetailsViewModelMapper
 import com.ng.tvshowsdb.shows.di.ShowsActivityBindingModule
 import com.ng.tvshowsdb.shows.domain.model.TvShows
@@ -12,6 +12,7 @@ import com.ng.tvshowsdb.shows.fixtures.buildTvShow
 import com.ng.tvshowsdb.shows.fixtures.buildTvShows
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import dagger.BindsInstance
 import dagger.Component
@@ -24,12 +25,12 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyLong
 import javax.inject.Inject
+import javax.inject.Singleton
 
 @RunWith(AndroidJUnit4::class)
 class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsTestComponent>() {
 
-    @Inject
-    lateinit var showsRepository: TvShowRepository
+    private val showsRepository: TvShowRepository = mock()
 
     @Inject
     lateinit var showDetailsViewModelMapper: ShowDetailsViewModelMapper
@@ -38,6 +39,7 @@ class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsT
     private val tvShows = TvShows(buildTvShows(), 1, 5)
     private val tvShowViewModel by lazy { showDetailsViewModelMapper.map(tvShow) }
 
+    @Singleton
     @Component(
         modules = [
             AndroidSupportInjectionModule::class,
@@ -45,7 +47,7 @@ class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsT
             ShowsActivityBindingModule::class
         ]
     )
-    interface ShowDetailsTestComponent : BaseApplicationComponent {
+    interface ShowDetailsTestComponent : TestApplicationComponent {
 
         fun inject(showDetailsActivityTest: ShowDetailsActivityTest)
 
@@ -61,7 +63,11 @@ class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsT
 
     @Before
     fun setup() {
-        applicationComponent().inject(this)
+        val testComponent = DaggerShowDetailsActivityTest_ShowDetailsTestComponent.builder()
+            .repository(showsRepository)
+            .build()
+        application().testComponent = testComponent
+        testComponent.inject(this)
 
         whenever(showsRepository.getShow(eq(tvShow.id))) doReturn Maybe.just(tvShow)
         whenever(showsRepository.getSimilarTvShows(anyLong(), page = anyInt())) doReturn

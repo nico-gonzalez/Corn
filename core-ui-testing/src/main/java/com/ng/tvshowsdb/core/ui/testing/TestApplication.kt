@@ -1,15 +1,24 @@
 package com.ng.tvshowsdb.core.ui.testing
 
 import android.app.Application
-import com.ng.tvshowsdb.core.ui.testing.injection.BaseApplicationComponent
+import com.ng.tvshowsdb.core.ui.testing.injection.TestApplicationComponent
 import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
 class TestApplication : Application(), HasAndroidInjector {
 
-    var testComponent: BaseApplicationComponent? = null
+    @Inject
+    @Volatile
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    fun applicationComponent(): BaseApplicationComponent = testComponent!!
+    var testComponent: TestApplicationComponent? = null
+        set(value) {
+            field = field ?: value.apply { this?.inject(this@TestApplication) }
+        }
 
-    override fun androidInjector(): AndroidInjector<Any> = testComponent!!
+    fun applicationComponent(): TestApplicationComponent = testComponent!!
+
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="Theme" parent="Base.Theme">
-    <item name="android:windowSharedElementEnterTransition">
-      @transition/image_shared_element_transition
-    </item>
-    <item name="android:windowEnterTransition">@transition/default_transition</item>
-    <item name="android:windowExitTransition">@transition/default_transition</item>
-  </style>
+    <style name="Theme" parent="Base.Theme">
+        <item name="android:windowSharedElementEnterTransition">
+            @transition/image_shared_element_transition
+        </item>
+        <item name="android:windowEnterTransition">@transition/default_transition</item>
+        <item name="android:windowExitTransition">@transition/default_transition</item>
+    </style>
 
-  <style name="Theme.Show.Details" parent="Theme">
-    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    <item name="android:statusBarColor">@android:color/transparent</item>
-  </style>
+    <style name="Theme.Show.Details" parent="Theme">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 </resources>

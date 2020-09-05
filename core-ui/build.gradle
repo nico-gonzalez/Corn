@@ -46,6 +46,7 @@ dependencies {
     implementation Libs.rxJava
     implementation Libs.rxKotlin
     implementation Libs.rxAndroid
+    implementation Libs.material
     implementation Libs.recyclerview
     implementation Libs.glide
     kapt Libs.glideCompiler

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <dimen name="divider_size">2dp</dimen>
-  <dimen name="show_detail_poster_height">256dp</dimen>
-  <dimen name="show_list_item_width">180dp</dimen>
+    <dimen name="divider_size">2dp</dimen>
+    <dimen name="show_detail_poster_height">256dp</dimen>
+    <dimen name="show_list_item_width">180dp</dimen>
 </resources>
