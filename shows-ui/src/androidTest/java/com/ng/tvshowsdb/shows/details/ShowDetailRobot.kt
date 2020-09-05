@@ -26,9 +26,9 @@ fun showDetail(tvShow: ShowDetailsUiModel, func: ShowDetailRobot.() -> Unit) = S
     finish()
 }
 
-class ShowDetailRobot(private val tvShow: ShowDetailsUiModel) : com.ng.tvshowsdb.core.ui.testing.TestRobot() {
+class ShowDetailRobot(private val tvShow: ShowDetailsUiModel) : TestRobot() {
 
-    @get:Rule
+    @field:Rule
     private var activityTestRule = IntentsTestRule(
         ShowDetailActivity::class.java,
         true,
@@ -45,9 +45,9 @@ class ShowDetailRobot(private val tvShow: ShowDetailsUiModel) : com.ng.tvshowsdb
     }
 
     fun checkShowDetailsAreDisplayed() {
-        onView(com.ng.tvshowsdb.core.ui.testing.withIndex(withId(R.id.titleTv), 0)).check(matches(withText(tvShow.title)))
-        onView(com.ng.tvshowsdb.core.ui.testing.withIndex(withId(R.id.ratingTv), 0)).check(matches(withText(tvShow.rating)))
-        onView(com.ng.tvshowsdb.core.ui.testing.withIndex(withId(R.id.posterIv), 0)).check(matches(isDisplayed()))
+        onView(withIndex(withId(R.id.titleTv), 0)).check(matches(withText(tvShow.title)))
+        onView(withIndex(withId(R.id.ratingTv), 0)).check(matches(withText(tvShow.rating)))
+        onView(withIndex(withId(R.id.posterIv), 0)).check(matches(isDisplayed()))
         onView(withId(R.id.descriptionTv)).check(matches(withText(tvShow.description)))
     }
 

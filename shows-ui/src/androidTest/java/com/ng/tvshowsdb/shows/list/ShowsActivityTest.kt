@@ -2,8 +2,8 @@ package com.ng.tvshowsdb.shows.list
 
 import androidx.test.runner.AndroidJUnit4
 import com.ng.tvshowsdb.core.ui.testing.AndroidTest
-import com.ng.tvshowsdb.core.ui.testing.injection.BaseApplicationComponent
 import com.ng.tvshowsdb.core.ui.testing.injection.MockApplicationModule
+import com.ng.tvshowsdb.core.ui.testing.injection.TestApplicationComponent
 import com.ng.tvshowsdb.shows.di.ShowsActivityBindingModule
 import com.ng.tvshowsdb.shows.domain.model.TvShows
 import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
@@ -40,7 +40,7 @@ class ShowsActivityTest : AndroidTest<ShowsActivityTest.ShowTestComponent>() {
             ShowsActivityBindingModule::class
         ]
     )
-    interface ShowTestComponent : BaseApplicationComponent {
+    interface ShowTestComponent : TestApplicationComponent {
 
         fun inject(showsActivityTest: ShowsActivityTest)
 
@@ -60,7 +60,7 @@ class ShowsActivityTest : AndroidTest<ShowsActivityTest.ShowTestComponent>() {
             .repository(showsRepository)
             .build()
         application().testComponent = testComponent
-        applicationComponent().inject(this)
+        testComponent.inject(this)
 
         whenever(showsRepository.getMostPopularShows(anyInt())) doReturn Single.just(tvShows)
         whenever(showsRepository.getShow(eq(tvShow.id))) doReturn Maybe.just(tvShow)

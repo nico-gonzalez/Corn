@@ -1,20 +1,20 @@
 <resources>
 
-  <!-- Base application theme. -->
-  <style name="Base.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-    <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:textColorPrimary">@color/textColorPrimary</item>
+    <!-- Base application theme. -->
+    <style name="Base.Theme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
 
-    <item name="android:listDivider">@drawable/list_divider</item>
-  </style>
+        <item name="android:listDivider">@drawable/list_divider</item>
+    </style>
 
-  <style name="Theme" parent="Base.Theme"/>
+    <style name="Theme" parent="Base.Theme" />
 
-  <style name="Theme.CollapsingToolbar.Expanded" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
-    <item name="android:textColor">@android:color/transparent</item>
-  </style>
+    <style name="Theme.CollapsingToolbar.Expanded" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
 
 </resources>

@@ -27,8 +27,9 @@ private object Versions {
 
     //region Test
     const val junit = "4.12"
-    const val espresso = "3.0.1"
-    const val testRunner = "1.0.1"
+    const val espresso = "3.1.0"
+    const val testRunner = "1.1.0"
+    const val testRules = "1.1.0"
     const val hamcrest = "1.3"
     const val mockito = "2.12.0"
     const val mockitoKotlin = "1.5.0"
@@ -86,13 +87,11 @@ private object Libs {
     const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
     const val mockitoKotlin = "com.nhaarman:mockito-kotlin:${Versions.mockitoKotlin}"
     const val mockitoAndroid = "org.mockito:mockito-android:${Versions.mockito}"
-    const val espressoCore = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
-    const val espressoContrib =
-        "com.android.support.test.espresso:espresso-contrib:${Versions.espresso}"
-    const val espressoIntents =
-        "com.android.support.test.espresso:espresso-intents:${Versions.espresso}"
-    const val androidRunner = "com.android.support.test:runner:${Versions.testRunner}"
-    const val androidRules = "com.android.support.test:rules:${Versions.testRunner}"
+    const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+    const val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso}"
+    const val espressoIntents = "androidx.test.espresso:espresso-intents:${Versions.espresso}"
+    const val androidRunner = "androidx.test:runner:${Versions.testRunner}"
+    const val androidRules = "androidx.test:rules:${Versions.testRules}"
     const val hamcrest = "org.hamcrest:hamcrest-all:${Versions.hamcrest}"
     //endregion
 }

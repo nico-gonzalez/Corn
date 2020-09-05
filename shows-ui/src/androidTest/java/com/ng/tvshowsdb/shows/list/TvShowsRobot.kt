@@ -22,7 +22,7 @@ fun tvShows(func: TvShowsRobot.() -> Unit) = TvShowsRobot().apply {
     finish()
 }
 
-class TvShowsRobot : com.ng.tvshowsdb.core.ui.testing.TestRobot() {
+class TvShowsRobot : TestRobot() {
 
     @get:Rule
     private var activityTestRule = IntentsTestRule(
@@ -44,12 +44,8 @@ class TvShowsRobot : com.ng.tvshowsdb.core.ui.testing.TestRobot() {
     }
 
     fun selectShowAt(position: Int) {
-        onView(withId(R.id.showsRv)).perform(
-            actionOnItemAtPosition<ShowsViewHolder>(
-                position,
-                click()
-            )
-        )
+        onView(withId(R.id.showsRv))
+            .perform(actionOnItemAtPosition<ShowsViewHolder>(position, click()))
     }
 
     fun checkShowDetailsAreOpened(showId: Long) {
