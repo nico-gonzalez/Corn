@@ -20,7 +20,7 @@ class ShowsPresenter @Inject constructor(
     }
 
     fun onShowMostPopularTvShows() {
-        getTvShows.execute(1)
+        getTvShows(1)
             .doOnSuccess {
                 view.hideLoading()
 
@@ -47,7 +47,7 @@ class ShowsPresenter @Inject constructor(
     fun onShowMoreShows() {
         val isLoadingMore = tvShows.last() == LoadingShowUiModel
         if (currentPage < totalShowsPages && !isLoadingMore) {
-            getTvShows.execute(++currentPage)
+            getTvShows(++currentPage)
                 .doOnSuccess {
                     tvShows.remove(LoadingShowUiModel)
                     view.showShows(tvShows)

@@ -13,8 +13,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
 import com.ng.tvshowsdb.core.ui.common.extensions.loadShowImage
 import com.ng.tvshowsdb.shows.R
-import com.ng.tvshowsdb.shows.list.ShowsAdapter
 import com.ng.tvshowsdb.shows.list.ShowItem
+import com.ng.tvshowsdb.shows.list.ShowsAdapter
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_show_detail.*
 import javax.inject.Inject
@@ -25,8 +25,6 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
 
     @Inject
     lateinit var showDetailPresenter: ShowDetailPresenter
-
-    private var showId: Long = -1
 
     private lateinit var similarShowsAdapter: ShowsAdapter
 
@@ -48,8 +46,6 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
         super.onCreate(savedInstanceState)
         supportPostponeEnterTransition()
         setContentView(R.layout.activity_show_detail)
-
-        showId = intent.extras?.getLong(EXTRA_SHOW_ID) ?: -1
 
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
@@ -78,8 +74,10 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
             isNestedScrollingEnabled = false
         }
 
-        showDetailPresenter.onShowDetails(showId)
+        showDetailPresenter.onShowDetails()
     }
+
+    internal fun extractShowIdExtra() = intent.extras?.getLong(EXTRA_SHOW_ID) ?: -1
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         android.R.id.home -> {
@@ -124,10 +122,8 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
         startActivity(
             intent,
             ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this, view!!,
-                getString(R.string.shared_show_poster_transition)
-            )
-                .toBundle()
+                this, view!!, getString(R.string.shared_show_poster_transition)
+            ).toBundle()
         )
     }
 }
