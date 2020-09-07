@@ -21,15 +21,15 @@ class ShowsPresenter @Inject constructor(
 
     fun onShowMostPopularTvShows() {
         getTvShows(1)
-            .doOnSuccess {
+            .doOnSuccess { result ->
                 view.hideLoading()
 
-                it.error?.let {
+                result.error?.let {
                     view.showError()
                     return@doOnSuccess
                 }
 
-                it.value?.let {
+                result.value?.let {
                     currentPage = it.currentPage
                     totalShowsPages = it.totalPages
                     val shows = it.shows.map(showViewModelMapper::map)
@@ -48,16 +48,16 @@ class ShowsPresenter @Inject constructor(
         val isLoadingMore = tvShows.last() == LoadingShowUiModel
         if (currentPage < totalShowsPages && !isLoadingMore) {
             getTvShows(++currentPage)
-                .doOnSuccess {
+                .doOnSuccess { result ->
                     tvShows.remove(LoadingShowUiModel)
                     view.showShows(tvShows)
 
-                    it.error?.let {
+                    result.error?.let {
                         view.showError()
                         return@doOnSuccess
                     }
 
-                    it.value?.let {
+                    result.value?.let {
                         currentPage = it.currentPage
                         totalShowsPages = it.totalPages
                         val shows = it.shows.map(showViewModelMapper::map)

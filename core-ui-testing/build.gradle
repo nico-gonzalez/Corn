@@ -37,24 +37,15 @@ dependencies {
     implementation project(":core-ui")
     implementation project(":core-domain")
 
-    implementation Libs.kotlin
     implementation Libs.rxJava
-    implementation Libs.rxAndroid
     implementation Libs.junit
     implementation Libs.kotlinJUnit
     implementation Libs.androidRunner
     implementation Libs.androidRules
     implementation Libs.mockitoAndroid
     implementation Libs.mockitoKotlin
-    implementation(Libs.espressoCore, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    implementation(Libs.espressoContrib, {
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude module: 'recyclerview-v7'
-    })
+    implementation(Libs.espressoCore)
+    implementation(Libs.espressoContrib)
     implementation Libs.espressoIntents
     implementation Libs.dagger
     implementation Libs.daggerAndroid

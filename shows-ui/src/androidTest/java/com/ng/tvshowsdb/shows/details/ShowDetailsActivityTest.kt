@@ -1,10 +1,11 @@
 package com.ng.tvshowsdb.shows.details
 
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ng.tvshowsdb.core.ui.testing.AndroidTest
 import com.ng.tvshowsdb.core.ui.testing.injection.MockApplicationModule
 import com.ng.tvshowsdb.core.ui.testing.injection.TestApplicationComponent
 import com.ng.tvshowsdb.shows.detail.ShowDetailsViewModelMapper
+import com.ng.tvshowsdb.shows.di.MockRepositoryModule
 import com.ng.tvshowsdb.shows.di.ShowsActivityBindingModule
 import com.ng.tvshowsdb.shows.domain.model.TvShows
 import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
@@ -12,9 +13,7 @@ import com.ng.tvshowsdb.shows.fixtures.buildTvShow
 import com.ng.tvshowsdb.shows.fixtures.buildTvShows
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 import io.reactivex.Maybe
@@ -30,7 +29,8 @@ import javax.inject.Singleton
 @RunWith(AndroidJUnit4::class)
 class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsTestComponent>() {
 
-    private val showsRepository: TvShowRepository = mock()
+    @Inject
+    internal lateinit var showsRepository: TvShowRepository
 
     @Inject
     lateinit var showDetailsViewModelMapper: ShowDetailsViewModelMapper
@@ -44,27 +44,18 @@ class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsT
         modules = [
             AndroidSupportInjectionModule::class,
             MockApplicationModule::class,
+            MockRepositoryModule::class,
             ShowsActivityBindingModule::class
         ]
     )
     interface ShowDetailsTestComponent : TestApplicationComponent {
 
         fun inject(showDetailsActivityTest: ShowDetailsActivityTest)
-
-        @Component.Builder
-        interface Builder {
-
-            @BindsInstance
-            fun repository(tvShowRepository: TvShowRepository): Builder
-
-            fun build(): ShowDetailsTestComponent
-        }
     }
 
     @Before
     fun setup() {
         val testComponent = DaggerShowDetailsActivityTest_ShowDetailsTestComponent.builder()
-            .repository(showsRepository)
             .build()
         application().testComponent = testComponent
         testComponent.inject(this)

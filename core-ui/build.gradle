@@ -42,7 +42,6 @@ dependencies {
 
     compileOnly Libs.javaxInject
 
-    implementation Libs.kotlin
     implementation Libs.rxJava
     implementation Libs.rxKotlin
     implementation Libs.rxAndroid
@@ -60,15 +59,8 @@ dependencies {
     androidTestImplementation Libs.androidRules
     androidTestImplementation Libs.mockitoAndroid
     androidTestImplementation Libs.mockitoKotlin
-    androidTestImplementation(Libs.espressoCore, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestImplementation(Libs.espressoContrib, {
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude module: 'recyclerview-v7'
-    })
+    androidTestImplementation(Libs.espressoCore)
+    androidTestImplementation(Libs.espressoContrib)
     androidTestImplementation Libs.espressoIntents
     kaptAndroidTest Libs.daggerCompiler
     kaptAndroidTest Libs.daggerAndroidCompiler

@@ -11,5 +11,9 @@ interface ShowDetailView : View<ShowDetailPresenter> {
 
     fun showSimilarShows(shows: List<ShowItem>)
 
+    fun showLoadingSimilarShows()
+
+    fun hideLoadingSimilarShows()
+
     fun navigateToShowDetails(position: Int, showId: Long)
 }

@@ -2,6 +2,8 @@ package com.ng.tvshowsdb.shows.list
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.ng.tvshowsdb.core.ui.common.extensions.inflate
 import com.ng.tvshowsdb.core.ui.common.extensions.loadShowImage
-import kotlinx.android.synthetic.main.show_card.view.*
+import com.ng.tvshowsdb.shows.R
 
 sealed class ShowsViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -19,13 +21,16 @@ class ShowViewHolder(
     private val onShowClickedListener: (position: Int) -> Unit
 ) : ShowsViewHolder(view) {
 
+    private val titleTv by lazy { view.findViewById<TextView>(R.id.titleTv) }
+    private val posterIv by lazy { view.findViewById<ImageView>(R.id.posterIv) }
+    private val ratingTv by lazy { view.findViewById<TextView>(R.id.ratingTv) }
+    private val showCard by lazy { view.findViewById<View>(R.id.showCard) }
+
     fun bind(show: ShowUiModel) {
-        itemView.apply {
-            titleTv.text = show.title
-            posterIv.loadShowImage(show.posterPath)
-            ratingTv.text = show.rating
-            showCard.setOnClickListener { onShowClickedListener(adapterPosition) }
-        }
+        titleTv.text = show.title
+        posterIv.loadShowImage(show.posterPath)
+        ratingTv.text = show.rating
+        showCard.setOnClickListener { onShowClickedListener(adapterPosition) }
     }
 }
 
