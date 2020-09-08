@@ -34,6 +34,7 @@ class TvShowDetailsPresenterTest {
     fun setup() {
         presenter = ShowDetailPresenter(
             view,
+            SHOW_ID,
             getTvShow,
             getSimilarTvShows,
             tvShowViewModelMapper,
@@ -47,15 +48,15 @@ class TvShowDetailsPresenterTest {
         val similarTvShows =
             Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-        whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
-        whenever(getSimilarTvShows.execute(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
+        whenever(getTvShow(SHOW_ID)) doReturn Single.just(showDetails)
+        whenever(getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
                 Single.just(similarTvShows)
         whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsUiModel
 
-        presenter.onShowDetails(SHOW_ID)
+        presenter.onShowDetails()
 
         inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
-            verify(getTvShow).execute(SHOW_ID)
+            verify(getTvShow).invoke(SHOW_ID)
             verify(tvShowDetailsViewModelMapper).map(tvShow)
             verify(view).showDetails(tvShowDetailsUiModel)
         }
@@ -67,15 +68,15 @@ class TvShowDetailsPresenterTest {
         val similarTvShows =
             Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-        whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
-        whenever(getSimilarTvShows.execute(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
+        whenever(getTvShow(SHOW_ID)) doReturn Single.just(showDetails)
+        whenever(getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
                 Single.just(similarTvShows)
         whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsUiModel
 
-        presenter.onShowDetails(SHOW_ID)
+        presenter.onShowDetails()
 
         inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
-            verify(getTvShow).execute(SHOW_ID)
+            verify(getTvShow).invoke(SHOW_ID)
             verify(view).showError(argThat {
                 this == "Error"
             })
@@ -89,15 +90,15 @@ class TvShowDetailsPresenterTest {
         val similarTvShows =
             Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-        whenever(getTvShow.execute(SHOW_ID)) doReturn Single.just(showDetails)
-        whenever(getSimilarTvShows.execute(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
+        whenever(getTvShow(SHOW_ID)) doReturn Single.just(showDetails)
+        whenever(getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
                 Single.just(similarTvShows)
         whenever(tvShowViewModelMapper.map(tvShow)) doReturn tvShowUiModel
 
-        presenter.onShowDetails(SHOW_ID)
+        presenter.onShowDetails()
 
         inOrder(view, getSimilarTvShows, tvShowViewModelMapper) {
-            verify(getSimilarTvShows).execute(check {
+            verify(getSimilarTvShows).invoke(check {
                 assertThat(it.showId, `is`(equalTo(SHOW_ID)))
                 assertThat(it.page, `is`(equalTo(1)))
             })

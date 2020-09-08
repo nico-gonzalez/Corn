@@ -35,13 +35,13 @@ class TvShowsPresenterTest {
     fun `On show most popular tv shows, gets popular tv shows and hand the view model to the view`() {
         val shows = Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-        whenever(getTvShows.execute(1)) doReturn Single.just(shows)
+        whenever(getTvShows(1)) doReturn Single.just(shows)
         whenever(showViewModelMapper.map(tvShow)) doReturn tvShowUiModel
 
         presenter.onShowMostPopularTvShows()
 
         inOrder(view, getTvShows, showViewModelMapper) {
-            verify(getTvShows).execute(1)
+            verify(getTvShows).invoke(1)
             verify(view).showLoading()
             verify(view).hideLoading()
             verify(showViewModelMapper).map(tvShow)
@@ -56,12 +56,12 @@ class TvShowsPresenterTest {
     fun `On show most popular tv shows, gets popular tv shows fails hands error message to view`() {
         val result = Result.error<TvShows>(Throwable("Error"))
 
-        whenever(getTvShows.execute(1)) doReturn Single.just(result)
+        whenever(getTvShows(1)) doReturn Single.just(result)
 
         presenter.onShowMostPopularTvShows()
 
         inOrder(view, getTvShows) {
-            verify(getTvShows).execute(1)
+            verify(getTvShows).invoke(1)
             verify(view).showLoading()
             verify(view).hideLoading()
             verify(view).showError()
@@ -85,8 +85,8 @@ class TvShowsPresenterTest {
             TvShows(listOf(similarTvShow), currentPage = 2, totalPages = 5)
         )
 
-        whenever(getTvShows.execute(1)) doReturn Single.just(firstPageShows)
-        whenever(getTvShows.execute(2)) doReturn Single.just(secondPageShows)
+        whenever(getTvShows(1)) doReturn Single.just(firstPageShows)
+        whenever(getTvShows(2)) doReturn Single.just(secondPageShows)
         whenever(showViewModelMapper.map(tvShow)) doReturn tvShowUiModel
         whenever(showViewModelMapper.map(similarTvShow)) doReturn similarTvShowUiModel
 
@@ -94,7 +94,7 @@ class TvShowsPresenterTest {
         presenter.onShowMoreShows()
 
         inOrder(view, getTvShows, showViewModelMapper) {
-            verify(getTvShows).execute(1)
+            verify(getTvShows).invoke(1)
             verify(view).showLoading()
             verify(view).hideLoading()
             verify(showViewModelMapper).map(tvShow)
@@ -102,7 +102,7 @@ class TvShowsPresenterTest {
                 this[0].id == SHOW_ID
             })
 
-            verify(getTvShows).execute(2)
+            verify(getTvShows).invoke(2)
             verify(showViewModelMapper).map(similarTvShow)
             verify(view).showShows(argThat {
                 this[1].id == SIMILAR_SHOW_ID
@@ -117,15 +117,15 @@ class TvShowsPresenterTest {
             Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
         val secondPageResult = Result.error<TvShows>(Throwable("Error"))
 
-        whenever(getTvShows.execute(1)) doReturn Single.just(firstPageShows)
-        whenever(getTvShows.execute(2)) doReturn Single.just(secondPageResult)
+        whenever(getTvShows(1)) doReturn Single.just(firstPageShows)
+        whenever(getTvShows(2)) doReturn Single.just(secondPageResult)
         whenever(showViewModelMapper.map(tvShow)) doReturn tvShowUiModel
 
         presenter.onShowMostPopularTvShows()
         presenter.onShowMoreShows()
 
         inOrder(view, getTvShows, showViewModelMapper) {
-            verify(getTvShows).execute(1)
+            verify(getTvShows).invoke(1)
             verify(view).showLoading()
             verify(view).hideLoading()
             verify(showViewModelMapper).map(tvShow)
@@ -134,7 +134,7 @@ class TvShowsPresenterTest {
             })
 
 
-            verify(getTvShows).execute(2)
+            verify(getTvShows).invoke(2)
             verify(view).showError()
             verifyNoMoreInteractions()
         }
