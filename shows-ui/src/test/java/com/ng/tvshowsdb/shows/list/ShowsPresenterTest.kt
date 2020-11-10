@@ -12,7 +12,7 @@ import org.junit.Test
 private const val SHOW_ID = 1L
 private const val SIMILAR_SHOW_ID = 2L
 
-class TvShowsPresenterTest {
+class ShowsPresenterTest {
 
     private lateinit var presenter: ShowsPresenter
 

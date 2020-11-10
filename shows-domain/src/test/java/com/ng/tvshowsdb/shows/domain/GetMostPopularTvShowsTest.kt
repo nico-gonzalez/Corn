@@ -34,7 +34,7 @@ class GetMostPopularTvShowsTest {
         val shows = TvShows(listOf(tvShow, tvShow, tvShow), 1, 5)
         whenever(tvShowRepository.getMostPopularShows(PAGE)) doReturn Single.just(shows)
 
-        getTvShows.execute(PAGE)
+        getTvShows(PAGE)
             .test()
             .apply {
                 assertValue {
@@ -49,7 +49,7 @@ class GetMostPopularTvShowsTest {
         val error: Throwable = mock()
         whenever(tvShowRepository.getMostPopularShows(PAGE)) doReturn Single.error(error)
 
-        getTvShows.execute(PAGE)
+        getTvShows(PAGE)
             .test()
             .apply {
                 assertValue {

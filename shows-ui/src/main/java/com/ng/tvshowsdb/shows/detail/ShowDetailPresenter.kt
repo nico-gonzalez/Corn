@@ -44,6 +44,7 @@ class ShowDetailPresenter @Inject constructor(
             .addTo(subscriptions)
 
         getSimilarTvShows(GetSimilarTvShows.Params(showId, currentSimilarShowsPage))
+            .doOnSubscribe { view.showLoadingSimilarShows() }
             .doOnSuccess { result ->
                 result.error?.let {
                     view.showError(it.localizedMessage.orEmpty())
@@ -56,6 +57,7 @@ class ShowDetailPresenter @Inject constructor(
                     similarTvShows.clear()
                     similarTvShows += shows
                     view.showSimilarShows(similarTvShows)
+                    view.hideLoadingSimilarShows()
                 }
             }
             .subscribe()
@@ -81,6 +83,7 @@ class ShowDetailPresenter @Inject constructor(
                         val shows = it.shows.map(showViewModelMapper::map)
                         similarTvShows += shows
                         view.showSimilarShows(similarTvShows)
+                        view.hideLoadingSimilarShows()
                     }
                 }
                 .doOnSubscribe {

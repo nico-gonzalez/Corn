@@ -35,7 +35,7 @@ class GetSimilarTvShowsTest {
         val shows = TvShows(listOf(tvShow, tvShow, tvShow), 1, 5)
         whenever(tvShowRepository.getSimilarTvShows(SHOW_ID, PAGE)) doReturn Single.just(shows)
 
-        getSimilarTvShows.execute(GetSimilarTvShows.Params(SHOW_ID, PAGE))
+        getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, PAGE))
             .test()
             .apply {
                 assertValue {
@@ -50,7 +50,7 @@ class GetSimilarTvShowsTest {
         val error: Throwable = mock()
         whenever(tvShowRepository.getSimilarTvShows(SHOW_ID, PAGE)) doReturn Single.error(error)
 
-        getSimilarTvShows.execute(GetSimilarTvShows.Params(SHOW_ID, PAGE))
+        getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, PAGE))
             .test()
             .apply {
                 assertValue {

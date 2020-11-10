@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.HORIZONTAL
@@ -13,10 +14,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
 import com.ng.tvshowsdb.core.ui.common.extensions.loadShowImage
 import com.ng.tvshowsdb.shows.R
+import com.ng.tvshowsdb.shows.databinding.ActivityShowDetailBinding
 import com.ng.tvshowsdb.shows.list.ShowItem
 import com.ng.tvshowsdb.shows.list.ShowsAdapter
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_show_detail.*
 import javax.inject.Inject
 
 const val EXTRA_SHOW_ID = "Extra:ShowId:Long"
@@ -26,16 +27,14 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
     @Inject
     lateinit var showDetailPresenter: ShowDetailPresenter
 
+    private lateinit var binding: ActivityShowDetailBinding
     private lateinit var similarShowsAdapter: ShowsAdapter
-
     private lateinit var similarShowsLayoutManager: LinearLayoutManager
 
     companion object {
-
         fun startIntent(context: Context, showId: Long): Intent =
             Intent(context, ShowDetailActivity::class.java)
                 .putExtra(EXTRA_SHOW_ID, showId)
-
     }
 
     override fun setPresenter(presenter: ShowDetailPresenter) {
@@ -45,9 +44,10 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportPostponeEnterTransition()
-        setContentView(R.layout.activity_show_detail)
+        binding = ActivityShowDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = ""
@@ -66,7 +66,7 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
 
         similarShowsLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        similarShowsRv.apply {
+        binding.similarShowsRv.apply {
             adapter = similarShowsAdapter
             layoutManager = similarShowsLayoutManager
             setHasFixedSize(true)
@@ -93,27 +93,30 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
     }
 
     override fun showError(message: String) {
-        Snackbar.make(toolbar, message, LENGTH_LONG)
+        Snackbar.make(binding.root, message, LENGTH_LONG)
             .show()
     }
 
     override fun showDetails(show: ShowDetailsUiModel) {
-
-        posterIv.loadShowImage(show.posterPath) {
-            supportStartPostponedEnterTransition()
-        }
-        backdropIv.loadShowImage(show.backdropPath)
-
-        titleTv.text = show.title
-        descriptionTv.text = show.description
-        firstAiredDateTv.text = show.firstAirDate
-        ratingTv.text = show.rating
+        binding.posterIv.loadShowImage(show.posterPath) { supportStartPostponedEnterTransition() }
+        binding.backdropIv.loadShowImage(show.backdropPath)
+        binding.titleTv.text = show.title
+        binding.descriptionTv.text = show.description
+        binding.firstAiredDateTv.text = show.firstAirDate
+        binding.ratingTv.text = show.rating
     }
 
 
     override fun showSimilarShows(shows: List<ShowItem>) {
-        similarShowsProgress.visibility = GONE
         similarShowsAdapter.submitList(ArrayList(shows))
+    }
+
+    override fun showLoadingSimilarShows() {
+        binding.similarShowsProgress.visibility = VISIBLE
+    }
+
+    override fun hideLoadingSimilarShows() {
+        binding.similarShowsProgress.visibility = GONE
     }
 
     override fun navigateToShowDetails(position: Int, showId: Long) {

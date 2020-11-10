@@ -1,11 +1,12 @@
 private object Versions {
-    //region Android"
-    const val gradlePlugin = "4.1.0-rc01"
-    const val buildTools = "29.0.2"
+    //region Android
+    const val gradlePlugin = "4.2.0-alpha15"
+    const val buildTools = "30.0.2"
     const val minSdk = 21
     const val targetSdk = 30
     const val compileSdk = 30
-    //endregion"
+    const val compose = "1.0.0-alpha04"
+    //endregion
 
     //region Libraries
     const val kotlin = "1.4.0"
@@ -42,13 +43,12 @@ private object Versions {
     private const val versionBuild = 0
 
     const val versionCode =
-        versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+            versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
     const val versionName = "$versionMajor.$versionMinor.$versionPatch"
     //endregion
 }
 
-private object Libs {
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+object Libs {
 
     //region Libraries
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
@@ -57,7 +57,7 @@ private object Libs {
     const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
     const val retrofitRxJava = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     const val okhttpLoggingInterceptor =
-        "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+            "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
     const val javaxInject = "javax.inject:javax.inject:${Versions.javaxInject}"
     const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     //endregion
@@ -68,7 +68,7 @@ private object Libs {
     const val cardview = "androidx.cardview:cardview:${Versions.cardview}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val constraintlayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+            "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
@@ -76,9 +76,18 @@ private object Libs {
     const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
     const val daggerAndroidSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
     const val daggerAndroidCompiler =
-        "com.google.dagger:dagger-android-processor:${Versions.dagger}"
+            "com.google.dagger:dagger-android-processor:${Versions.dagger}"
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
+    const val composeUi = "androidx.compose.ui:ui:${Versions.compose}"
+    const val composeTooling = "androidx.ui:ui-tooling:${Versions.compose}"
+    const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose}"
+    const val composeMaterial = "androidx.compose.material:material:${Versions.compose}"
+    const val composeMaterialIcons = "androidx.compose.material:material-icons-core:${Versions.compose}"
+    const val composeMaterialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
+    const val composeLiveData = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+    const val composeRxJava = "androidx.compose.runtime:runtime-rxjava2:${Versions.compose}"
+    const val composeUiTest = "androidx.ui:ui-test:${Versions.compose}"
     //endregion
 
     //region Testing

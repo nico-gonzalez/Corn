@@ -11,7 +11,6 @@ java {
 dependencies {
     compileOnly Libs.javaxInject
 
-    implementation Libs.kotlin
     implementation Libs.rxJava
 
     testImplementation Libs.junit

@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.ng.tvshowsdb.core.ui.common.view.GridSpacingItemDecoration
 import com.ng.tvshowsdb.shows.R
+import com.ng.tvshowsdb.shows.databinding.ActivityShowsBinding
 import com.ng.tvshowsdb.shows.detail.ShowDetailActivity
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_shows.*
 import javax.inject.Inject
 
 private const val GRID_COLUMNS = 2
@@ -22,8 +22,8 @@ class ShowsActivity : DaggerAppCompatActivity(), ShowsView {
     @Inject
     lateinit var showsPresenter: ShowsPresenter
 
+    private lateinit var binding: ActivityShowsBinding
     private lateinit var showsAdapter: ShowsAdapter
-
     private lateinit var showsLayoutManager: GridLayoutManager
 
     override fun setPresenter(presenter: ShowsPresenter) {
@@ -32,9 +32,10 @@ class ShowsActivity : DaggerAppCompatActivity(), ShowsView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shows)
+        binding = ActivityShowsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
         showsAdapter =
             ShowsAdapter(R.layout.show_grid_item, R.layout.loading_show_card, { position ->
@@ -50,7 +51,7 @@ class ShowsActivity : DaggerAppCompatActivity(), ShowsView {
             }
         }
 
-        showsRv.apply {
+        binding.showsRv.apply {
             adapter = showsAdapter
             layoutManager = showsLayoutManager
             setHasFixedSize(true)
@@ -79,15 +80,15 @@ class ShowsActivity : DaggerAppCompatActivity(), ShowsView {
     }
 
     override fun showLoading() {
-        progressBar.visibility = VISIBLE
+        binding.progressBar.visibility = VISIBLE
     }
 
     override fun hideLoading() {
-        progressBar.visibility = GONE
+        binding.progressBar.visibility = GONE
     }
 
     override fun showError() {
-        Snackbar.make(showsRv, R.string.error_loading_popular_shows, Snackbar.LENGTH_LONG)
+        Snackbar.make(binding.showsRv, R.string.error_loading_popular_shows, Snackbar.LENGTH_LONG)
             .setAction(R.string.retry) {
                 showsPresenter.onShowMostPopularTvShows()
             }

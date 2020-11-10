@@ -39,7 +39,6 @@ dependencies {
 
     compileOnly Libs.javaxInject
 
-    implementation Libs.kotlin
     implementation Libs.moshi
     api Libs.moshiKotlin
     api Libs.retrofit

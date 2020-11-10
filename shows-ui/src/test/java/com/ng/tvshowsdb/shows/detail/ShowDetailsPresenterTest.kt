@@ -17,7 +17,7 @@ import org.junit.Test
 
 private const val SHOW_ID = 1L
 
-class TvShowDetailsPresenterTest {
+class ShowDetailsPresenterTest {
 
     private lateinit var presenter: ShowDetailPresenter
 

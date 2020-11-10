@@ -32,7 +32,7 @@ class GetTvShowTest {
     fun `Gets Show from Repository by it's Id`() {
         whenever(tvShowRepository.getShow(SHOW_ID)) doReturn Maybe.just(tvShow)
 
-        getTvShow.execute(SHOW_ID)
+        getTvShow(SHOW_ID)
             .test()
             .apply {
                 assertValue {
@@ -47,7 +47,7 @@ class GetTvShowTest {
         val error: Throwable = mock()
         whenever(tvShowRepository.getShow(SHOW_ID)) doReturn Maybe.error(error)
 
-        getTvShow.execute(SHOW_ID)
+        getTvShow(SHOW_ID)
             .test()
             .assertError(error)
         verify(tvShowRepository).getShow(SHOW_ID)
