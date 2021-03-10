@@ -1,4 +1,4 @@
-# TVShowsDB Android app
+# Corn Android app
 Android app implemented 100% in Kotlin that uses https://www.themoviedb.org API to display information of the current Most Popular Tv Shows.
 
 # Setup
