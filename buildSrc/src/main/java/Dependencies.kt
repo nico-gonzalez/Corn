@@ -1,15 +1,15 @@
 private object Versions {
     //region Android
-    const val gradlePlugin = "4.2.0-alpha15"
+    const val gradlePlugin = "7.0.0-alpha09"
     const val buildTools = "30.0.2"
     const val minSdk = 21
     const val targetSdk = 30
     const val compileSdk = 30
-    const val compose = "1.0.0-alpha04"
+    const val compose = "1.0.0-beta02"
     //endregion
 
     //region Libraries
-    const val kotlin = "1.4.0"
+    const val kotlin = "1.4.31"
     const val material = "1.2.0"
     const val appCompat = "1.2.0"
     const val recyclerview = "1.1.0"
@@ -80,7 +80,6 @@ object Libs {
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
     const val composeUi = "androidx.compose.ui:ui:${Versions.compose}"
-    const val composeTooling = "androidx.ui:ui-tooling:${Versions.compose}"
     const val composeFoundation = "androidx.compose.foundation:foundation:${Versions.compose}"
     const val composeMaterial = "androidx.compose.material:material:${Versions.compose}"
     const val composeMaterialIcons = "androidx.compose.material:material-icons-core:${Versions.compose}"
