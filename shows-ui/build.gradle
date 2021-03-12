@@ -69,7 +69,6 @@ dependencies {
     implementation Libs.daggerAndroidSupport
     kapt Libs.daggerAndroidCompiler
     implementation Libs.composeUi
-    implementation Libs.composeTooling
     implementation Libs.composeFoundation
     implementation Libs.composeMaterial
     implementation Libs.composeMaterialIcons
@@ -87,8 +86,8 @@ dependencies {
     androidTestImplementation Libs.androidRules
     androidTestImplementation Libs.mockitoAndroid
     androidTestImplementation Libs.mockitoKotlin
-    androidTestImplementation(Libs.espressoCore)
-    androidTestImplementation(Libs.espressoContrib)
+    androidTestImplementation Libs.espressoCore
+    androidTestImplementation Libs.espressoContrib
     androidTestImplementation Libs.espressoIntents
     androidTestImplementation Libs.composeUiTest
     kaptAndroidTest Libs.daggerCompiler
