@@ -1,4 +1,4 @@
-package com.ng.tvshowsdb.shows.data.remote.model
+package com.ng.tvshowsdb.shows.data.datasource.remote.model
 
 class ApiTvShow(
     val id: Long,

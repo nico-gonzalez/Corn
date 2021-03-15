@@ -11,7 +11,7 @@ class ShowDetailsViewModelMapper @Inject constructor() {
             title,
             description,
             posterPath,
-            backdropPath,
+            backdropPath.ifEmpty { posterPath },
             firstAirDate,
             rating.toString()
         )

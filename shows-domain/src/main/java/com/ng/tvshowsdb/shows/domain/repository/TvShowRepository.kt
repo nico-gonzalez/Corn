@@ -12,4 +12,8 @@ interface TvShowRepository {
     fun getShow(id: Long): Maybe<TvShow>
 
     fun getSimilarTvShows(id: Long, page: Int): Single<TvShows>
+
+    fun getTopRated(page: Int): Single<TvShows>
+
+    fun getLatest(): Single<TvShow>
 }

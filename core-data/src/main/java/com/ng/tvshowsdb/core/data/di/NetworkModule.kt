@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.logging.HttpLoggingInterceptor.Level.BASIC
+import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -29,7 +29,7 @@ class NetworkModule {
             .addInterceptor(apiKeyInterceptor)
 
         if (BuildConfig.DEBUG) {
-            builder.addInterceptor(HttpLoggingInterceptor().setLevel(BASIC))
+            builder.addInterceptor(HttpLoggingInterceptor().setLevel(BODY))
         }
         return builder.build()
     }
@@ -45,7 +45,7 @@ class NetworkModule {
     fun provideRetrofit(
         @Named("baseUrl") baseUrl: String,
         okHttpClient: OkHttpClient,
-        moshi: Moshi
+        moshi: Moshi,
     ): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(okHttpClient)

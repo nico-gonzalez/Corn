@@ -1,7 +1,7 @@
 package com.ng.tvshowsdb.shows.data
 
-import com.ng.tvshowsdb.shows.data.remote.model.ApiTvShow
-import com.ng.tvshowsdb.shows.data.remote.model.ApiTvShows
+import com.ng.tvshowsdb.shows.data.datasource.remote.model.ApiTvShow
+import com.ng.tvshowsdb.shows.data.datasource.remote.model.ApiTvShows
 import com.ng.tvshowsdb.shows.data.shows.TvShowMapper
 import com.ng.tvshowsdb.shows.domain.model.TvShow
 import org.junit.Before

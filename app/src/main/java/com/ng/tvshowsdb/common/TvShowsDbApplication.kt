@@ -3,6 +3,7 @@ package com.ng.tvshowsdb.common
 import androidx.appcompat.app.AppCompatDelegate
 import com.ng.tvshowsdb.common.injection.components.DaggerApplicationComponent
 import com.ng.tvshowsdb.core.ui.common.BaseApplication
+import com.ng.tvshowsdb.home.ui.di.DaggerHomeComponent
 import com.ng.tvshowsdb.shows.di.DaggerShowsComponent
 import dagger.android.AndroidInjector
 
@@ -17,8 +18,14 @@ open class TvShowsDbApplication : BaseApplication() {
         val showsComponent = DaggerShowsComponent.builder()
             .context(this)
             .build()
+
+        val homeComponent = DaggerHomeComponent.builder()
+            .context(this)
+            .build()
+
         return DaggerApplicationComponent.builder()
             .application(this)
+            .homeComponent(homeComponent)
             .showsComponent(showsComponent)
             .build()
             .also { it.inject(this) }

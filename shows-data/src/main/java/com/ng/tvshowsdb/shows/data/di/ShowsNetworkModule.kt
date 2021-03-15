@@ -1,7 +1,7 @@
 package com.ng.tvshowsdb.shows.data.di
 
 import com.ng.tvshowsdb.core.data.di.NetworkModule
-import com.ng.tvshowsdb.shows.data.remote.ShowsService
+import com.ng.tvshowsdb.shows.data.datasource.remote.ShowsService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

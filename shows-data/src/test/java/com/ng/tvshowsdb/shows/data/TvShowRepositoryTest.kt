@@ -1,9 +1,9 @@
 package com.ng.tvshowsdb.shows.data
 
-import com.ng.tvshowsdb.shows.data.remote.ShowsService
-import com.ng.tvshowsdb.shows.data.remote.model.ApiTvShow
-import com.ng.tvshowsdb.shows.data.remote.model.ApiTvShows
-import com.ng.tvshowsdb.shows.data.shows.TvShowRepositoryImpl
+import com.ng.tvshowsdb.shows.data.datasource.remote.ShowsService
+import com.ng.tvshowsdb.shows.data.datasource.remote.model.ApiTvShow
+import com.ng.tvshowsdb.shows.data.datasource.remote.model.ApiTvShows
+import com.ng.tvshowsdb.shows.data.repository.TvShowRepositoryImpl
 import com.ng.tvshowsdb.shows.data.shows.TvShowMapper
 import com.ng.tvshowsdb.shows.domain.model.TvShow
 import com.ng.tvshowsdb.shows.domain.model.TvShows

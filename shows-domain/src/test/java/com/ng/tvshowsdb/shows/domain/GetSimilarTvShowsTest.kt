@@ -1,7 +1,7 @@
 package com.ng.tvshowsdb.shows.domain
 
 import com.ng.tvshowsdb.core.domain.common.SchedulerProvider
-import com.ng.tvshowsdb.shows.domain.common.ImmediateSchedulers
+import com.ng.tvshowsdb.movies.domain.common.ImmediateSchedulers
 import com.ng.tvshowsdb.shows.domain.model.TvShow
 import com.ng.tvshowsdb.shows.domain.model.TvShows
 import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
