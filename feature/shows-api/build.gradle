@@ -34,12 +34,14 @@ android {
 dependencies {
 
     api project(":library:core-data")
-    implementation project(":feature:shows-domain")
+    api project(":library:core-domain")
 
     compileOnly Libs.javaxInject
 
     implementation Libs.dagger
     kapt Libs.daggerCompiler
+
+    implementation Libs.rxJava
 
     testImplementation Libs.junit
     testImplementation Libs.kotlinJUnit

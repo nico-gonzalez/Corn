@@ -44,8 +44,7 @@ android {
 dependencies {
 
     api project(":library:core-ui")
-    api project(":feature:shows-domain")
-    api project(":feature:shows-data")
+    api project(':feature:shows-api')
 
     compileOnly Libs.javaxInject
 
