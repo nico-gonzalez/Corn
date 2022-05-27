@@ -9,7 +9,7 @@ java {
 }
 
 dependencies {
-    api project(":core-domain")
+    api project(":library:core-domain")
 
     compileOnly Libs.javaxInject
 

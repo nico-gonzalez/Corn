@@ -34,9 +34,9 @@ android {
 
 dependencies {
 
-    implementation project(":core-ui")
-    implementation project(":shows-ui")
-    implementation project(":core-domain")
+    implementation project(":library:core-ui")
+    implementation project(":feature:shows-ui")
+    implementation project(":library:core-domain")
 
     implementation Libs.appcompat
     implementation Libs.material

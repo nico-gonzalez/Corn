@@ -13,16 +13,19 @@ android {
         versionCode Versions.versionCode
         versionName Versions.versionName
 
+        testInstrumentationRunner "com.ng.tvshowsdb.core.ui.testing.CustomAndroidJUnitTestRunner"
         consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildFeatures {
+        compose true
+        viewBinding = true
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            buildConfigField "String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/\""
         }
     }
     compileOptions {
@@ -31,35 +34,60 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        useIR = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Versions.compose
     }
 }
 
 dependencies {
 
-    implementation project(":core-domain")
+    api project(":library:core-ui")
+    api project(":feature:shows-domain")
+    api project(":feature:shows-data")
 
     compileOnly Libs.javaxInject
 
     implementation Libs.rxJava
     implementation Libs.rxKotlin
     implementation Libs.rxAndroid
+    implementation Libs.appcompat
     implementation Libs.material
     implementation Libs.recyclerview
+    implementation Libs.cardview
+    implementation Libs.constraintlayout
     implementation Libs.glide
     kapt Libs.glideCompiler
+    implementation Libs.dagger
+    implementation Libs.rxAndroid
+    implementation Libs.dagger
+    kapt Libs.daggerCompiler
+    implementation Libs.daggerAndroid
     implementation Libs.daggerAndroidSupport
     kapt Libs.daggerAndroidCompiler
+    implementation Libs.composeUi
+    implementation Libs.composeFoundation
+    implementation Libs.composeMaterial
+    implementation Libs.composeMaterialIcons
+    implementation Libs.composeMaterialIconsExtended
+    implementation Libs.composeLiveData
+    implementation Libs.composeRxJava
 
     testImplementation Libs.junit
+    testImplementation Libs.mockitoKotlin
+
+    androidTestImplementation project(":library:core-ui-testing")
     androidTestImplementation Libs.junit
     androidTestImplementation Libs.kotlinJUnit
     androidTestImplementation Libs.androidRunner
     androidTestImplementation Libs.androidRules
     androidTestImplementation Libs.mockitoAndroid
     androidTestImplementation Libs.mockitoKotlin
-    androidTestImplementation(Libs.espressoCore)
-    androidTestImplementation(Libs.espressoContrib)
+    androidTestImplementation Libs.espressoCore
+    androidTestImplementation Libs.espressoContrib
     androidTestImplementation Libs.espressoIntents
+    androidTestImplementation Libs.composeUiTest
     kaptAndroidTest Libs.daggerCompiler
     kaptAndroidTest Libs.daggerAndroidCompiler
 }
