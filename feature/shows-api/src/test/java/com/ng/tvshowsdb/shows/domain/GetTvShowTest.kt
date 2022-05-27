@@ -5,13 +5,13 @@ import com.ng.tvshowsdb.shows.domain.common.ImmediateSchedulers
 import com.ng.tvshowsdb.shows.domain.model.TvShow
 import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
 import com.ng.tvshowsdb.shows.domain.usecase.GetTvShow
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 private const val SHOW_ID = 1L
 

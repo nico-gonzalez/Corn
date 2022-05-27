@@ -86,7 +86,7 @@ dependencies {
     androidTestImplementation Libs.espressoCore
     androidTestImplementation Libs.espressoContrib
     androidTestImplementation Libs.espressoIntents
-    androidTestImplementation Libs.composeUiTest
+    androidTestImplementation Libs.androidxTestExtJUnit
     kaptAndroidTest Libs.daggerCompiler
     kaptAndroidTest Libs.daggerAndroidCompiler
 }

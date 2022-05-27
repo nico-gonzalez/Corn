@@ -6,13 +6,13 @@ import com.ng.tvshowsdb.shows.domain.model.TvShow
 import com.ng.tvshowsdb.shows.domain.model.TvShows
 import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
 import com.ng.tvshowsdb.shows.domain.usecase.GetMostPopularTvShows
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 private const val PAGE = 1
 
