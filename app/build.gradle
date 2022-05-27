@@ -5,7 +5,6 @@ apply plugin: 'kotlin-kapt'
 android {
 
     compileSdkVersion Versions.compileSdk
-    buildToolsVersion Versions.buildTools
 
     defaultConfig {
         applicationId "com.ng.tvshowsdb"

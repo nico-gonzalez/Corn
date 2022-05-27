@@ -1,15 +1,14 @@
 private object Versions {
     //region Android
-    const val gradlePlugin = "7.0.0-alpha09"
-    const val buildTools = "30.0.2"
+    const val gradlePlugin = "7.2.1"
     const val minSdk = 21
     const val targetSdk = 30
-    const val compileSdk = 30
-    const val compose = "1.0.0-beta02"
+    const val compileSdk = 32
+    const val compose = "1.2.0-beta01"
     //endregion
 
     //region Libraries
-    const val kotlin = "1.4.31"
+    const val kotlin = "1.6.21"
     const val material = "1.2.0"
     const val appCompat = "1.2.0"
     const val recyclerview = "1.1.0"
@@ -19,7 +18,7 @@ private object Versions {
     const val okhttp = "4.8.1"
     const val moshi = "1.9.3"
     const val glide = "4.11.0"
-    const val dagger = "2.28.3"
+    const val dagger = "2.42"
     const val javaxInject = "1"
     const val rxJava = "2.2.19"
     const val rxAndroid = "2.1.1"
