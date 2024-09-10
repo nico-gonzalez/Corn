@@ -12,8 +12,8 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import com.ng.tvshowsdb.core.ui.BuildConfig
-import com.ng.tvshowsdb.core.ui.R
+import com.ng.tvshowsdb.core.ui.common.BuildConfig
+import com.ng.tvshowsdb.core.ui.common.R
 
 fun ViewGroup.inflate(
     @LayoutRes layoutResId: Int,

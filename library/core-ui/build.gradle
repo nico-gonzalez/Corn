@@ -7,6 +7,8 @@ plugins {
 android {
     compileSdkVersion Versions.compileSdk
 
+    namespace = "com.ng.tvshowsdb.core.ui.common"
+
     defaultConfig {
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
@@ -25,6 +27,11 @@ android {
             buildConfigField "String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/\""
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

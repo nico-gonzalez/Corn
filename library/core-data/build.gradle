@@ -7,6 +7,8 @@ plugins {
 android {
     compileSdkVersion Versions.compileSdk
 
+    namespace = "com.ng.tvshowsdb.core.data"
+
     defaultConfig {
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
@@ -24,6 +26,11 @@ android {
             buildConfigField 'String', 'THE_MOVIE_DB_API_KEY', "\"$movie_db_api_key\""
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

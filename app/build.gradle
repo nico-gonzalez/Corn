@@ -6,6 +6,8 @@ android {
 
     compileSdkVersion Versions.compileSdk
 
+    namespace = "com.ng.tvshowsdb"
+
     defaultConfig {
         applicationId "com.ng.tvshowsdb"
         minSdkVersion Versions.minSdk

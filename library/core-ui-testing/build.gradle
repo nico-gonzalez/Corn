@@ -7,6 +7,9 @@ plugins {
 android {
     compileSdkVersion Versions.compileSdk
 
+    namespace = "com.ng.tvshowsdb.core.ui.testing"
+
+
     defaultConfig {
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
