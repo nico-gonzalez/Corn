@@ -28,8 +28,11 @@ fun ImageView.loadShowImage(posterPath: String, onLoaded: (() -> Unit)? = null) 
     .applyDefaultRequestOptions(RequestOptions.placeholderOf(R.mipmap.ic_launcher_round))
     .load("${BuildConfig.IMAGE_BASE_URL}/w500/$posterPath")
     .listener(object : RequestListener<Drawable> {
+
         override fun onLoadFailed(
-            e: GlideException?, model: Any?, target: Target<Drawable>?,
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>,
             isFirstResource: Boolean
         ): Boolean {
             onLoaded?.invoke()
@@ -37,8 +40,11 @@ fun ImageView.loadShowImage(posterPath: String, onLoaded: (() -> Unit)? = null) 
         }
 
         override fun onResourceReady(
-            resource: Drawable?, model: Any?, target: Target<Drawable>?,
-            dataSource: DataSource?, isFirstResource: Boolean
+            resource: Drawable,
+            model: Any,
+            target: Target<Drawable>?,
+            dataSource: DataSource,
+            isFirstResource: Boolean
         ): Boolean {
             onLoaded?.invoke()
             return false
