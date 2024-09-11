@@ -1,11 +1,11 @@
-package com.ng.tvshowsdb.shows.domain
+package com.ng.tvshowsdb.shows.api.domain
 
 import com.ng.tvshowsdb.core.domain.common.SchedulerProvider
-import com.ng.tvshowsdb.shows.domain.common.ImmediateSchedulers
-import com.ng.tvshowsdb.shows.domain.model.TvShow
-import com.ng.tvshowsdb.shows.domain.model.TvShows
-import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
-import com.ng.tvshowsdb.shows.domain.usecase.GetSimilarTvShows
+import com.ng.tvshowsdb.shows.api.domain.common.ImmediateSchedulers
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShows
+import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
+import com.ng.tvshowsdb.shows.api.domain.usecase.GetSimilarTvShows
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test

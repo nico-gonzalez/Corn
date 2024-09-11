@@ -7,7 +7,7 @@ plugins {
 android {
     compileSdkVersion Versions.compileSdk
 
-    namespace = "com.ng.tvshowsdb.shows"
+    namespace = "com.ng.tvshowsdb.shows.api"
 
     defaultConfig {
         minSdkVersion Versions.minSdk

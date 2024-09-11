@@ -1,6 +1,6 @@
 package com.ng.tvshowsdb.shows.di
 
-import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
+import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
 import com.nhaarman.mockito_kotlin.mock
 import dagger.Module
 import dagger.Provides

@@ -1,6 +1,6 @@
 package com.ng.tvshowsdb.shows.detail
 
-import com.ng.tvshowsdb.shows.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat

@@ -7,8 +7,8 @@ import com.ng.tvshowsdb.core.ui.testing.injection.TestApplicationComponent
 import com.ng.tvshowsdb.shows.detail.ShowDetailsViewModelMapper
 import com.ng.tvshowsdb.shows.di.MockRepositoryModule
 import com.ng.tvshowsdb.shows.di.ShowsActivityBindingModule
-import com.ng.tvshowsdb.shows.domain.model.TvShows
-import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
+import com.ng.tvshowsdb.shows.api.domain.model.TvShows
+import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
 import com.ng.tvshowsdb.shows.fixtures.buildTvShow
 import com.ng.tvshowsdb.shows.fixtures.buildTvShows
 import com.nhaarman.mockito_kotlin.doReturn

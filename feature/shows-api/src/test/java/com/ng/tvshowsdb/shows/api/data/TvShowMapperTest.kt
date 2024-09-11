@@ -1,9 +1,9 @@
-package com.ng.tvshowsdb.shows.data
+package com.ng.tvshowsdb.shows.api.data
 
-import com.ng.tvshowsdb.shows.data.remote.model.ApiTvShow
-import com.ng.tvshowsdb.shows.data.remote.model.ApiTvShows
-import com.ng.tvshowsdb.shows.data.shows.TvShowMapper
-import com.ng.tvshowsdb.shows.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.data.remote.model.ApiTvShow
+import com.ng.tvshowsdb.shows.api.data.remote.model.ApiTvShows
+import com.ng.tvshowsdb.shows.api.data.shows.TvShowMapper
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
