@@ -1,7 +1,7 @@
-package com.ng.tvshowsdb.shows.domain.repository
+package com.ng.tvshowsdb.shows.api.domain.repository
 
-import com.ng.tvshowsdb.shows.domain.model.TvShow
-import com.ng.tvshowsdb.shows.domain.model.TvShows
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShows
 import io.reactivex.Maybe
 import io.reactivex.Single
 

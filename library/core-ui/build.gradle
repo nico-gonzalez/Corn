@@ -1,11 +1,13 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-kapt'
+    id("com.google.devtools.ksp")
 }
 
 android {
     compileSdkVersion Versions.compileSdk
+
+    namespace = "com.ng.tvshowsdb.core.ui.common"
 
     defaultConfig {
         minSdkVersion Versions.minSdk
@@ -25,12 +27,17 @@ android {
             buildConfigField "String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/\""
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 }
 
@@ -46,9 +53,9 @@ dependencies {
     implementation Libs.material
     implementation Libs.recyclerview
     implementation Libs.glide
-    kapt Libs.glideCompiler
+    ksp Libs.glideCompiler
     implementation Libs.daggerAndroidSupport
-    kapt Libs.daggerAndroidCompiler
+    ksp Libs.daggerAndroidCompiler
 
     testImplementation Libs.junit
     androidTestImplementation Libs.junit
@@ -60,6 +67,6 @@ dependencies {
     androidTestImplementation(Libs.espressoCore)
     androidTestImplementation(Libs.espressoContrib)
     androidTestImplementation Libs.espressoIntents
-    kaptAndroidTest Libs.daggerCompiler
-    kaptAndroidTest Libs.daggerAndroidCompiler
+    kspAndroidTest Libs.daggerCompiler
+    kspAndroidTest Libs.daggerAndroidCompiler
 }

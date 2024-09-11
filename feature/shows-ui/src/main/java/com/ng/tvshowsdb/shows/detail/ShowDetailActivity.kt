@@ -125,7 +125,7 @@ class ShowDetailActivity : DaggerAppCompatActivity(), ShowDetailView {
         startActivity(
             intent,
             ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this, view!!, getString(R.string.shared_show_poster_transition)
+                this, view!!, getString(com.ng.tvshowsdb.core.ui.common.R.string.shared_show_poster_transition)
             ).toBundle()
         )
     }

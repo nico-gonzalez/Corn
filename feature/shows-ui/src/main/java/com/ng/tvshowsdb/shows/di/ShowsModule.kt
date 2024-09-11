@@ -1,6 +1,6 @@
 package com.ng.tvshowsdb.shows.di
 
-import com.ng.tvshowsdb.shows.data.di.RepositoryModule
+import com.ng.tvshowsdb.shows.api.data.di.RepositoryModule
 import dagger.Module
 
 @Module(

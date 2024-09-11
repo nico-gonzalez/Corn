@@ -34,3 +34,4 @@ output.json
 /.idea/libraries
 /build
 .externalNativeBuild
+.kotlin/

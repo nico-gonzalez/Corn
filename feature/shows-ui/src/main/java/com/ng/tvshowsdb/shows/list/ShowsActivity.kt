@@ -55,7 +55,7 @@ class ShowsActivity : DaggerAppCompatActivity(), ShowsView {
             adapter = showsAdapter
             layoutManager = showsLayoutManager
             setHasFixedSize(true)
-            val divider = resources.getDimensionPixelSize(R.dimen.divider_size)
+            val divider = resources.getDimensionPixelSize(com.ng.tvshowsdb.core.ui.common.R.dimen.divider_size)
             addItemDecoration(GridSpacingItemDecoration(GRID_COLUMNS, divider, false, 0))
         }
 
@@ -88,8 +88,8 @@ class ShowsActivity : DaggerAppCompatActivity(), ShowsView {
     }
 
     override fun showError() {
-        Snackbar.make(binding.showsRv, R.string.error_loading_popular_shows, Snackbar.LENGTH_LONG)
-            .setAction(R.string.retry) {
+        Snackbar.make(binding.showsRv, com.ng.tvshowsdb.core.ui.common.R.string.error_loading_popular_shows, Snackbar.LENGTH_LONG)
+            .setAction(com.ng.tvshowsdb.core.ui.common.R.string.retry) {
                 showsPresenter.onShowMostPopularTvShows()
             }
             .show()
@@ -102,7 +102,7 @@ class ShowsActivity : DaggerAppCompatActivity(), ShowsView {
             intent,
             ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this, view!!,
-                getString(R.string.shared_show_poster_transition)
+                getString(com.ng.tvshowsdb.core.ui.common.R.string.shared_show_poster_transition)
             )
                 .toBundle()
         )

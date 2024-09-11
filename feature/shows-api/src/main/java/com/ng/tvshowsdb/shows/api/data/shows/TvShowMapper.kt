@@ -1,8 +1,8 @@
-package com.ng.tvshowsdb.shows.data.shows
+package com.ng.tvshowsdb.shows.api.data.shows
 
-import com.ng.tvshowsdb.shows.data.remote.model.ApiTvShows
-import com.ng.tvshowsdb.shows.domain.model.TvShow
-import com.ng.tvshowsdb.shows.domain.model.TvShows
+import com.ng.tvshowsdb.shows.api.data.remote.model.ApiTvShows
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShows
 import javax.inject.Inject
 
 class TvShowMapper @Inject constructor() {

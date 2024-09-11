@@ -1,9 +1,9 @@
-package com.ng.tvshowsdb.shows.data.shows
+package com.ng.tvshowsdb.shows.api.data.shows
 
-import com.ng.tvshowsdb.shows.data.remote.ShowsService
-import com.ng.tvshowsdb.shows.domain.model.TvShow
-import com.ng.tvshowsdb.shows.domain.model.TvShows
-import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
+import com.ng.tvshowsdb.shows.api.data.remote.ShowsService
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShows
+import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
 import io.reactivex.Maybe
 import io.reactivex.Single
 import javax.inject.Inject

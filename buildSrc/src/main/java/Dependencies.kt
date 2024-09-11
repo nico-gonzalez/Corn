@@ -1,14 +1,14 @@
 private object Versions {
     //region Android
-    const val gradlePlugin = "7.2.1"
+    const val gradlePlugin = "8.6.0"
     const val minSdk = 21
-    const val targetSdk = 30
-    const val compileSdk = 32
-    const val compose = "1.2.0-beta01"
+    const val targetSdk = 34
+    const val compileSdk = 34
+    const val compose = "1.7.1"
     //endregion
 
     //region Libraries
-    const val kotlin = "1.6.21"
+    const val kotlin = "2.0.20"
     const val material = "1.2.0"
     const val appCompat = "1.2.0"
     const val recyclerview = "1.1.0"
@@ -17,8 +17,8 @@ private object Versions {
     const val retrofit = "2.9.0"
     const val okhttp = "4.8.1"
     const val moshi = "1.9.3"
-    const val glide = "4.11.0"
-    const val dagger = "2.42"
+    const val glide = "4.16.0"
+    const val dagger = "2.52"
     const val javaxInject = "1"
     const val rxJava = "2.2.19"
     const val rxAndroid = "2.1.1"
@@ -69,7 +69,7 @@ object Libs {
     const val constraintlayout =
             "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
-    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+    const val glideCompiler = "com.github.bumptech.glide:ksp:${Versions.glide}"
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"

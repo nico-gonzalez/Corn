@@ -1,6 +1,6 @@
 package com.ng.tvshowsdb.shows.fixtures
 
-import com.ng.tvshowsdb.shows.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
 
 fun buildTvShow() = TvShow(1, "La casa de papel", "Money Heist", "", "", "", 8.9)
 

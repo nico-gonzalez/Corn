@@ -1,10 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.devtools.ksp'
 
 android {
 
     compileSdkVersion Versions.compileSdk
+
+    namespace = "com.ng.tvshowsdb"
 
     defaultConfig {
         applicationId "com.ng.tvshowsdb"
@@ -23,12 +25,11 @@ android {
         exclude 'META-INF/main.kotlin_module'
     }
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
-        useIR = true
+        jvmTarget = '17'
     }
 }
 
@@ -44,12 +45,12 @@ dependencies {
     implementation Libs.cardview
     implementation Libs.constraintlayout
     implementation Libs.glide
-    kapt Libs.glideCompiler
+    ksp Libs.glideCompiler
     implementation Libs.dagger
     implementation Libs.rxAndroid
     implementation Libs.dagger
-    kapt Libs.daggerCompiler
+    ksp Libs.daggerCompiler
     implementation Libs.daggerAndroid
     implementation Libs.daggerAndroidSupport
-    kapt Libs.daggerAndroidCompiler
+    ksp Libs.daggerAndroidCompiler
 }

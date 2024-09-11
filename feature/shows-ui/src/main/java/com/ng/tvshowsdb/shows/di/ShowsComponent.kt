@@ -1,7 +1,7 @@
 package com.ng.tvshowsdb.shows.di
 
 import android.content.Context
-import com.ng.tvshowsdb.shows.domain.repository.TvShowRepository
+import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

@@ -1,6 +1,6 @@
-package com.ng.tvshowsdb.shows.data.remote
+package com.ng.tvshowsdb.shows.api.data.remote
 
-import com.ng.tvshowsdb.shows.data.remote.model.ApiTvShows
+import com.ng.tvshowsdb.shows.api.data.remote.model.ApiTvShows
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,8 +1,8 @@
 package com.ng.tvshowsdb.shows.detail
 
 import com.ng.tvshowsdb.core.ui.common.Presenter
-import com.ng.tvshowsdb.shows.domain.usecase.GetSimilarTvShows
-import com.ng.tvshowsdb.shows.domain.usecase.GetTvShow
+import com.ng.tvshowsdb.shows.api.domain.usecase.GetSimilarTvShows
+import com.ng.tvshowsdb.shows.api.domain.usecase.GetTvShow
 import com.ng.tvshowsdb.shows.list.LoadingShowUiModel
 import com.ng.tvshowsdb.shows.list.ShowItem
 import com.ng.tvshowsdb.shows.list.ShowViewModelMapper

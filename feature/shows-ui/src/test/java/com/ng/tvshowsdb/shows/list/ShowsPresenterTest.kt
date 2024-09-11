@@ -1,9 +1,9 @@
 package com.ng.tvshowsdb.shows.list
 
 import com.ng.tvshowsdb.core.domain.common.Result
-import com.ng.tvshowsdb.shows.domain.model.TvShow
-import com.ng.tvshowsdb.shows.domain.model.TvShows
-import com.ng.tvshowsdb.shows.domain.usecase.GetMostPopularTvShows
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShows
+import com.ng.tvshowsdb.shows.api.domain.usecase.GetMostPopularTvShows
 import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Single
 import org.junit.Before

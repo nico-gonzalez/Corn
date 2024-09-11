@@ -1,11 +1,13 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-kapt'
+    id("com.google.devtools.ksp")
 }
 
 android {
     compileSdkVersion Versions.compileSdk
+
+    namespace = "com.ng.tvshowsdb.core.data"
 
     defaultConfig {
         minSdkVersion Versions.minSdk
@@ -24,12 +26,17 @@ android {
             buildConfigField 'String', 'THE_MOVIE_DB_API_KEY', "\"$movie_db_api_key\""
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 }
 
@@ -47,7 +54,7 @@ dependencies {
     api Libs.okhttpLoggingInterceptor
     implementation Libs.rxJava
     implementation Libs.dagger
-    kapt Libs.daggerCompiler
+    ksp Libs.daggerCompiler
 
     testImplementation Libs.junit
     testImplementation Libs.kotlinJUnit

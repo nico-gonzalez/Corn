@@ -1,4 +1,4 @@
-package com.ng.tvshowsdb.shows.domain.model
+package com.ng.tvshowsdb.shows.api.domain.model
 
 data class TvShows(
     val shows: List<TvShow>,

@@ -1,7 +1,7 @@
 package com.ng.tvshowsdb.shows.list
 
 import com.ng.tvshowsdb.core.ui.common.Presenter
-import com.ng.tvshowsdb.shows.domain.usecase.GetMostPopularTvShows
+import com.ng.tvshowsdb.shows.api.domain.usecase.GetMostPopularTvShows
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 

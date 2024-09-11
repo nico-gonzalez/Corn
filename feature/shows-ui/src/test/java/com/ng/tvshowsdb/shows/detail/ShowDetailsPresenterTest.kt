@@ -1,10 +1,10 @@
 package com.ng.tvshowsdb.shows.detail
 
 import com.ng.tvshowsdb.core.domain.common.Result
-import com.ng.tvshowsdb.shows.domain.model.TvShow
-import com.ng.tvshowsdb.shows.domain.model.TvShows
-import com.ng.tvshowsdb.shows.domain.usecase.GetSimilarTvShows
-import com.ng.tvshowsdb.shows.domain.usecase.GetTvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShow
+import com.ng.tvshowsdb.shows.api.domain.model.TvShows
+import com.ng.tvshowsdb.shows.api.domain.usecase.GetSimilarTvShows
+import com.ng.tvshowsdb.shows.api.domain.usecase.GetTvShow
 import com.ng.tvshowsdb.shows.list.ShowUiModel
 import com.ng.tvshowsdb.shows.list.ShowViewModelMapper
 import com.nhaarman.mockito_kotlin.*

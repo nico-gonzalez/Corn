@@ -1,4 +1,4 @@
-package com.ng.tvshowsdb.shows.domain.common
+package com.ng.tvshowsdb.shows.api.domain.common
 
 import com.ng.tvshowsdb.core.domain.common.SchedulerProvider
 import io.reactivex.Scheduler
