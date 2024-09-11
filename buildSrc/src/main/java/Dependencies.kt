@@ -2,9 +2,9 @@ private object Versions {
     //region Android
     const val gradlePlugin = "8.6.0"
     const val minSdk = 21
-    const val targetSdk = 30
-    const val compileSdk = 32
-    const val compose = "1.2.0-beta01"
+    const val targetSdk = 34
+    const val compileSdk = 34
+    const val compose = "1.7.1"
     //endregion
 
     //region Libraries

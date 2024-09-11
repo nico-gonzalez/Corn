@@ -5,6 +5,7 @@
         <activity
             android:name=".list.ShowsActivity"
             android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
             android:theme="@style/Theme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -14,6 +15,7 @@
         </activity>
         <activity
             android:name=".detail.ShowDetailActivity"
+            android:exported="true"
             android:theme="@style/Theme.Show.Details" />
     </application>
 
