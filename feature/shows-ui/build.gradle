@@ -37,6 +37,14 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            merges += "META-INF/LICENSE.md"
+            merges += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
@@ -72,19 +80,19 @@ dependencies {
     implementation Libs.composeRxJava
 
     testImplementation Libs.junit
-    testImplementation Libs.mockitoKotlin
+    testImplementation(libs.mockk)
 
     androidTestImplementation project(":library:core-ui-testing")
     androidTestImplementation Libs.junit
     androidTestImplementation Libs.kotlinJUnit
-    androidTestImplementation Libs.androidRunner
+    androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation Libs.androidRules
-    androidTestImplementation Libs.mockitoAndroid
-    androidTestImplementation Libs.mockitoKotlin
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.mockk.agent)
     androidTestImplementation Libs.espressoCore
     androidTestImplementation Libs.espressoContrib
     androidTestImplementation Libs.espressoIntents
-    androidTestImplementation Libs.androidxTestExtJUnit
+    androidTestImplementation(libs.androidx.test.junit)
     kspAndroidTest Libs.daggerCompiler
     kspAndroidTest Libs.daggerAndroidCompiler
 }

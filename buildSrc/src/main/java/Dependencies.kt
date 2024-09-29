@@ -28,11 +28,8 @@ private object Versions {
     //region Test
     const val junit = "4.12"
     const val espresso = "3.1.0"
-    const val testRunner = "1.1.1"
     const val testRules = "1.1.0"
     const val hamcrest = "1.3"
-    const val mockito = "4.5.1"
-    const val mockitoKotlin = "4.0.0"
     //endregion
 
     //region Application
@@ -90,15 +87,10 @@ object Libs {
     //region Testing
     const val junit = "junit:junit:${Versions.junit}"
     const val kotlinJUnit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
-    const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
-    const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
-    const val mockitoAndroid = "org.mockito:mockito-android:${Versions.mockito}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espresso}"
     const val espressoIntents = "androidx.test.espresso:espresso-intents:${Versions.espresso}"
-    const val androidRunner = "androidx.test:runner:${Versions.testRunner}"
     const val androidRules = "androidx.test:rules:${Versions.testRules}"
-    const val androidxTestExtJUnit = "androidx.test.ext:junit:${Versions.testRunner}"
     const val hamcrest = "org.hamcrest:hamcrest-all:${Versions.hamcrest}"
     //endregion
 }

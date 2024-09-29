@@ -8,7 +8,7 @@ import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GetMostPopularTvShows @Inject constructor(
+class GetMostPopularTvShows @Inject internal constructor(
     schedulers: SchedulerProvider,
     private val tvShowRepository: TvShowRepository
 ) : SingleUseCase<Int, TvShows>(schedulers) {

@@ -60,10 +60,9 @@ dependencies {
     testImplementation Libs.junit
     androidTestImplementation Libs.junit
     androidTestImplementation Libs.kotlinJUnit
-    androidTestImplementation Libs.androidRunner
+    androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation Libs.androidRules
-    androidTestImplementation Libs.mockitoAndroid
-    androidTestImplementation Libs.mockitoKotlin
+    androidTestImplementation(libs.mockk)
     androidTestImplementation(Libs.espressoCore)
     androidTestImplementation(Libs.espressoContrib)
     androidTestImplementation Libs.espressoIntents

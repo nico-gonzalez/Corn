@@ -47,6 +47,5 @@ dependencies {
 
     testImplementation Libs.junit
     testImplementation Libs.kotlinJUnit
-    testImplementation Libs.mockito
-    testImplementation Libs.mockitoKotlin
+    testImplementation(libs.mockk)
 }
