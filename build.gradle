@@ -20,6 +20,7 @@ buildscript {
 plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.com.google.ksp) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
 }
 
 allprojects {
@@ -31,6 +32,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
