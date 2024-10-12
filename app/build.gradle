@@ -1,3 +1,6 @@
+plugins {
+    alias(libs.plugins.compose.compiler)
+}
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.google.devtools.ksp'
@@ -38,6 +41,9 @@ dependencies {
     implementation project(":library:core-ui")
     implementation project(":feature:shows-ui")
     implementation project(":library:core-domain")
+    implementation project(":shared")
+
+    implementation(libs.androidx.activity.compose)
 
     implementation Libs.appcompat
     implementation Libs.material

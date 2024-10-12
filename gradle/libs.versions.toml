@@ -2,14 +2,22 @@
 android-compileSdk = "34"
 android-minSdk = "21"
 android-targetSdk = "34"
+activity-compose-version = "1.9.2"
 kotlin-version = "2.0.20"
 ksp-version = "2.0.20-1.0.25"
 androidx-test-ext-junit-version = "1.2.1"
 androidx-test-runner-version = "1.6.2"
 mockk-version = "1.13.12"
-android-gradle-plugin-version = "8.7.0"
+android-gradle-plugin-version = "8.7.3"
 compose-version = "1.7.1"
 compose-plugin-version = "1.6.10"
+ktor-version = "3.0.0"
+coroutines-version = "1.9.0"
+serialization-version = "1.7.3"
+sl4j-version = "1.7.36"
+lifecycle-compose-version = "2.8.0"
+coil-version = "3.0.0-rc01"
+navigation-compose-version = "2.8.0-alpha10"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin-version" }
@@ -19,12 +27,27 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin-version" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-version" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-version" }
-
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-version" }
 
 [libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose-version" }
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-ext-junit-version" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner-version" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin-version" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk-version" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk-version" }
 mockk-agent = { module = "io.mockk:mockk-agent", version.ref = "mockk-version" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-version" }
+ktor-client-content-negotation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-version" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor-version" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor-version" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor-version" }
+ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-version" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines-version" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines-version" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-version" }
+jetbrains-androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-compose-version" }
+sl4j-android = { module = "org.slf4j:slf4j-android", version.ref = "sl4j-version" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil-version" }
+coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil-version" }
+jetbrains-androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose-version" }
