@@ -9,7 +9,7 @@ import com.ng.tvshowsdb.shows.api.domain.usecase.GetSimilarTvShows.Params
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GetSimilarTvShows @Inject constructor(
+class GetSimilarTvShows @Inject internal constructor(
     schedulers: SchedulerProvider,
     private val tvShowRepository: TvShowRepository
 ) : SingleUseCase<Params, TvShows>(schedulers) {

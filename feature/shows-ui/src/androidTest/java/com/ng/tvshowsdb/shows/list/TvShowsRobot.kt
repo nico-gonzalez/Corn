@@ -25,7 +25,7 @@ fun tvShows(func: TvShowsRobot.() -> Unit) = TvShowsRobot().apply {
 class TvShowsRobot : TestRobot() {
 
     @get:Rule
-    private var activityTestRule = IntentsTestRule(
+    var activityTestRule = IntentsTestRule(
         ShowsActivity::class.java,
         true,
         false

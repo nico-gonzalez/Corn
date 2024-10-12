@@ -4,25 +4,21 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ng.tvshowsdb.core.ui.testing.AndroidTest
 import com.ng.tvshowsdb.core.ui.testing.injection.MockApplicationModule
 import com.ng.tvshowsdb.core.ui.testing.injection.TestApplicationComponent
+import com.ng.tvshowsdb.shows.api.domain.model.TvShows
+import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
 import com.ng.tvshowsdb.shows.detail.ShowDetailsViewModelMapper
 import com.ng.tvshowsdb.shows.di.MockRepositoryModule
 import com.ng.tvshowsdb.shows.di.ShowsActivityBindingModule
-import com.ng.tvshowsdb.shows.api.domain.model.TvShows
-import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
 import com.ng.tvshowsdb.shows.fixtures.buildTvShow
 import com.ng.tvshowsdb.shows.fixtures.buildTvShows
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.whenever
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
+import io.mockk.every
 import io.reactivex.Maybe
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.ArgumentMatchers.anyLong
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -59,10 +55,6 @@ class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsT
             .build()
         application().testComponent = testComponent
         testComponent.inject(this)
-
-        whenever(showsRepository.getShow(eq(tvShow.id))) doReturn Maybe.just(tvShow)
-        whenever(showsRepository.getSimilarTvShows(anyLong(), page = anyInt())) doReturn
-                Single.just(tvShows)
     }
 
     @Test
@@ -75,7 +67,6 @@ class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsT
     @Test
     fun testWhenSimilarShowClickedOpenDetails() {
         val selectedShow = tvShows.shows[1]
-        whenever(showsRepository.getShow(eq(selectedShow.id))) doReturn Maybe.just(selectedShow)
 
         showDetail(tvShowViewModel) {
             clickOnSimilarTvShowAt(1)

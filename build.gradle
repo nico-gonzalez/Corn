@@ -4,7 +4,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://kotlin.bintray.com/kotlinx" }
+        maven { url = uri("https://plugins.gradle.org/m2/") }
+        mavenLocal()
     }
     dependencies {
 
@@ -25,7 +26,8 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://kotlin.bintray.com/kotlinx" }
+        maven { url = uri("https://plugins.gradle.org/m2/") }
+        mavenLocal()
     }
 }
 

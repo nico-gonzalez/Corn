@@ -26,11 +26,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '21'
     }
 }
 
@@ -42,10 +42,9 @@ dependencies {
     implementation Libs.rxJava
     implementation Libs.junit
     implementation Libs.kotlinJUnit
-    implementation Libs.androidRunner
+    implementation(libs.androidx.test.runner)
     implementation Libs.androidRules
-    implementation Libs.mockitoAndroid
-    implementation Libs.mockitoKotlin
+    implementation(libs.mockk)
     implementation(Libs.espressoCore)
     implementation(Libs.espressoContrib)
     implementation Libs.espressoIntents

@@ -28,8 +28,8 @@ fun showDetail(tvShow: ShowDetailsUiModel, func: ShowDetailRobot.() -> Unit) = S
 
 class ShowDetailRobot(private val tvShow: ShowDetailsUiModel) : TestRobot() {
 
-    @field:Rule
-    private var activityTestRule = IntentsTestRule(
+    @get:Rule
+    var activityTestRule = IntentsTestRule(
         ShowDetailActivity::class.java,
         true,
         false

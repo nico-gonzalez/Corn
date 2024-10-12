@@ -4,23 +4,20 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ng.tvshowsdb.core.ui.testing.AndroidTest
 import com.ng.tvshowsdb.core.ui.testing.injection.MockApplicationModule
 import com.ng.tvshowsdb.core.ui.testing.injection.TestApplicationComponent
-import com.ng.tvshowsdb.shows.di.MockRepositoryModule
-import com.ng.tvshowsdb.shows.di.ShowsActivityBindingModule
 import com.ng.tvshowsdb.shows.api.domain.model.TvShows
 import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
+import com.ng.tvshowsdb.shows.di.MockRepositoryModule
+import com.ng.tvshowsdb.shows.di.ShowsActivityBindingModule
 import com.ng.tvshowsdb.shows.fixtures.buildTvShow
 import com.ng.tvshowsdb.shows.fixtures.buildTvShows
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.whenever
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
+import io.mockk.every
 import io.reactivex.Maybe
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,10 +26,6 @@ class ShowsActivityTest : AndroidTest<ShowsActivityTest.ShowTestComponent>() {
 
     @Inject
     internal lateinit var showsRepository: TvShowRepository
-
-    private val tvShows = TvShows(buildTvShows(), currentPage = 1, totalPages = 5)
-    private val tvShow = buildTvShow()
-    private val similarTvShows = TvShows(buildTvShows(), currentPage = 1, totalPages = 5)
 
     @Singleton
     @Component(
@@ -55,11 +48,6 @@ class ShowsActivityTest : AndroidTest<ShowsActivityTest.ShowTestComponent>() {
             .build()
         application().testComponent = testComponent
         testComponent.inject(this)
-
-        whenever(showsRepository.getMostPopularShows(anyInt())) doReturn Single.just(tvShows)
-        whenever(showsRepository.getShow(eq(tvShow.id))) doReturn Maybe.just(tvShow)
-        whenever(showsRepository.getSimilarTvShows(eq(tvShow.id), page = anyInt())) doReturn
-                Single.just(similarTvShows)
     }
 
     @Test

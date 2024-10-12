@@ -7,7 +7,11 @@ import com.ng.tvshowsdb.shows.api.domain.usecase.GetSimilarTvShows
 import com.ng.tvshowsdb.shows.api.domain.usecase.GetTvShow
 import com.ng.tvshowsdb.shows.list.ShowUiModel
 import com.ng.tvshowsdb.shows.list.ShowViewModelMapper
-import com.nhaarman.mockito_kotlin.*
+import io.mockk.Called
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import io.mockk.verifyOrder
 import io.reactivex.Single
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.equalTo
@@ -21,14 +25,14 @@ class ShowDetailsPresenterTest {
 
     private lateinit var presenter: ShowDetailPresenter
 
-    private val view: ShowDetailView = mock()
-    private val getTvShow: GetTvShow = mock()
-    private val getSimilarTvShows: GetSimilarTvShows = mock()
-    private val tvShowViewModelMapper: ShowViewModelMapper = mock()
-    private val tvShowDetailsViewModelMapper: ShowDetailsViewModelMapper = mock()
-    private val tvShow: TvShow = mock()
-    private val tvShowDetailsUiModel: ShowDetailsUiModel = mock()
-    private val tvShowUiModel: ShowUiModel = mock()
+    private val view: ShowDetailView = mockk(relaxUnitFun = true)
+    private val getTvShow: GetTvShow = mockk()
+    private val getSimilarTvShows: GetSimilarTvShows = mockk()
+    private val tvShowViewModelMapper: ShowViewModelMapper = mockk()
+    private val tvShowDetailsViewModelMapper: ShowDetailsViewModelMapper = mockk()
+    private val tvShow: TvShow = mockk()
+    private val tvShowDetailsUiModel: ShowDetailsUiModel = mockk()
+    private val tvShowUiModel: ShowUiModel = mockk()
 
     @Before
     fun setup() {
@@ -48,17 +52,18 @@ class ShowDetailsPresenterTest {
         val similarTvShows =
             Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-        whenever(getTvShow(SHOW_ID)) doReturn Single.just(showDetails)
-        whenever(getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
+        every { getTvShow(SHOW_ID) } returns Single.just(showDetails)
+        every { getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1)) } returns
                 Single.just(similarTvShows)
-        whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsUiModel
+        every { tvShowDetailsViewModelMapper.map(tvShow) } returns tvShowDetailsUiModel
+        every { tvShowViewModelMapper.map(tvShow) } returns tvShowUiModel
 
         presenter.onShowDetails()
 
-        inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
-            verify(getTvShow).invoke(SHOW_ID)
-            verify(tvShowDetailsViewModelMapper).map(tvShow)
-            verify(view).showDetails(tvShowDetailsUiModel)
+        verifyOrder {
+            getTvShow(SHOW_ID)
+            tvShowDetailsViewModelMapper.map(tvShow)
+            view.showDetails(tvShowDetailsUiModel)
         }
     }
 
@@ -68,19 +73,18 @@ class ShowDetailsPresenterTest {
         val similarTvShows =
             Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-        whenever(getTvShow(SHOW_ID)) doReturn Single.just(showDetails)
-        whenever(getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
+        every { getTvShow(SHOW_ID) } returns Single.just(showDetails)
+        every { getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1)) } returns
                 Single.just(similarTvShows)
-        whenever(tvShowDetailsViewModelMapper.map(tvShow)) doReturn tvShowDetailsUiModel
+        every { tvShowDetailsViewModelMapper.map(tvShow) } returns tvShowDetailsUiModel
+        every { tvShowViewModelMapper.map(tvShow) } returns tvShowUiModel
 
         presenter.onShowDetails()
 
-        inOrder(view, getTvShow, getSimilarTvShows, tvShowDetailsViewModelMapper) {
-            verify(getTvShow).invoke(SHOW_ID)
-            verify(view).showError(argThat {
-                this == "Error"
-            })
-            verifyZeroInteractions(tvShowDetailsViewModelMapper)
+        verifyOrder {
+            getTvShow(SHOW_ID)
+            view.showError(withArg { assertThat(it, `is`(equalTo("Error"))) })
+            tvShowDetailsViewModelMapper wasNot Called
         }
     }
 
@@ -90,21 +94,22 @@ class ShowDetailsPresenterTest {
         val similarTvShows =
             Result.success(TvShows(listOf(tvShow), currentPage = 1, totalPages = 5))
 
-        whenever(getTvShow(SHOW_ID)) doReturn Single.just(showDetails)
-        whenever(getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1))) doReturn
+        every { getTvShow(SHOW_ID) } returns Single.just(showDetails)
+        every { getSimilarTvShows(GetSimilarTvShows.Params(SHOW_ID, page = 1)) } returns
                 Single.just(similarTvShows)
-        whenever(tvShowViewModelMapper.map(tvShow)) doReturn tvShowUiModel
+        every { tvShowDetailsViewModelMapper.map(tvShow) } returns tvShowDetailsUiModel
+        every { tvShowViewModelMapper.map(tvShow) } returns tvShowUiModel
 
         presenter.onShowDetails()
 
-        inOrder(view, getSimilarTvShows, tvShowViewModelMapper) {
-            verify(getSimilarTvShows).invoke(check {
+        verifyOrder {
+            getSimilarTvShows.invoke(withArg {
                 assertThat(it.showId, `is`(equalTo(SHOW_ID)))
                 assertThat(it.page, `is`(equalTo(1)))
             })
-            verify(tvShowViewModelMapper).map(tvShow)
-            verify(view).showSimilarShows(argThat {
-                this[0] == tvShowUiModel
+            tvShowViewModelMapper.map(tvShow)
+            view.showSimilarShows(withArg {
+                assertThat(it[0], `is`(equalTo(tvShowUiModel)))
             })
         }
     }
@@ -113,6 +118,6 @@ class ShowDetailsPresenterTest {
     fun `On similar show selected navigates to show details`() {
         presenter.onSimilarShowSelected(1, SHOW_ID)
 
-        verify(view).navigateToShowDetails(1, SHOW_ID)
+        verify { view.navigateToShowDetails(1, SHOW_ID) }
     }
 }
