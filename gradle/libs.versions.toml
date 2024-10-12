@@ -1,17 +1,30 @@
 [versions]
+android-compileSdk = "34"
+android-minSdk = "21"
+android-targetSdk = "34"
 kotlin-version = "2.0.20"
 ksp-version = "2.0.20-1.0.25"
 androidx-test-ext-junit-version = "1.2.1"
 androidx-test-runner-version = "1.6.2"
 mockk-version = "1.13.12"
+android-gradle-plugin-version = "8.7.0"
+compose-version = "1.7.1"
+compose-plugin-version = "1.6.10"
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin-version" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin-version" }
 com-google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp-version" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin-version" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin-version" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-version" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-version" }
+
 
 [libraries]
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-ext-junit-version" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner-version" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin-version" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk-version" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk-version" }
 mockk-agent = { module = "io.mockk:mockk-agent", version.ref = "mockk-version" }
