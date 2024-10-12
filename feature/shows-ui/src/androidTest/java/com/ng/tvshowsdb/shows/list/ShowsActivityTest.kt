@@ -27,11 +27,6 @@ class ShowsActivityTest : AndroidTest<ShowsActivityTest.ShowTestComponent>() {
     @Inject
     internal lateinit var showsRepository: TvShowRepository
 
-    private val tvShows = TvShows(buildTvShows(), currentPage = 1, totalPages = 5)
-    private val tvShow1 = buildTvShows()[0]
-    private val tvShow2 = buildTvShows()[1]
-    private val similarTvShows = TvShows(buildTvShows(), currentPage = 1, totalPages = 5)
-
     @Singleton
     @Component(
         modules = [
@@ -53,14 +48,6 @@ class ShowsActivityTest : AndroidTest<ShowsActivityTest.ShowTestComponent>() {
             .build()
         application().testComponent = testComponent
         testComponent.inject(this)
-
-        every { showsRepository.getMostPopularShows(any()) } returns Single.just(tvShows)
-        every { showsRepository.getShow(eq(tvShow1.id)) } returns Maybe.just(tvShow1)
-        every { showsRepository.getSimilarTvShows(eq(tvShow1.id), page = any()) } returns
-                Single.just(similarTvShows)
-        every { showsRepository.getShow(eq(tvShow2.id)) } returns Maybe.just(tvShow2)
-        every { showsRepository.getSimilarTvShows(eq(tvShow2.id), page = any()) } returns
-                Single.just(similarTvShows)
     }
 
     @Test

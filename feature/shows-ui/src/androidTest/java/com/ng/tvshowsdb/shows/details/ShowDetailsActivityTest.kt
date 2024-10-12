@@ -55,10 +55,6 @@ class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsT
             .build()
         application().testComponent = testComponent
         testComponent.inject(this)
-
-        every { showsRepository.getShow(eq(tvShow.id)) } returns Maybe.just(tvShow)
-        every { showsRepository.getSimilarTvShows(any(), page = any()) } returns
-                Single.just(tvShows)
     }
 
     @Test
@@ -71,7 +67,6 @@ class ShowDetailsActivityTest : AndroidTest<ShowDetailsActivityTest.ShowDetailsT
     @Test
     fun testWhenSimilarShowClickedOpenDetails() {
         val selectedShow = tvShows.shows[1]
-        every { showsRepository.getShow(eq(selectedShow.id)) } returns Maybe.just(selectedShow)
 
         showDetail(tvShowViewModel) {
             clickOnSimilarTvShowAt(1)

@@ -50,11 +50,7 @@ class ShowsPresenterTest {
             getTvShows.invoke(1)
             view.showLoading()
             view.hideLoading()
-            showViewModelMapper.map(tvShow)
-
-            view.showShows(match {
-                it[0].id == SHOW_ID
-            })
+            view.showShows(listOf(tvShowUiModel))
         }
     }
 
@@ -96,24 +92,20 @@ class ShowsPresenterTest {
         every { showViewModelMapper.map(similarTvShow) } returns similarTvShowUiModel
 
         presenter.onShowMostPopularTvShows()
-        presenter.onShowMoreShows()
 
         verifyOrder {
             getTvShows(1)
             view.showLoading()
             view.hideLoading()
-            showViewModelMapper.map(tvShow)
+            view.showShows(listOf(tvShowUiModel))
+        }
 
-            view.showShows(match {
-                it[0].id == SHOW_ID
-            })
+        presenter.onShowMoreShows()
 
+        verifyOrder {
             getTvShows(2)
-            showViewModelMapper.map(similarTvShow)
-
-            view.showShows(withArg {
-                assertThat(it[1].id, equalTo(SIMILAR_SHOW_ID))
-            })
+            view.showShows(listOf(tvShowUiModel, similarTvShowUiModel))
+            view.showShows(listOf(tvShowUiModel, similarTvShowUiModel))
         }
     }
 
@@ -134,10 +126,7 @@ class ShowsPresenterTest {
             getTvShows(1)
             view.showLoading()
             view.hideLoading()
-            showViewModelMapper.map(tvShow)
-            view.showShows(match {
-                it[0].id == SHOW_ID
-            })
+            view.showShows(listOf(tvShowUiModel))
 
             getTvShows(2)
             view.showError()

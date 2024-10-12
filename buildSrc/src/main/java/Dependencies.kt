@@ -1,6 +1,6 @@
 private object Versions {
     //region Android
-    const val gradlePlugin = "8.6.0"
+    const val gradlePlugin = "8.7.0"
     const val minSdk = 21
     const val targetSdk = 34
     const val compileSdk = 34

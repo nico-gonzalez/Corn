@@ -1,14 +1,14 @@
 package com.ng.tvshowsdb.shows.di
 
 import com.ng.tvshowsdb.shows.api.domain.repository.TvShowRepository
+import com.ng.tvshowsdb.shows.fixtures.FakeTvShowRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import io.mockk.mockk
 import javax.inject.Singleton
 
 @Module
-object MockRepositoryModule {
+internal interface MockRepositoryModule {
     @Singleton
-    @Provides
-    fun provideTvShowRepository(): TvShowRepository = mockk()
+    @Binds
+    fun provideTvShowRepository(repository: FakeTvShowRepository): TvShowRepository
 }

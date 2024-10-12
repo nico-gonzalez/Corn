@@ -50,7 +50,6 @@ class ShowsPresenter @Inject constructor(
             getTvShows(++currentPage)
                 .doOnSuccess { result ->
                     tvShows.remove(LoadingShowUiModel)
-                    view.showShows(tvShows)
 
                     result.error?.let {
                         view.showError()

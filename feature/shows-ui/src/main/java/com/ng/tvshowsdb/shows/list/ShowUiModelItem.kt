@@ -12,4 +12,4 @@ data class ShowUiModel(
     val rating: String
 ) : ShowItem()
 
-object LoadingShowUiModel : ShowItem()
+data object LoadingShowUiModel : ShowItem()
