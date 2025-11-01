@@ -1,5 +1,5 @@
-# Corn Android app
-Android app implemented 100% in Kotlin that uses https://www.themoviedb.org API to display information of the current Most Popular Tv Shows.
+# Corn app
+Android and iOS app implemented 100% in Kotlin using KMP and the https://www.themoviedb.org API to display information.
 
 # Setup
 In order to have the app working with the API, the `movie_db_api_key=<Your TheMovieDB api key>` should be set in either project's or global <b>gradle.properties</b> file.
