@@ -15,8 +15,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +24,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.ng.tvshowsdb.shared.movies.domain.model.Movie
+import corn.shared.generated.resources.Res
+import corn.shared.generated.resources.star
+import org.jetbrains.compose.resources.painterResource
 
 
 @Composable
@@ -75,9 +76,9 @@ fun MovieCardItem(
                 ) {
                     Icon(
                         modifier = Modifier.size(16.dp),
-                        imageVector = Icons.Filled.Star,
+                        painter = painterResource(Res.drawable.star),
                         contentDescription = null,
-                        tint = MaterialTheme.colors.onSurface
+                        tint = MaterialTheme.colors.onBackground
                     )
                     Text(
                         text = movie.displayRating,

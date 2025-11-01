@@ -5,10 +5,11 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import corn.shared.generated.resources.Res
+import corn.shared.generated.resources.arrow_back
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun CornAppBar(
@@ -20,7 +21,7 @@ fun CornAppBar(
     val navigationIcon = @Composable {
         IconButton(onClick = navigateUp) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                painter = painterResource(Res.drawable.arrow_back),
                 contentDescription = "Navigate Up"
             )
         }

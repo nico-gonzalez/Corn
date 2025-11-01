@@ -44,8 +44,6 @@ class MovieViewModel internal constructor(
                     it.copy(title = movie.title)
                 }
             }
-//                .onSuccess(::onGetMoviesSuccess)
-//                .onFailure(::onGetMoviesError)
         }
     }
 }

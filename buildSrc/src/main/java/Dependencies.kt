@@ -1,14 +1,14 @@
 private object Versions {
     //region Android
-    const val gradlePlugin = "8.7.3"
-    const val minSdk = 21
-    const val targetSdk = 34
-    const val compileSdk = 34
+    const val gradlePlugin = "8.13.0"
+    const val minSdk = 23
+    const val targetSdk = 36
+    const val compileSdk = 36
     const val compose = "1.7.1"
     //endregion
 
     //region Libraries
-    const val kotlin = "2.0.20"
+    const val kotlin = "2.2.21"
     const val material = "1.2.0"
     const val appCompat = "1.2.0"
     const val recyclerview = "1.1.0"
@@ -62,7 +62,7 @@ object Libs {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     const val cardview = "androidx.cardview:cardview:${Versions.cardview}"
-    const val material = "com.google.android.material:material:${Versions.material}"
+    const val  material = "com.google.android.material:material:${Versions.material}"
     const val constraintlayout =
             "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"

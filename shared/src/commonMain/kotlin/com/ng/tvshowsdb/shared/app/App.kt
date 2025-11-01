@@ -9,8 +9,6 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,8 +21,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.ng.tvshowsdb.shared.app.theme.CornTheme
-import com.ng.tvshowsdb.shared.movie.presentation.MovieScreen
 import com.ng.tvshowsdb.shared.home.presentation.HomeScreen
+import com.ng.tvshowsdb.shared.movie.presentation.MovieScreen
+import org.jetbrains.compose.resources.painterResource
+import corn.shared.generated.resources.Res
+import corn.shared.generated.resources.favorite
+import corn.shared.generated.resources.star
 
 @Composable
 fun App() {
@@ -51,8 +53,9 @@ private fun CornApp(
                 items.forEachIndexed { index, item ->
                     BottomNavigationItem(
                         icon = {
+                            val icon = if (index == 0) Res.drawable.star else Res.drawable.favorite
                             Icon(
-                                imageVector = Icons.Filled.Favorite,
+                                painter = painterResource(icon),
                                 contentDescription = null
                             )
                         },
@@ -90,4 +93,3 @@ private fun CornApp(
     }
 
 }
-
