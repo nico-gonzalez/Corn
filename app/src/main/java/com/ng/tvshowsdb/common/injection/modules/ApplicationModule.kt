@@ -9,7 +9,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class ApplicationModule {
+internal abstract class ApplicationModule {
 
     @PerApplication
     @Binds
