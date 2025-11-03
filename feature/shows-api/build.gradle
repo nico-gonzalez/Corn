@@ -1,19 +1,19 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.com.google.ksp)
 }
 
 android {
-    compileSdkVersion Versions.compileSdk
+    compileSdkVersion Integer.parseInt(libs.versions.android.compileSdk.get())
 
     namespace = "com.ng.tvshowsdb.shows.api"
 
     defaultConfig {
-        minSdkVersion Versions.minSdk
-        targetSdkVersion Versions.targetSdk
-        versionCode Versions.versionCode
-        versionName Versions.versionName
+        minSdkVersion Integer.parseInt(libs.versions.android.minSdk.get())
+        targetSdkVersion Integer.parseInt(libs.versions.android.targetSdk.get())
+        versionCode 1
+        versionName "1.0"
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -38,14 +38,14 @@ dependencies {
     api project(":library:core-data")
     api project(":library:core-domain")
 
-    compileOnly Libs.javaxInject
+    compileOnly(libs.javax.inject)
 
-    implementation Libs.dagger
-    ksp Libs.daggerCompiler
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
 
-    implementation Libs.rxJava
+    implementation(libs.rxjava)
 
-    testImplementation Libs.junit
-    testImplementation Libs.kotlinJUnit
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.junit)
     testImplementation(libs.mockk)
 }

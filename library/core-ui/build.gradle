@@ -1,19 +1,19 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.com.google.ksp)
 }
 
 android {
-    compileSdkVersion Versions.compileSdk
+    compileSdkVersion Integer.parseInt(libs.versions.android.compileSdk.get())
 
     namespace = "com.ng.tvshowsdb.core.ui.common"
 
     defaultConfig {
-        minSdkVersion Versions.minSdk
-        targetSdkVersion Versions.targetSdk
-        versionCode Versions.versionCode
-        versionName Versions.versionName
+        minSdkVersion Integer.parseInt(libs.versions.android.minSdk.get())
+        targetSdkVersion Integer.parseInt(libs.versions.android.targetSdk.get())
+        versionCode 1
+        versionName "1.0"
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -52,27 +52,27 @@ dependencies {
 
     implementation project(":library:core-domain")
 
-    compileOnly Libs.javaxInject
+    compileOnly(libs.javax.inject)
 
-    implementation Libs.rxJava
-    implementation Libs.rxKotlin
-    implementation Libs.rxAndroid
-    implementation Libs.material
-    implementation Libs.recyclerview
-    implementation Libs.glide
-    ksp Libs.glideCompiler
-    implementation Libs.daggerAndroidSupport
-    ksp Libs.daggerAndroidCompiler
+    implementation(libs.rxjava)
+    implementation(libs.rxkotlin)
+    implementation(libs.rxandroid)
+    implementation(libs.material)
+    implementation(libs.recyclerview)
+    implementation(libs.glide)
+    ksp(libs.glide.compiler)
+    implementation(libs.dagger.android.support)
+    ksp(libs.dagger.android.compiler)
 
-    testImplementation Libs.junit
-    androidTestImplementation Libs.junit
-    androidTestImplementation Libs.kotlinJUnit
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.kotlin.junit)
     androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation Libs.androidRules
+    androidTestImplementation(libs.android.rules)
     androidTestImplementation(libs.mockk)
-    androidTestImplementation(Libs.espressoCore)
-    androidTestImplementation(Libs.espressoContrib)
-    androidTestImplementation Libs.espressoIntents
-    kspAndroidTest Libs.daggerCompiler
-    kspAndroidTest Libs.daggerAndroidCompiler
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.contrib)
+    androidTestImplementation(libs.espresso.intents)
+    kspAndroidTest(libs.dagger.compiler)
+    kspAndroidTest(libs.dagger.android.compiler)
 }

@@ -1,20 +1,20 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.com.google.ksp)
     alias(libs.plugins.compose.compiler)
 }
 
 android {
-    compileSdkVersion Versions.compileSdk
+    compileSdkVersion Integer.parseInt(libs.versions.android.compileSdk.get())
 
     namespace = "com.ng.tvshowsdb.shows"
 
     defaultConfig {
-        minSdkVersion Versions.minSdk
-        targetSdkVersion Versions.targetSdk
-        versionCode Versions.versionCode
-        versionName Versions.versionName
+        minSdkVersion Integer.parseInt(libs.versions.android.minSdk.get())
+        targetSdkVersion Integer.parseInt(libs.versions.android.targetSdk.get())
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "com.ng.tvshowsdb.core.ui.testing.CustomAndroidJUnitTestRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -52,47 +52,47 @@ dependencies {
     api project(":library:core-ui")
     api project(':feature:shows-api')
 
-    compileOnly Libs.javaxInject
+    compileOnly(libs.javax.inject)
 
-    implementation Libs.rxJava
-    implementation Libs.rxKotlin
-    implementation Libs.rxAndroid
-    implementation Libs.appcompat
-    implementation Libs.material
-    implementation Libs.recyclerview
-    implementation Libs.cardview
-    implementation Libs.constraintlayout
-    implementation Libs.glide
-    ksp Libs.glideCompiler
-    implementation Libs.dagger
-    implementation Libs.rxAndroid
-    implementation Libs.dagger
-    ksp Libs.daggerCompiler
-    implementation Libs.daggerAndroid
-    implementation Libs.daggerAndroidSupport
-    ksp Libs.daggerAndroidCompiler
-    implementation Libs.composeUi
-    implementation Libs.composeFoundation
-    implementation Libs.composeMaterial
-    implementation Libs.composeMaterialIcons
-    implementation Libs.composeMaterialIconsExtended
-    implementation Libs.composeLiveData
-    implementation Libs.composeRxJava
+    implementation(libs.rxjava)
+    implementation(libs.rxkotlin)
+    implementation(libs.rxandroid)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.recyclerview)
+    implementation(libs.cardview)
+    implementation(libs.constraintlayout)
+    implementation(libs.glide)
+    ksp(libs.glide.compiler)
+    implementation(libs.dagger)
+    implementation(libs.rxandroid)
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support)
+    ksp(libs.dagger.android.compiler)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material)
+    implementation(libs.compose.material.icons)
+    implementation(libs.compose.material.icons.extended)
+    implementation(libs.compose.livedata)
+    implementation(libs.compose.rxjava)
 
-    testImplementation Libs.junit
+    testImplementation(libs.junit)
     testImplementation(libs.mockk)
 
     androidTestImplementation project(":library:core-ui-testing")
-    androidTestImplementation Libs.junit
-    androidTestImplementation Libs.kotlinJUnit
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.kotlin.junit)
     androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation Libs.androidRules
+    androidTestImplementation(libs.android.rules)
     androidTestImplementation(libs.mockk.android)
     androidTestImplementation(libs.mockk.agent)
-    androidTestImplementation Libs.espressoCore
-    androidTestImplementation Libs.espressoContrib
-    androidTestImplementation Libs.espressoIntents
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.contrib)
+    androidTestImplementation(libs.espresso.intents)
     androidTestImplementation(libs.androidx.test.junit)
-    kspAndroidTest Libs.daggerCompiler
-    kspAndroidTest Libs.daggerAndroidCompiler
+    kspAndroidTest(libs.dagger.compiler)
+    kspAndroidTest(libs.dagger.android.compiler)
 }

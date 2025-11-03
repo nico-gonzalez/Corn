@@ -1,22 +1,22 @@
 plugins {
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.com.google.ksp)
 }
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'com.google.devtools.ksp'
 
 android {
 
-    compileSdkVersion Versions.compileSdk
+    compileSdkVersion Integer.parseInt(libs.versions.android.compileSdk.get())
 
     namespace = "com.ng.tvshowsdb"
 
     defaultConfig {
         applicationId "com.ng.tvshowsdb"
-        minSdkVersion Versions.minSdk
-        targetSdkVersion Versions.targetSdk
-        versionCode Versions.versionCode
-        versionName Versions.versionName
+        minSdkVersion Integer.parseInt(libs.versions.android.minSdk.get())
+        targetSdkVersion Integer.parseInt(libs.versions.android.targetSdk.get())
+        versionCode 1
+        versionName "1.0"
     }
     buildTypes {
         release {
@@ -45,18 +45,18 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
 
-    implementation Libs.appcompat
-    implementation Libs.material
-    implementation Libs.recyclerview
-    implementation Libs.cardview
-    implementation Libs.constraintlayout
-    implementation Libs.glide
-    ksp Libs.glideCompiler
-    implementation Libs.dagger
-    implementation Libs.rxAndroid
-    implementation Libs.dagger
-    ksp Libs.daggerCompiler
-    implementation Libs.daggerAndroid
-    implementation Libs.daggerAndroidSupport
-    ksp Libs.daggerAndroidCompiler
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.recyclerview)
+    implementation(libs.cardview)
+    implementation(libs.constraintlayout)
+    implementation(libs.glide)
+    ksp(libs.glide.compiler)
+    implementation(libs.dagger)
+    implementation(libs.rxandroid)
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support)
+    ksp(libs.dagger.android.compiler)
 }

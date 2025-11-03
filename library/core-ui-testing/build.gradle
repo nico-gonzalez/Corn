@@ -1,20 +1,20 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.com.google.ksp)
 }
 
 android {
-    compileSdkVersion Versions.compileSdk
+    compileSdkVersion Integer.parseInt(libs.versions.android.compileSdk.get())
 
     namespace = "com.ng.tvshowsdb.core.ui.testing"
 
 
     defaultConfig {
-        minSdkVersion Versions.minSdk
-        targetSdkVersion Versions.targetSdk
-        versionCode Versions.versionCode
-        versionName Versions.versionName
+        minSdkVersion Integer.parseInt(libs.versions.android.minSdk.get())
+        targetSdkVersion Integer.parseInt(libs.versions.android.targetSdk.get())
+        versionCode 1
+        versionName "1.0"
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -39,18 +39,18 @@ dependencies {
     implementation project(":library:core-ui")
     implementation project(":library:core-domain")
 
-    implementation Libs.rxJava
-    implementation Libs.junit
-    implementation Libs.kotlinJUnit
+    implementation(libs.rxjava)
+    implementation(libs.junit)
+    implementation(libs.kotlin.junit)
     implementation(libs.androidx.test.runner)
-    implementation Libs.androidRules
+    implementation(libs.android.rules)
     implementation(libs.mockk)
-    implementation(Libs.espressoCore)
-    implementation(Libs.espressoContrib)
-    implementation Libs.espressoIntents
-    implementation Libs.dagger
-    implementation Libs.daggerAndroid
-    implementation Libs.daggerAndroidSupport
-    ksp Libs.daggerCompiler
-    ksp Libs.daggerAndroidCompiler
+    implementation(libs.espresso.core)
+    implementation(libs.espresso.contrib)
+    implementation(libs.espresso.intents)
+    implementation(libs.dagger)
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support)
+    ksp(libs.dagger.compiler)
+    ksp(libs.dagger.android.compiler)
 }
