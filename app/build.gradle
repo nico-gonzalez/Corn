@@ -38,9 +38,6 @@ android {
 
 dependencies {
 
-    implementation project(":library:core-ui")
-    implementation project(":feature:shows-ui")
-    implementation project(":library:core-domain")
     implementation project(":shared")
 
     implementation(libs.androidx.activity.compose)
@@ -52,8 +49,6 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.glide)
     ksp(libs.glide.compiler)
-    implementation(libs.dagger)
-    implementation(libs.rxandroid)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
     implementation(libs.dagger.android)

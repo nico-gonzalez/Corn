@@ -30,9 +30,6 @@ moshi-version = "1.9.3"
 glide-version = "4.16.0"
 dagger-version = "2.52"
 javax-inject-version = "1"
-rxjava-version = "2.2.19"
-rxandroid-version = "2.1.1"
-rxkotlin-version = "2.4.0"
 junit-version = "4.12"
 espresso-version = "3.1.0"
 test-rules-version = "1.1.0"
@@ -75,10 +72,8 @@ moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi-version" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi-version" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit-version" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit-version" }
-retrofit-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "retrofit-version" }
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp-version" }
 javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject-version" }
-rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava-version" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat-version" }
 recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview-version" }
 cardview = { module = "androidx.cardview:cardview", version.ref = "cardview-version" }
@@ -91,15 +86,12 @@ dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = 
 dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "dagger-version" }
 dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger-version" }
 dagger-android-compiler = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger-version" }
-rxandroid = { module = "io.reactivex.rxjava2:rxandroid", version.ref = "rxandroid-version" }
-rxkotlin = { module = "io.reactivex.rxjava2:rxkotlin", version.ref = "rxkotlin-version" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-version" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-version" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose-version" }
 compose-material-icons = { module = "androidx.compose.material:material-icons-core", version.ref = "compose-version" }
 compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-version" }
 compose-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose-version" }
-compose-rxjava = { module = "androidx.compose.runtime:runtime-rxjava2", version.ref = "compose-version" }
 junit = { module = "junit:junit", version.ref = "junit-version" }
 kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-version" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-version" }
@@ -107,3 +99,4 @@ espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version
 espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espresso-version" }
 android-rules = { module = "androidx.test:rules", version.ref = "test-rules-version" }
 hamcrest = { module = "org.hamcrest:hamcrest-all", version.ref = "hamcrest-version" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines-version" }

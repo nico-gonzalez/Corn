@@ -14,11 +14,9 @@ dependencyResolutionManagement {
     }
 }
 
-include ':library:core-ui-testing'
-include ':library:core-ui'
-include ':library:core-domain'
-include ':library:core-data'
-include ':feature:shows-api'
-include ':feature:shows-ui'
+//include ':library:core-ui-testing'
+//include ':library:core-ui'
+//include ':library:core-domain'
+//include ':library:core-data'
 include ':app'
 include ':shared'
