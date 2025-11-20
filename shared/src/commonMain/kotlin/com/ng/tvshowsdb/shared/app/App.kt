@@ -25,8 +25,12 @@ import com.ng.tvshowsdb.shared.home.presentation.HomeScreen
 import com.ng.tvshowsdb.shared.movie.presentation.MovieScreen
 import org.jetbrains.compose.resources.painterResource
 import corn.shared.generated.resources.Res
+import corn.shared.generated.resources.arrow_back
 import corn.shared.generated.resources.favorite
+import corn.shared.generated.resources.favorite_filled
 import corn.shared.generated.resources.star
+import corn.shared.generated.resources.star_filled
+import org.jetbrains.compose.resources.DrawableResource
 
 @Composable
 fun App() {
@@ -51,16 +55,16 @@ private fun CornApp(
                 windowInsets = BottomNavigationDefaults.windowInsets
             ) {
                 items.forEachIndexed { index, item ->
+                    val isSelected = selectedItem == index
                     BottomNavigationItem(
                         icon = {
-                            val icon = if (index == 0) Res.drawable.star else Res.drawable.favorite
                             Icon(
-                                painter = painterResource(icon),
+                                painter = painterResource(resolveIcon(index, selectedItem)),
                                 contentDescription = null
                             )
                         },
                         label = { Text(item) },
-                        selected = selectedItem == index,
+                        selected = isSelected,
                         onClick = { selectedItem = index })
                 }
             }
@@ -93,3 +97,11 @@ private fun CornApp(
     }
 
 }
+
+private fun resolveIcon(index: Int, selectedItem: Int): DrawableResource =
+    when(index) {
+        0 -> if (selectedItem == index) Res.drawable.star_filled else Res.drawable.star
+        1 -> if (selectedItem == index) Res.drawable.favorite_filled else Res.drawable.favorite
+        2 -> if(selectedItem == index) Res.drawable.arrow_back else Res.drawable.arrow_back
+        else -> throw IllegalArgumentException("Unknown index $index")
+    }

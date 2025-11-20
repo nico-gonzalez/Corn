@@ -41,6 +41,7 @@ android-library = { id = "com.android.library", version.ref = "android-gradle-pl
 com-google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp-version" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin-version" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin-version" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "android-gradle-plugin-version" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-version" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-version" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-version" }

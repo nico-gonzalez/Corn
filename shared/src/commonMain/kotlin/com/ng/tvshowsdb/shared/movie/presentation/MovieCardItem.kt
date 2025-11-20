@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.ng.tvshowsdb.shared.movies.domain.model.Movie
 import corn.shared.generated.resources.Res
-import corn.shared.generated.resources.star
+import corn.shared.generated.resources.star_filled
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -76,7 +76,7 @@ fun MovieCardItem(
                 ) {
                     Icon(
                         modifier = Modifier.size(16.dp),
-                        painter = painterResource(Res.drawable.star),
+                        painter = painterResource(Res.drawable.star_filled),
                         contentDescription = null,
                         tint = MaterialTheme.colors.onBackground
                     )
